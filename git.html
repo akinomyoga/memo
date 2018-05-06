@@ -11,7 +11,7 @@
     <span class="mwg-nav-here">Git</span>
   ]
 </nav>
-<h1>Git のちゃんとした入門 (になる筈だったページ)</h1>
+<h1>Git のちゃんとした入門 (になる筈だった文書)</h1>
 <aside class="mwg-aside-caution">
   <p>※このページは書き途中です。読んで意味のある所まで書き進んでいません。</p>
 </aside>
@@ -24,7 +24,7 @@
   例えば、学生に「Git を勉強しておいて欲しい」というと大体このサイトに辿り着いて読んでくるようだが、
   どれくらい理解しているか確認すると <q>Git はリモート・リポジトリが存在しないと使えないものである</q> と勘違いしていたり、
   <q>Git とは GitHub にアクセスするためのツールのようで実は違うらしい良くわからない何かである</q> という曖昧模糊たる理解だったり、
-  それどころかそもそも Git の何たるかを全く把握できていなかったりする。
+  それどころかそもそも Git の何たるかを皆目把握できていなかったりする。
   検索の上の方に来る他の入門サイトも似たり寄ったりである。
   そんな次第で、結局学生には Web で読んでもらった内容は一旦全部忘れてもらって、自ら一つずつ Git の何たるかを説く羽目になる。
   最近では寧ろその辺のページは分かりにくいから読まなくて良いとさえ言っている。
@@ -41,7 +41,7 @@
 </ul>
 <p>他に、出版されている書籍であれば流石にちゃんとしているのだとは予想するのだが、読んでいないので分からない。申し訳ない。
   それに、Git の使い方なんていうものは研究のほんの (感覚) 1% にも満たないので、わざわざ本を買えとも言いづらい。他に買うべき本が沢山ある。
-  それでも、お金を出す気があるならば、Git の良さそうな書籍を見繕って買うという選択肢は考えて良い。
+  それでも、お金を出す気があるならば、Git の良さそうな書籍を見繕って買うという選択肢はありだと考える。
 </p>
 
 <p>そういう訳で、上に紹介した長い解説ページ (や書籍) と巷の分かりにくいページの間に横たわる大きな隔たりを埋める形で、
@@ -158,16 +158,18 @@ $ git 機能名 引数...
   まず "<code>[user@host ディレクトリ名]$ </code>" の部分はシェルのプロンプトなので入力しない。
   その右側にあるのが実際に入力して実行するコマンドである。
   ディレクトリ名は現在のディレクトリを表す。
+  上の例ではたまたまホームディレクトリにディレクトリを作ったが、もちろん何処でやっても良い。
   上記、<code><i>editor</i></code> とした部分は、自分の好きなエディタでそのファイルを編集するということを表すことにする。
   <code>emacs</code> なり <code>vim</code> なり <code>nano</code> なり、自分の好きなものを使えば良い。
   何なら GUI のエディタを使っても良い。
   "<code> #</code>" 以降はコメントなので実際には入力しない。
 </p>
 
-<p>この時、ディレクトリ working-tree の中のファイルの階層構造は以下のようになっている。
+<p>この時、ディレクトリ <code>working-tree</code> の中のファイルの階層構造は以下のようになっている。
   <code>tree</code> コマンドは、ファイルの階層構造を表示してくれるコマンドである。
   つまり、子ディレクトリの中の孫ファイル・子孫ファイルたちまでツリー形式で表示してくれる <code>ls</code> のようなものと思えば良い。
-  因みに、<code>tree</code> コマンドは Git とは関係なく GNU/Linux に入っている。macOS では別に入れる必要があるらしい。
+  因みに、<code>tree</code> コマンドは Git とは関係なく GNU/Linux に入っている。
+  macOS では自分で入れる必要があるらしいが、このコマンドは以降の節では使わないので入れなくて良い。
 </p>
 <pre class="mwg-console">
 [user@host working-tree]$ tree
@@ -204,9 +206,9 @@ working-tree
   また後で VCS を用いたバージョンの統合について取り扱うことになると思う。
 </p>
 
-<p>という訳で断然校舎の方法で行く。
+<p>という訳で断然後者の方法で行く。
   先ずは過去の記録を残しておく為のバックアップディレクトリを作る。
-  今回は repository という名前にする。
+  今回は <code>repository</code> という名前にする。
 </p>
 <pre class="mwg-console">
 [user@host working-tree]$ mkdir repository
@@ -221,7 +223,7 @@ working-tree
 [user@host working-tree]$ cp hello.cpp repository/hello.20160103.cpp
 </pre>
 
-<p>この時、ディレクトリの中身は以下の様な感じの構成になっている。</p>
+<p>この段階で、ディレクトリの中身は以下の様な感じの構成になっている。</p>
 <pre class="mwg-console">
 [user@host working-tree]$ tree
 working-tree
@@ -237,5 +239,13 @@ working-tree
 <h4>複数のファイルを編集する (→ commit 導入)</h4>
 <h4>管理対象のファイルとそうでないファイルがある (→ index 導入)</h4>
 
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga Koichi Murase &lt;myoga.murase at gmail.com&gt;,</p>
+  <p>連絡先
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>,
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>,
+    <a href="https://twitter.com/akinomyoga">Twitter</a>
+  </p>
+</address>
 </body>
 </html>

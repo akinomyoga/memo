@@ -87,3 +87,8 @@ pre.mwg-console {
   border: 1px solid gray;
   padding: 1em;
 }
+
+address.mwg-address>p {
+  margin: 0;
+  text-align: center;
+}
