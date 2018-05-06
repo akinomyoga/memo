@@ -70,7 +70,20 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
 
+
+aside.mwg-aside-caution {
+  border: 1px solid red;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
 p.mwg-footnote {
   padding-left: 2em;
   padding-right: 2em;
+  font-size: 85%;
+}
+
+pre.mwg-console {
+  border: 1px solid gray;
+  padding: 1em;
 }
