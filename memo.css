@@ -16,12 +16,30 @@ body.mwg-standard-layout {
   text-align: justify;
 }
 
+dfn {
+  font-weight: bold;
+  font-style: normal;
+}
+em {
+  text-decoration: underline;
+  font-style: normal;
+}
+code {
+  background-color: #eee;
+  padding: 0.3ex;
+}
+
 @media print {
   body.mwg-standard-layout {
     font-family: serif;
     padding-left: 0;
     padding-right: 0;
     max-width: none;
+  }
+
+  dfn {
+    font-weight: normal;
+    font-family: sans-serif;
   }
 }
 
@@ -50,4 +68,9 @@ nav span.mwg-nav-here {
 h1, h2, h3, h4, h5, h6 {
   font-family: Times, Times New Roman, sans-serif; /* 日本語はサンセリフの方が良さそう "Yu Mincho", YuMincho, sans-serif; */
   font-weight: bold;
+}
+
+p.mwg-footnote {
+  padding-left: 2em;
+  padding-right: 2em;
 }
