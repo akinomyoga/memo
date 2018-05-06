@@ -1,0 +1,52 @@
+/* memo.css - CSS */
+@charset "utf-8";
+
+/*---------------------------------------------------------------------------*
+ *
+ * Page
+ *
+ *---------------------------------------------------------------------------*/
+
+body.mwg-standard-layout {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1em;
+  padding-right: 1em;
+  max-width: 50em;
+}
+
+@media print {
+  body.mwg-standard-layout {
+    font-family: serif;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+  }
+}
+
+/*---------------------------------------------------------------------------*
+ *
+ * Navigator
+ *
+ *---------------------------------------------------------------------------*/
+
+nav span.mwg-nav-here {
+  font-weight: bold;
+}
+
+@media print {
+  nav {
+    display: none;
+  }
+}
+
+/*---------------------------------------------------------------------------*
+ *
+ * Headings
+ *
+ *---------------------------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Times, Times New Roman, sans-serif; /* 日本語はサンセリフの方が良さそう "Yu Mincho", YuMincho, sans-serif; */
+  font-weight: bold;
+}
