@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>密度汎関数法メモ</title>
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+  <meta name="agh-fly-type" content="tex" />
+  <script src="/agh/agh.fly.js" charset="utf-8"></script>
+  <script type="application/x-tex" id="tex-preamble">
+  \documentclass{article}
+  </script>
+</head>
+<body class="mwg-standard-layout aghfly-inline-math">
+<nav>
+  [
+    <a href="../index.html">Top</a> -
+    物理 - <span class="mwg-nav-here">密度汎関数法</span>
+  ]
+</nav>
+
+<h1>密度汎関数法メモ</h1>
+
+<p>密度汎関数法は使わないので、その発想を一回理解したと思ってもすぐ忘れるのでメモする
+  (使わないもののメモをして意味があるのかは分からないが)。
+  密度汎関数理論という大層な名前がついているが、概ね数値計算の為の反復法の設計である。
+  つまり、物理的な描像ではなく数値計算での取り扱い方が理論の形を定めている。
+</p>
+
+<p>※改めて調べてみると文献によって前提が微妙に違っていたりする様なので、
+  いつか改めて広範に調べて纏めるのが良さそう。</p>
+
+<h2>概略</h2>
+<p>$N$ 体のハミルトニアンが以下で与えられるとする。
+  但し、$T$ が運動項で $V_2$ が二体の相互作用で $V_1$ が一体のポテンシャルとする。
+</p>
+<p class="aghfly-begin-align">
+  \hat H &= \hat T + \hat V_2 + \hat V_1, &
+  \hat V_1 &= \sum_{i=1}^N v_1(x_i).
+</p>
+
+<p>知りたいのは基底状態である。
+  変分法で行く (つまり、エネルギー期待値の最小値を与える波動関数 $\Psi$ が見つかればそれが基底状態である)。
+  特に基底状態の一体密度分布 $n(x)$ だけが分かればいい事にする。
+  波動関数での変分ではなくて $n(x)$ での変分で最小化問題を定式化できれば嬉しい。
+  ここで、最小化を二段階に分ける。
+  "与えられた $n(x)$ を再現する $\Psi$ の内でエネルギーを最小化したもの" を $E[n]$ として、
+  更にそれを $n(x)$ を最適化して最小にすることを考える。
+</p>
+<p class="aghfly-begin-align">
+  \min_{\Psi} \langle \hat{H} \rangle
+  &= \min_{n(x)} \underbrace{
+      \min_{\Psi\ \text{s.t.}\ \langle \hat n(x) \rangle = n(x)} \langle \hat{H} \rangle}_{=: E[n(x)]}.
+</p>
+
+<p><u>スレイター行列式の形の波動関数を仮定</u><sup>[仮定]</sup>すれば、以下の様な項が出てくる。
+  $V_{2H}, V_{2F}$ はそれぞれハートリー項・フォック項からの寄与。
+  ここで $V_{2H}$ と $V_1$ は、実は $n(x)$ だけから決まってしまう。
+</p>
+<p class="aghfly-begin-align">
+  \langle \hat H \rangle = T[\Psi] + V_{2H}[n] + V_{2F}[\Psi] + V_1[n].
+</p>
+
+<p>従って $E[n]$ を得るには $T + V_{2F}$ の部分を最小化する $\Psi$ を見つければ良い。
+  が、難しいので、まあ $V_{2F}$ の寄与は本質的ではなかろうと思って
+  $V_{2F}$ は適当に近似して良い事にする。
+  特に<u>現象論的に密度の汎関数の形 $V_{2F} = V_{2F}[n]$ を仮定して近似する</u><sup>[仮定]</sup>。
+  すると $E[n]$ は以下の形になる。
+</p>
+<p class="aghfly-begin-align">
+  E[n] &= \min_{\Psi | n} T[\Psi] + V_{2H}[n] + V_{2F}[n] + V_1[n].
+</p>
+
+<p>これの変分を取って、最小を与える $n(x)$ を探せば良い。
+</p>
+<p class="aghfly-begin-align">
+  0 &= \frac{\delta}{\delta n(x)} \min_{\Psi | n} T[\Psi] + v_s[n](x). \label{eq:henbun} \\
+  & v_s[n](x) := v_1(x) + \frac{\delta}{\delta n(x)} (V_{2H}[n] + V_{2F}[n]).
+</p>
+
+<p>これを解くのは依然として難しいが、$V_2=0$ の時に限ればすぐ解ける。
+  わざわざ変分法をしなくても、$v_s(x) = v_1(x)$ をポテンシャルとする1体の問題に帰着するので
+  単にシュレーディンガー方程式を解けば良い。
+  $\Psi$ は得られた固有関数でスレイター行列式を組む。$n(x)$ も得られる。
+</p>
+
+<p>$V_2 \ne 0$ の時はどうするか。
+  取り敢えず、$n(x)$ を外部から与えた $n_k(x)$ で置き換えて $v_s[n_k](x)$ を1体ポテンシャルとしたシュレーディンガー方程式を形式的に解くことができる。
+  そうすると新しく求められる $n_{k+1}(x) := n(x)$ は元の $n_k(x)$ に必ずしも一致するとは限らない。
+  しかし、この操作を反復して $\lim_{k\to\infty} n_k(x)$ が収束すれば、元の $n_k(x)$ と得られた $n_{k+1}(x)$ が一致するようになる。
+  つまり、収束先は Eq. $\eqref{eq:henbun}$ の解になっている。
+</p>
+
+<p>或いは2粒子分布に依存する部分 $V_{2F}[\Psi]$ を適当に近似して、
+  平均場 $n(x)$ についての自己無撞着方程式にして解くと考えたら良い。
+  よくある話である。
+</p>
+
+<h2>注意</h2>
+<p>ここに書いたのは密度汎関数法とは一体何なのかということだけである。付加的な事柄は全て省略した。
+  歴史経緯だとか、解が一意に存在するのかとか、この反復で本当に解が収束するのかとか、そういった議論も普通はする。
+  更に、交換項 $V_{2F}$ をどの様な形に設計するかとか本当に大丈夫なのかとかの議論もあるだろう。計算テクもある。
+  しかし、それらは差し当たっての理解にとって不可欠という訳ではない。
+</p>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga Koichi Murase &lt;myoga.murase at gmail.com&gt;,</p>
+  <p>連絡先
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>,
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>,
+  </p>
+</address>
+</body>
+</html>
