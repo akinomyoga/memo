@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>偶奇性と分解</title>
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+  <meta name="agh-fly-type" content="tex" />
+  <script src="/agh/agh.fly.js" charset="utf-8"></script>
+  <script type="application/x-tex" id="tex-preamble">
+  \documentclass{article}
+  </script>
+</head>
+<body class="mwg-standard-layout aghfly-inline-math">
+<nav>
+  [
+    <a href="../index.html">Top</a> -
+    物理 - <span class="mwg-nav-here">偶奇性と分解</span>
+  ]
+</nav>
+
+<h1>偶奇性と分解</h1>
+<p>何らかの $T^2 = 1$ を満たす線形変換 $T$ が与えられて、
+  それによって2種類の成分に分解されるというパターンがよくある。
+  $T$ の固有値は $\pm 1$ になる。
+  各固有空間への射影子は $P_\pm = \frac{1\pm T}2$ で与えられる。
+  実際に $P_\pm^2 = P_\pm$ を満たし完全系を為す ($P_+ + P_- = 1$)。
+  これにより固有値 +1 の固有空間と -1 の固有空間に分解できる。
+</p>
+
+<h2>複素共役</h2>
+<p>最たる物は複素共役である。実部と虚部に分解される。
+  虚部は純虚なので $i$ を括りだせば実数になる。
+</p>
+<p class="aghfly-begin-align">
+  z &= \Re z + i \Im z, \\
+  \Re z &:= P_+ z = \frac{z + z^*}2, \\
+  \Im z &:= \frac{P_- z}i = \frac{z + z^*}{2i}.
+</p>
+<p>因みに $e^{ix}$ を分解すれば $\cos$ と $\sin$ を得る。</p>
+<p class="aghfly-begin-align">
+  e^{ix} &= \cos x + i\sin x, \\
+  \cos x &:= \frac{e^{ix} + e^{-ix}}2, \\
+  \sin x &:= \frac{e^{ix} - e^{-ix}}{2i}.
+</p>
+
+<h2>転置</h2>
+<p>正方行列の転置もある。対称行列と反対称行列 (歪対称行列) に分解される。</p>
+<p class="aghfly-begin-align">
+  A_{ij} &= A_{(ij)} + A_{[ij]}, \\
+  A_{(ij)} &:= P_+ A = \frac12 (A + A^T), \\
+  A_{[ij]} &:= P_- A = \frac12 (A - A^T).
+</p>
+<p>更に3つ以上の添字についても分解できる気がしないでもないが、面倒なので深入りはしない。</p>
+<p>実のところ、実正方行列について考えている限りは、
+  これは次のエルミート共役の特別な場合に過ぎない。
+</p>
+
+<h2>エルミート共役</h2>
+<p>転置を複素行列に拡張しただけである。
+  エルミート行列と反エルミート行列に分解できる。
+  $i$ を括りだせば反エルミート行列はエルミート行列になる。
+  実のところ、これは固有値の複素共役と考えても良い。
+  対応する記号は存在しない気がするが、ここでは強引に $\Re, \Im$ を使ってみる。
+</p>
+<p class="aghfly-begin-align">
+  A &= \Re A + i \Im A, \\
+  \Re A &:= P_+ A = \frac12 (A + A^\dag), \\
+  \Im A &:= \frac{P_- A}i = \frac1{2i} (A - A^\dag).
+</p>
+
+<h2>鏡映</h2>
+<p>$x$ を $x' = -x$ に変えてみる。
+  この時、実数の上で定義されている関数 $f(x)$ はどう振る舞うか。
+  偶関数と奇関数に分解される。
+</p>
+<p class="aghfly-begin-align">
+  f(x) &= f_\text{even}(x) + f_\text{odd}(x), \\
+  f_\text{even}(x) &:= P_+ A = \frac12 (f(x) + f(-x)), \\
+  f_\text{odd}(x)  &:= P_- A = \frac12 (f(x) - f(-x)).
+</p>
+<p>$e^x$ を偶関数と奇関数に分解すれば $\cosh$ と $\sinh$ を得る。</p>
+<p class="aghfly-begin-align">
+  e^x &= \cosh x + \sinh x, \\
+  \cosh x &:= \frac{e^x + e^{-x}}2, \\
+  \sinh x &:= \frac{e^x - e^{-x}}2.
+</p>
+<p>もし関数が $L^2$ なら Fourier 変換できて、それぞれ Fourier 空間で実部と虚部になっている。
+  逆に Fourier 空間での偶奇は実空間の実部虚部に対応する。
+</p>
+<p>もし関数が解析関数なら虚軸上に解析接続して、それぞれ実部と虚部になっている。
+  $\cosh, \sinh \mapsto \cos, \sin$ がその例である。
+</p>
+
+<h2>他</h2>
+<p>何か他にも沢山ありそうな気がしてまとめてみたが余りなかった…。</p>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
+  </p>
+</address>
+</body>
+</html>
