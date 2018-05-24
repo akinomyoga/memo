@@ -3,6 +3,12 @@
 <head>
   <title>行列の不変量</title>
   <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="行列の不変量" />
+  <meta property="og:image" content="https://akinomyoga.github.io/agh/res/agh.icon.mwg_128x128.png" />
+  <meta property="og:url" content="https://akinomyoga.github.io/memo/math/matrix-invariants.png" />
+  <meta property="og:site_name" content="github.akinomyoga.io" />
+
   <meta name="agh-fly-type" content="tex" />
   <script src="/agh/agh.fly.js" charset="utf-8"></script>
   <script type="application/x-tex" id="tex-preamble">
@@ -10,6 +16,10 @@
   \def\tr{\operatorname{tr}}
   \begin{document}
   </script>
+  <style>
+  img.ring1 { height: 1.4em; vertical-align: middle; }
+  img.ring2 { height: 2.8em; vertical-align: middle; }
+  </style>
 </head>
 <body class="mwg-standard-layout aghfly-inline-math">
 <nav>
@@ -150,14 +160,23 @@
   幾つか具体例を書き下しておく。
 </p>
 <p class="aghfly-begin-align">
-  I_n^1[A] &= (-1)[(1)] = \tr A, \\
-  I_n^2[A] &= (-1)^2[(2) + (1)(1)] \\
+  I_n^1[A] &= (-1)\left[<img src="matrix-invariants-d1.png" alt="(1)" class="ring1" />\right] = \tr A, \\
+  I_n^2[A] &= (-1)^2\left[<img src="matrix-invariants-d2.png" alt="(2)" class="ring1" />
+      + <img src="matrix-invariants-d11.png" alt="(1)(1)" class="ring1" />\right] \\
     &= -\frac12\tr A^2 + \frac1{2!}(\tr A)^2 \\
     &= \frac12[(\tr A)^2 - \tr A^2], \\
-  I_n^3[A] &= (-1)^3[(3) + (2)(1) + (1)(1)(1)] \\
+  I_n^3[A] &= (-1)^3\left[
+      <img src="matrix-invariants-d3.png" alt="(3)" class="ring1" />
+      + <img src="matrix-invariants-d21.png" alt="(2)(1)" class="ring1" />
+      + <img src="matrix-invariants-d111.png" alt="(1)(1)(1)" class="ring2" />\right] \\
     &= -\Bigl[-\frac13\tr A^3 + \frac12\tr A^2 \tr A - \frac1{3!}(\tr A)^3 \Bigr] \\
     &= \frac16[(\tr A)^3 + 2\tr A^3 - 3\tr A^2 \tr A], \\
-  I_n^4[A] &= (-1)^4[(4) + (3)(1) + (2)(2) + (2)(1)(1) + (1)(1)(1)(1)] \\
+  I_n^4[A] &= (-1)^4\left[
+      <img src="matrix-invariants-d4.png" alt="(4)" class="ring1" />
+      + <img src="matrix-invariants-d31.png" alt="(3)(1)" class="ring1" />
+      + <img src="matrix-invariants-d22.png" alt="(2)(2)" class="ring1" />
+      + <img src="matrix-invariants-d211.png" alt="(2)(1)(1)" class="ring2" />
+      + <img src="matrix-invariants-d1111.png" alt="(1)(1)(1)(1)" class="ring2" />\right] \\
     &= \frac1{24}[(\tr A)^4 + 3(\tr A^2)^2 + 8\tr A^3\tr A - 6\tr A^2 (\tr A)^2 - 6 \tr A^4].
 </p>
 <p>ここで幾つか気づくことがある。</p>
