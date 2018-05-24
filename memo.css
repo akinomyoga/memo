@@ -92,3 +92,8 @@ address.mwg-address>p {
   margin: 0;
   text-align: center;
 }
+
+div.mwg-note {
+  border: 1px solid black;
+  padding: 0.5em;
+}
