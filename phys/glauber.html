@@ -1,0 +1,108 @@
+<p>ここでは高エネルギー重イオン衝突の初期条件として用いられるグラウバー模型について取り扱う。</p>
+
+<h2>1 光学グラウバー模型</h2>
+<p>単にグラウバー模型というと滑らかな確率分布である<dfn>光学グラウバー模型</dfn> (optical Glauber model) を指す。</p>
+
+<h3>核子分布</h3>
+<p>$A$ 個の核子からなる原子核 $A$ があるとする。
+  核子の数密度を $\rho_A(x, y, z)$ と書くことにする。
+  これを全空間で積分すれば核子の数 $A$ になる。
+</p>
+<p class="aghfly-begin-align">
+  \int \rho_A(x, y, z) d^3x &= A.
+</p>
+<p>
+  核子1つ1つの位置分布は独立とすると、
+  核子1つを選んだときのその位置の確率分布は $\rho_A/A$ で書かれる。
+  また、$\rho(x,y,z)$ の具体形は Woods-Saxon 型のパラメータ付けをすることが多い。
+</p>
+<p class="aghfly-begin-align">
+  \rho_A(x, y, z) &\approx \rho_{WS}(r).
+</p>
+
+<h3>厚み関数</h3>
+<p>原子核$A$に粒子を入射するとき、一般に原子核$A$に含まれる複数の核子と散乱しうる。
+  この時、入射粒子がほとんど運動量 (向きと大きさ) を変えずに次々と核子と散乱するとする (cf アイコナール近似)。
+  横位置 $\bm{x}_T$ から入った入射粒子が感じる "<dfn>厚み</dfn> (thickness)" は、その横位置における原子核 $A$ 内の核子の数で書かれる。
+</p>
+<p class="aghfly-begin-align">
+  T_A(x, y) &= \int \rho_A(x, y, z) dz.
+</p>
+
+<h3>散乱断面積</h3>
+<p>散乱断面積の定義について改めて確認する。
+  粒子1と粒子2の散乱を考える。単位面積あたりの衝突回数 $\rho_\text{coll}$ を考えたい。
+  単位面積あたりの入射粒子の数密度をそれぞれ $\rho_1$, $\rho_2$ とする。
+  或る面積 $S = dx dy$ に入射する粒子の数は、それぞれ $\rho_1 S$ 個、 $\rho_2 S$ 個である。
+  粒子1と粒子2が一個ずつ $S$ に入った時の散乱確率を $p(S)$ とすると、
+  $\rho_\text{coll} S = p(S)\cdot(\rho_1 S)\cdot(\rho_2 S)$ になる。
+  これより、$p(S) \propto \sigma_{12}/S$ の形であり、比例係数 $\sigma_{12}$ は面積$S$に依らず衝突する粒子の種類のみによると分かる。
+  この比例係数$\sigma_{12}$は面積の次元を持ち、実際に剛体球の散乱の場合には剛体球の断面積に一致する。
+  この比例係数$\sigma_{12}$を<dfn>散乱断面積</dfn> (cross section) と呼ぶ
+  (ただの名前である。剛体球以外の場合には何の "面積" なのか考えても仕方がない)。
+  まとめると、
+</p>
+<p class="aghfly-begin-align">
+  \rho_\text{coll} &= \sigma_{12} \rho_1 \rho_2. \label{eq:cross-section-def}
+</p>
+
+<h3>重なり関数と衝突回数</h3>
+<p>原子核$A$と原子核$B$の衝突を考える。
+  原子核$B$についても核子密度や厚みを$A$と同様に定義する。
+  衝突をそれぞれの原子核の中に含まれる核子同士の散乱と考えて、
+  式$\eqref{eq:cross-section-def}$に当てはめて核子同士の散乱の回数を求める。
+  特に、衝突係数$b$の衝突を考えたいので、
+  原子核$A$の厚み$T_A(x,y)$を$+b/2$だけ$x$軸方向にずらし、
+  原子核$B$の厚み$T_B(x,y)$を$-b/2$だけ$x$軸方向にずらしてそれぞれ入射密度$\rho_1$, $\rho_2$とすると、
+</p>
+<p class="aghfly-begin-align">
+  \rho_\text{coll}(x,y)
+    &= \sigma_{NN} T_{AB}(x,y), \\
+  \text{where}\quad
+  T_{AB}(x,y) &:= T_A(x-b/2, y) T_B(x+b/2, y).
+</p>
+<p>但し、原子核内の核子同士の散乱断面積を$\sigma_{NN}$としたが、これは直接測れない。
+  実際には核子同士(陽子同士)の非弾性散乱断面積に近いだろうと思ってそれで代用する。
+</p>
+<p class="aghfly-begin-align">
+  \sigma_{NN} \approx \sigma_{inel}^{pp}.
+</p>
+<p>また $T_{AB}$ を<dfn>重なり関数</dfn> (overlap function) と呼ぶ。
+  衝突の回数は全空間で積分すれば得られる。
+</p>
+<p class="aghfly-begin-align">
+  N_\text{coll} &:= \int \rho_\text{coll}(x,y)dxdy.
+</p>
+
+<h3>関与した核子の個数</h3>
+<p>1回以上衝突を起こした核子を<dfn>関与した核子</dfn> (participant nucleon) と呼ぶ。
+  因みに1回も衝突を起こさなかった核子を<dfn>傍観者</dfn> (spectator) と呼ぶ。
+  原子核$A$の中の関与した核子の密度を $\rho_\text{part}^A(x,y)$ と書く。
+  ここではそれを $T_A(x,y)$, $T_B(x,y)$ を用いて書き表す。 
+</p>
+<p>原子核$A$の中の1つの核子$a$に注目する。
+  この核子が位置 $(x, y)$ にいるとする。
+  原子核$B$の中の或る核子$b$に注目するとその確率密度は $T_B(x,y)/B$ で与えられる。
+  核子$a$が核子$b$と衝突する確率は、$\sigma_{NN} T_B(x,y)/B$ である。
+  原子核$B$の中の他の核子と衝突する確率も同様である。
+  核子$a$が1回も衝突しない (原子核$B$の中の$B$個あるどの核子とも衝突しない) 確率は、
+</p>
+<p class="aghfly-begin-align">
+  \left(1-\frac{\sigma_{NN}T_B(x,y)}{B}\right)^B
+</p>
+<p>になる。従って、横位置 $(x,y)$ における、原子核$A$内の関与した(つまり1回以上衝突した)核子の数密度は、</p>
+<p class="aghfly-begin-align">
+  \rho_\text{part}^A(x,y) &= T_A(x,y)\cdot \left[1 - \left(1-\frac{\sigma_{NN}T_B(x,y)}{B}\right)^B\right].
+</p>
+
+<p>原子核$B$の中の関与した核子の密度 $\rho_\text{part}^B$ も同様に計算できる。
+  関与した核子密度の合計は、
+</p>
+<p class="aghfly-begin-align">
+  \rho_\text{part}(x, y) &:= \rho_\text{part}^A(x,y) + \rho_\text{part}^B(x,y)
+</p>
+<p>で与えられ、合計の関与した核子の数は</p>
+<p class="aghfly-begin-align">
+  N_\text{part} &:= \int \rho_\text{part}(x,y) dx dy
+</p>
+<p>で与えられる。</p>
