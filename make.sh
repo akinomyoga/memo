@@ -16,6 +16,7 @@ function generate {
   local TITLE=$2
 
   [[ out/$PAGE_PATH -nt $PAGE_PATH ]] && return
+  # && [[ out/$PAGE_PATH -nt make.sh ]] && return
   local CONTENT=$(< "$PAGE_PATH")
 
   local CATEGORY=
@@ -80,10 +81,11 @@ EOF
 update memo.css
 update git.html
 update index.html
-update phys/dft.html
-update math/parity.html
 
-update math/matrix-invariants.html 行列の不変量
+generate phys/dft.html 密度汎関数法メモ
+generate math/parity.html 偶奇性と分解
+
+generate math/matrix-invariants.html 行列の不変量
 update math/matrix-invariants-d1.png
 update math/matrix-invariants-d11.png
 update math/matrix-invariants-d111.png
