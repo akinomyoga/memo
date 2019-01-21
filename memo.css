@@ -97,3 +97,9 @@ div.mwg-note {
   border: 1px solid black;
   padding: 0.5em;
 }
+p.mwg-framed {
+  border: 1px solid black;
+  padding: 0.5em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
