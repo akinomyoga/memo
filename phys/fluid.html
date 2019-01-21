@@ -1,0 +1,118 @@
+<p>学生に流体力学 (非相対論) の基本について話したので、
+  それを改めて文章に書き起こしておく。
+</p>
+<h2>1. (準備) ストークスの定理まとめ</h2>
+<h3>1.1 ストークスの定理</h3>
+<p>流体力学について説明する前に其処で使う数学の定理について確認しておく。
+  これは物理ではなくて、単に数学の式である。
+  一般化されたストークスの定理は、微分形式の言葉で書かれる。
+  $n$次元多様体 $M$ に埋め込まれた $p+1$ 次元の領域 $D$ の積分と、
+  その$p$次元の境界 $\partial D$ の積分の間の関係である。
+  $p$ 次元積分は $p$-形式 $\omega \in \wedge\!^pT^*_xM$ の積分で表される。
+  この時、
+</p>
+<p class="aghfly-begin-align">
+  \int_{\partial D} \omega = \int_D d\omega.
+</p>
+
+<p>具体例を見て行くのが良い。3次元中の3次元領域$V$の場合が<dfn>ガウスの発散定理</dfn>である。</p>
+<p class="aghfly-begin-align">
+  \int_{\partial V} d\bm{S}\cdot\bm{A} = \int_V dV \nabla\cdot\bm{A}.
+</p>
+<p>他に以下も成り立つ。上からすぐ示せる。$d\bm{S} \to dV \nabla$ と覚えれば良い。</p>
+<p class="aghfly-begin-align">
+  \int_{\partial V} d\bm{S}\times\bm{A} &= \int_V dV \nabla\times\bm{A}, \\
+  \int_{\partial V} d\bm{S} \alpha &= \int_V dV \nabla\alpha.
+</p>
+
+<p>3次元中の2次元領域$S$ の場合が<dfn>(ケルビン・)ストークスの定理</dfn>である。</p>
+<p class="aghfly-begin-align">
+  \int_{\partial S} d\bm{l}\cdot\bm{A}
+    &= \int_S d\bm{S}\cdot(\nabla\times\bm{A}) \\
+    &= \int_S (d\bm{S}\times\nabla)\cdot\bm{A}.
+</p>
+<p>以下も成り立つ。$d\bm{l} \to d\bm{S}\times\nabla$ と覚えれば良い。</p>
+<p class="aghfly-begin-align">
+  \int_{\partial S} d\bm{l}\times\bm{A}
+    &= \int_{S} (d\bm{S}\times\nabla)\times\bm{A}, \\
+  \int_{\partial S} d\bm{l}\alpha
+    &= \int_{S} d\bm{S}\times\nabla\alpha. \\
+</p>
+
+<p>2次元中の2次元領域$D$ の場合が<dfn>グリーンの定理</dfn>である。</p>
+<p class="aghfly-begin-align">
+  \int_{\partial D} (F dx + G dy)
+    &= \int_D \Bigl(\frac{\partial G}{\partial x} - \frac{\partial F}{\partial y}\biggr)dxdy.
+</p>
+
+<p>実は1次元中の1次元区間$I$の場合は<dfn>微分積分学の基本定理</dfn>に対応する。</p>
+<p class="aghfly-begin-align">
+  F(x) |_{\partial I} &= \int_I \frac{dF}{dx} dx.
+</p>
+
+<h3>1.2 他</h3>
+<p>他に以下も使う。</p>
+<p class="aghfly-begin-align">
+  \biggl(\forall D, \int_D \omega = 0\biggr) \Rightarrow \omega = 0.
+</p>
+
+<h2>2. 質量保存 (連続の式)</h2>
+<p>流体力学における流体とは何か。
+  連続体の一つである。連続体には流体や弾性体などがある。
+  連続体は空間の各点における物理量の「場」で書かれて、
+  どんなに拡大してもなめらかであり時間・空間について好きなだけ微分可能な、
+  数学的な (仮想的な) 物体である。
+  その振る舞いによって流体と呼ばれたり弾性体と呼ばれたりする。
+  流体は幾らでも変形できる連続体で、弾性体は「元の形状」を覚えている連続体と思っておけば問題ない。
+  勿論、現実の流体はどんどん拡大して行くと分子が見えてくるので流体力学の流体とは違うが、
+  適切な適用条件のもとで近似的に流体力学の流体と思って良い。
+</p>
+<p>流体方程式を出すためには先ず登場人物を定めなければならない。
+  流体力学で登場する一番基本的な未知変数は密度の場 $\rho(\bm x, t)$ と流速の場 $\bm{v}(\bm x, t)$ である。
+  流体力学ではこの場 $\rho$ と場 $\bm{v}$ の時間発展を記述する式を考える。
+  先ず初めに質量保存から $\rho$ の時間発展を出す。
+  空間内に任意の領域 $V$ を取ると、その内部にある質量の時間変化は、表面 $\partial V$
+  から単位時間あたりに流入 (流出) する質量で書かれる。
+</p>
+<p class="aghfly-begin-align">
+  \forall V, \quad \frac{d}{dt}\int_D dV \rho &= -\int_{\partial D} d\bm{S}\cdot\bm{v}\rho.
+</p>
+<p>ストークスの定理を使って、</p>
+<p class="aghfly-begin-align">
+  \forall V, \quad \int_D dV \frac{\partial\rho}{\partial t} &= -\int_D dV \nabla\cdot(\rho\bm{v}).
+</p>
+<p>従って、次の連続の式を得る。これが $\rho$ の時間発展の式となる。</p>
+<p class="aghfly-begin-align">
+  \frac{\partial\rho}{\partial t} &= -\nabla\cdot(\rho\bm{v}).\quad\text{(連続の式)}
+</p>
+
+<h2>3. 応力</h2>
+<p>"連続体の内部で働く力" を応力という。
+  次に行く前に応力を表現する方法を決めておく必要がある。
+  今、流体の中に仮想的に $x$ 軸方向を向いた面を設置することにする。
+  (連続体の中に実際に切れ目を作る訳ではないが) 断層のようなものを想像してもらえれば良い。
+  この時 "断層" の左側($-x$側)と右側($+x$側)の間には力が働く。
+  左側が右側に及ぼす力を $\bm{F}$ とする (当然、右側が左側に及ぼす反作用は $-\bm{F}$ である)。
+  働く力は必ずしも面に対して垂直な成分 $F_x$ (抗力・圧力のようなもの) だけとは限らない。
+  面に沿った方向に働く力 $F_y$ や $F_z$ (摩擦のようなもの) の成分があっても良い。
+  また、働く力は局所的に見れば面積 $dydz$ に比例する。
+  従って、単位面積当たりの $P_{xj}$ を以下の様に定義する。
+</p>
+<p class="aghfly-begin-align">
+  P_{xj} dydz := F_j
+</p>
+<p>他の軸に沿った向きの面を考えれば $P_{yj}$ や $P_{zj}$ も定義できる。
+  更に好きな向き $\bm{n}$ の面を考えて $P_{nj}$ を定義した時はどうなるか。
+  これは微小な四面体 (todo) を考えれば、運動方程式より
+</p>
+<p class="aghfly-begin-align">
+  P_{nj} = \bm{n} \cdot \begin{pmatrix}P_{xj}\\ P_{yj}\\ P_{zj}\end{pmatrix}
+</p>
+<p>と分かる。つまり、$(P_{xj}, P_{yj}, P_{zj})$ さえ分かれば任意の向きの面に対する応力が決まり、
+  またベクトルとして振る舞う ($\bm{x}$ と同様に基底変換する) 事が分かる。
+  こうして定義される "連続体内部に働く単位面積あたりの力" $P_{ij}(\bm{x}, t)$ を<dfn>応力テンソル</dfn>と呼ぶ。
+</p>
+<h2>4. 運動量保存</h2>
+
+<h2>5. 構成方程式</h2>
+

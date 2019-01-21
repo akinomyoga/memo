@@ -20,10 +20,12 @@ function generate {
   local CONTENT=$(< "$PAGE_PATH")
 
   local CATEGORY=
-  if [[ $PAGE_PATH == math/* ]]; then
-    CATEGORY='数学 - '
-  elif [[ $PAGE_PATH == phys/* ]]; then
-    CATEGORY='物理 - '
+  if [[ $PAGE_PATH == */* ]]; then
+    case ${PAGE_PATH%/*} in
+    (math) CATEGORY='数学 - ' ;;
+    (phys) CATEGORY='物理 - ' ;;
+    (*)    CATEGORY="${PAGE_PATH%/*} -" ;;
+    esac
   fi
 
   local dir=out
@@ -99,3 +101,6 @@ update math/matrix-invariants-d31.png
 update math/matrix-invariants-d4.png
 
 generate phys/glauber.html グラウバー模型
+generate phys/fluid.html 流体力学の基本
+
+generate aghtex/test-bigl.html 'test \bigl, \bigr'
