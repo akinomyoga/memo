@@ -1,11 +1,15 @@
-<p>つまりエラーバーをどう計算するか。</p>
+<p>つまりエラーバーをどう計算するか。
+  Web 上にまともな説明がない (間違っているか初歩的すぎるか応用的すぎるかしかない) ので、
+  毎回学生に説明しなければならない。なので、ここにまとめておく事にする。
+  今度からはここを参考に取り敢えず勉強してもらってから教えることにする。
+</p>
 
 <h2>1. 統計と推定</h2>
 <p>今、何らかの集団の性質を知りたいとする。
   この興味の対象の集団を<dfn>母集団</dfn> (population) と呼び、
-  母集団の性質を表す様々な数を<dfn>母数</dfn>と呼ぶ。
-  母数には例えば<dfn>母平均</dfn> (母集団の平均)
-  や<dfn>母分散</dfn> (母集団の分散) などがある。
+  母集団の性質を表す様々な数を<dfn>母数</dfn> (population parameter) と呼ぶ。
+  母数には例えば<dfn>母平均</dfn> (population mean; 母集団の平均)
+  や<dfn>母分散</dfn> (population variance; 母集団の分散) などがある。
 </p>
 <p>母集団の性質を調べるのに確実な方法は<dfn>全数調査</dfn>である。
   母集団の全体に対して調査を行って母数を求める。
@@ -34,6 +38,7 @@
 </p>
 
 <h2>2. 平均と分散の推定</h2>
+<h3>2.1 確率空間と確率変数</h3>
 <p>具体的な推定量を考えるために設定を行う。
   母集団は<dfn>確率空間</dfn>$(\Omega, F, P)$として与える。
   つまり標本点の集合$\Omega=\{\omega_\alpha\}$と、
@@ -54,11 +59,13 @@
 </p>
 <p>と書く。</p>
 
+<h3>2.2 標本と一致推定量</h3>
 <p>母集団の性質を推定するために
   有限の標本 $(\omega_1,\dots,\omega_N) \in \Omega^N$ を抽出する。ただし、
 </p>
 <p class="mwg-framed">(仮定) 各標本点$\omega_i$の抽出は無作為 (確率$P$に従って) かつ独立に行われるとする。
   特に、有限母集団の場合には重複して抽出されることも許すことにする。
+  つまり、$\omega_1, \dots, \omega_N$ のそれぞれは<dfn>独立同分布</dfn> (i.i.d, independent and identical distribution) に従うと考える。
 </p>
 <p class="mwg-footnote">[Note: 実は他の標本抽出の仕方も考えられる。
   例えば、重複を許さずに $N$ 点を持ってくるという事もできるし、
@@ -70,24 +77,109 @@
 <p>今、確率変数$X$を考えて、
   母平均 $\mu = \langle X\rangle$ と
   母分散 $\sigma^2 = \langle(X-\langle X\rangle)^2\rangle$ が知りたい量だとする。
-  これを標本における確率変数の値 $(X_1,\dots,X_n)$ から求めた
-  <dfn>標本平均</dfn> (標本の平均) と<dfn>標本分散</dfn> (標本の分散) をそれぞれの推定量とすることができる。
+  標本における確率変数の値 $(X_1,\dots,X_n)$ から求めた
+  <dfn>標本平均</dfn> (標本の平均) と<dfn>標本分散</dfn> (標本の分散) を、それぞれの推定量とすることができる。
 </p>
 <p class="aghfly-begin-align">
-  m &= \frac1N\sum_{i=1}^N X_i, \\
-  s^2 &= \frac1N\sum_{i=1}^N (X_i-m)^2.
+  m &= \frac1N\sum_{i=1}^N X_i, \label{eq:sample-mean} \\
+  s^2 &= \frac1N\sum_{i=1}^N (X_i-m)^2. \label{eq:sample-variance}
 </p>
 <p>これらの推定量は標本サイズが大きくなる極限で真の値に "確率的に" 近づく。</p>
 <p class="aghfly-begin-align">
   m & \to \mu, & (N\to\infty), \\
   s^2 & \to \sigma^2, & (N\to\infty).
 </p>
-<p>この性質 (<dfn>一致性</dfn>) を満たす推定量を<dfn>一致推定量</dfn>と呼ぶ。
-  但し、ここでは説明しないが "確率的に" 近づく
-  というのには数学的には色々あることに注意する。
+<p>この性質は<dfn>一致性</dfn> (consistency) と呼び、これを満たす推定量を<dfn>一致推定量</dfn> (consistent estimator) と呼ぶ。
+  但し、ここでは説明しないが "確率的に" 近づくというのには数学的には色々あることに注意する。
+</p>
+
+<p>所で、標本から一つの母数を推定する推定量の組み立て方は一つではない。
+  例えば、(不自然な例ではあるが) 以下の様に重みを変えた平均を以て $\mu$ の推定量とすることも可能である。
+  但し、推定量は最低でも一致性を持つように作るのが普通である。
+</p>
+<p class="aghfly-begin-align">
+  m' &= \frac2{N(N-1)} \sum_{i=1}^N i X_i.
+</p>
+
+<h3>2.3 不偏推定量</h3>
+<p>ここで母数 $\theta$ の推定量 $\hat\theta$ 自体の性質について考える。
+  推定量 $\hat\theta$ はもちろん標本の選び方によって値が変わる。
+  つまり推定量自体も確率的に分布すると考えられる。
+  ここで推定量の期待値 $\langle \hat\theta\rangle$ を考える。
+  どういう事かというと「標本を抽出して標本から推定量を計算する」
+  という過程自体を仮に何度も繰り返したとした時の期待値である。
+  先ず1つ目の標本 $(\omega_1^{(1)},\dots,\omega_N^{(1)}) \in \Omega^N$ を抽出して推定量 $\hat\theta^{(1)}$ を計算する。
+  次に2つ目の標本 $(\omega_1^{(1)},\dots,\omega_N^{(1)})$ から推定量 $\hat\theta^{(2)}$ を計算する。
+  というのを繰り返して、$k$番目の標本$(\omega_1^{(1)},\dots,\omega_N^{(1)})$から推定量$\hat\theta^{(k)}$を計算する。
+  これらの推定量の期待値を考えて $\langle \hat\theta\rangle$ とする。
+  この時 $\langle \hat\theta\rangle - \theta$ を推定量 $\hat\theta$ の<dfn>偏り</dfn> (bias) と呼ぶ。
+  偏りがない、つまり $\langle \hat\theta\rangle = \theta$ を満たすことを<dfn>不偏性</dfn> (unbiasedness) と呼ぶ。
+  不偏性を持つ推定量を<dfn>不偏推定量</dfn> (unbiased estimator) と呼ぶ。
+  例えば、標本平均 $m$ は母平均 $\mu$ の不偏推定量になっている。
+</p>
+<p class="aghfly-begin-align">
+  \langle m \rangle
+    &= \frac1N \sum_{i=1}^N \langle X_i\rangle = \frac1N \sum_{i=1}^N \mu = \mu.
+</p>
+<p>上の計算で、標本の抽出の方法から $(X_1, \dots, X_N)$ はそれぞれ $X$ と同じ分布で独立同分布していることに注意する。
+  一方で、標本分散 $s^2$ は母分散 $\sigma^2$ の不偏推定量ではない。
+</p>
+<p class="aghfly-begin-align">
+  \langle s^2 \rangle
+    &= \frac1N \sum_{i=1}^N \langle (X_i - m)^2 \rangle \\
+    &= \langle (X_1 - m)^2 \rangle \label{eq:sample-variance-reduce} \\
+    &= \langle [(X_1 - \mu) - (m - \mu)]^2 \rangle \\
+    &= \langle (X_1 - \mu)\rangle^2  -2 \langle(X_1-\mu)(m-\mu)\rangle + \langle (m - \mu)^2 \rangle
+      \label{eq:sample-variance-decompose} \\
+    &= \langle(X_1-\mu)^2\rangle -\frac2N \sum_{i=1}^N\langle (X_1-\mu)(X_i-\mu)\rangle \nonumber\\ & \quad
+      + \frac1{N^2} \sum_{i=1}^N \sum_{j=1}^N \langle(X_i-\mu)(X_j-\mu)\rangle \\
+    &= \sigma^2 - \frac2N \sum_{i=1}^N \delta_{1i} \sigma^2 + \frac1{N^2}\sum_{i=1}^N\sum_{j=1}^N \delta_{ij} \sigma^2
+      \label{eq:sample-variance-sigma}\\
+    &= \Bigl(1-\frac1N\Bigr) \sigma^2.
+</p>
+<p>式 $\eqref{eq:sample-variance-reduce}$ で $\langle(X_i-m)^2\rangle$ は $i$ によらずに同じ値になることを用いた。
+  また、式 $\eqref{eq:sample-variance-sigma}$ で $\langle(X_i-\mu)(X_j-\mu)\rangle = \delta_{ij} \sigma^2$ を用いた。
+  上の最後の結果を見ると分かるように、標本分散には $\frac1N$ の割合だけ母分散の推定量として偏りがあることが分かる。
+  そもそも母分散は母平均の周りの揺らぎの大きさで、標本分散は標本平均の周りの揺らぎの大きさである。
+  標本平均の方が母平均よりも標本の各点に引きずられて近くなるので、標本分散の方が母分散よりも小さくなるのは道理である。
+  この偏りを前提として新しく不偏推定量を作ることができる。
+</p>
+<p class="aghfly-begin-align">
+  \sigma^2_* &= \frac{N}{N-1} s^2.
+</p>
+<p>この $\sigma_*^2$ を<dfn>不偏標本分散</dfn> (unbiased sample variance)
+  または単に<dfn>不偏分散</dfn> (unbiased variance) と呼ぶ。
+  $\langle\sigma_*^2\rangle = \frac{N}{N-1} (1-\frac1N) \sigma^2 = \sigma^2$ なので
+  実際に不偏推定量になっている (また当然一致推定量でもある)。
 </p>
 
 <h2>3. 標準誤差の評価</h2>
+<p>ここで推定量$\hat\theta$によって評価した値がどの程度信用できるかの指標が欲しい。
+  その為に推定量が真の値$\theta$からどの程度ずれているかを計る目的で
+  <dfn>標準誤差</dfn> (standard error) $\Delta\hat\theta$ を以下の様に定義する。
+</p>
+<p class="aghfly-begin-align">
+  (\Delta\hat\theta)^2 &= \langle (\hat\theta-\theta)^2\rangle.
+</p>
+<p>最も典型的な推定量は式 $\eqref{eq:sample-mean}$ の平均 $m$ の形をしている。</p>
+<p class="mwg-footnote">
+  [Note: 平均される確率変数 $X$ は標本点から計算されるものであれば、どんなに複雑な量でも良い。
+  例えば、実際には考えている対象に応じて $X = \cos n(Y-Z)$ の形をしていたり、
+  $X = e^{inY} + e^{inZ}$ の形をしていたりしても良い。
+  因みに、標本分散 $\eqref{eq:sample-variance}$ も平均の形を持っている様に見えるが、
+  $m$ は標本点から計算される量ではなくて標本全体から計算される量なので以下の議論は適用できない。]
+</p>
+<p>平均の場合の標準誤差は以下のようになる。</p>
+<p class="aghfly-begin-align">
+  (\Delta m)^2 &= \langle (m-\mu)^2\rangle = \frac1N\sigma^2.
+</p>
+<p>但し、これは丁度、式 $\eqref{eq:sample-variance-decompose}$
+  の第3項で計算したものなので計算は省略した。
+  実際には右辺の母分散 $\sigma^2$ は分からないので不偏標本分散で推定する。
+</p>
+<p class="aghfly-begin-align">
+  (\Delta m)^2 &\simeq \frac1N \sigma_*^2.
+</p>
+
 <h2>4. 誤差の伝播</h2>
 <h2>5. ジャックナイフ法</h2>
-
