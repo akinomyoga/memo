@@ -33,8 +33,9 @@
   標本抽出の手法に起因する偏りなどから来るずれを<dfn>系統誤差</dfn> (systematic error) という。
   統計誤差は標本を大きくすれば小さくなる誤差で、系統誤差は標本を大きくしても残る誤差と思って良い。
   <dfn>標準誤差</dfn> (standard error) とは誤差の大きさの尺度であり、
-  "一連の標本抽出と推定量の計算" を無限に繰り返した時の誤差のRMS (二乗平均平方根) と考えて良い。
+  "標本抽出と推定量の計算" 自体を無限に繰り返した時の誤差のRMS (二乗平均平方根) である。
   実際に推定を行うときには得られた推定量がどれだけ信用に足るかを判定するために標準誤差を見積もる。
+  見積もられた標準誤差がグラフにプロットする時のエラーバーの長さとして使われる。
 </p>
 
 <h2>2. 平均と分散の推定</h2>
@@ -42,8 +43,8 @@
 <p>具体的な推定量を考えるために設定を行う。
   母集団は<dfn>確率空間</dfn>$(\Omega, F, P)$として与える。
   つまり標本点の集合$\Omega=\{\omega_\alpha\}$と、
-  <dfn>事象</dfn> (event; 確率を考える対象である部分集合 $E\in\Omega$) の集まり$F=\{E_\beta\}$と、
-  その上の確率測度$P(E)$を以て、母集団が定義される。
+  <dfn>事象</dfn> (event; 確率を考える対象である部分集合 $E\subset\Omega$) の集まり$F=\{E_\beta\}$と、
+  その上の確率測度$P: F \to \mathbb{R}$を以て、母集団が定義される。
   確率測度は、母集団の中の点が実現する確率 (的な尺度) を与えると思って良い
   (或いは単に母集団の中の点の重みと思っても良い)。
   次に、母集団の各点$\omega\in\Omega$に対応して値を持つ
@@ -57,7 +58,7 @@
 <p class="aghfly-begin-align">
   \langle X \rangle = \int_\Omega X(\omega) dP(\omega)
 </p>
-<p>と書く。</p>
+<p>と書くことにする。</p>
 
 <h3>2.2 標本と一致推定量</h3>
 <p>母集団の性質を推定するために
@@ -70,6 +71,7 @@
 <p class="mwg-footnote">[Note: 実は他の標本抽出の仕方も考えられる。
   例えば、重複を許さずに $N$ 点を持ってくるという事もできるし、
   特定の重みをかけて各点が抽出されるという状況を考えることもできる。
+  マルコフ連鎖モンテカルロ法の場合には、近接する標本点の間に相関が入る。
   この抽出の仕方によって後の議論は大きく変わるが、
   今回は物理で現れる上記のような場合に絞って考える]
 </p>
@@ -302,7 +304,7 @@
   コーシー・シュワルツの不等式から 
 </p>
 <p class="aghfly-begin-align">
-  |\Delta_{XY}| & \le \Delta X\Delta Y
+  |\Delta_{XY}| &\le \Delta X\Delta Y
 </p>  
 <p>なので、</p>
 <p class="aghfly-begin-align">
@@ -321,12 +323,14 @@
 <p>誤差の伝播で検索するとよくあるのがこの式だが、
   これは飽くまで上限を与えるのに過ぎない。
   エラーバーを過大に評価しているので一見安全の様にも見えるが、
-  合っていない物を合っていると判断してしまう問題などがある。
-  更に、これで求めた標準誤差を続く検定で用いると誤った結果を導くことになる。
+  合っていない物を合っていると判断してしまうなど問題である。
+  更に、これで求めた標準誤差を検定で用いると誤った結果を導くことになる。
   できるだけこの "上限値" ではなくて、正しい式を誤差の伝播の式として用いたい。
 </p>
 
 <h2>5. エラーバーの読み方</h2>
+<p>(この章は個人的な感覚を述べているに過ぎないので余り真面目に読まなくて良い)</p>
+
 <p>実際にエラーバーをつけてグラフにプロットしたらそれで終わりではない。
   例えば、エラーバーの付いた点と理論的な線や理想的な値と比較したり、
   或いはエラーバーの付いた点同士を比較して、
@@ -364,14 +368,14 @@
   つまり、殆どがエラーバーの外に出ていれば何か考慮に入れていない理由がある (または何かを間違えている) 事を示唆する。
   逆に、殆ど全てがエラーバーの中に入っている場合にも、エラーバーの評価を間違えているか何らかのバイアスが入ってしまっている事を示唆する。
 </li>
-<li>更に大きく外れている場合には、
+<li>更に大きく外れている場合には、正規分布で
   $2\sigma$ の範囲外になる確率は 5% で、$3\sigma$ の範囲外になる確率は約 0.3% というのは覚えておくと良い。
-  但し、正規分布の裾野の方は中心極限定理でも正規分布に近づくのに大きな標本が必要になるので、
+  但し、正規分布の裾野の方は中心極限定理が余り効かないので、
   エラーバーがとても小さいというのでなければ大きく外れた時の $2\sigma$, $3\sigma$ などの割合は余り当てにし過ぎないのが良い。
 </li>
 <li>上では両側検定 (理論値とずれているかずれていないか) を気にしていたが、
   片側検定 (ある値より上であるべきかどうか) を気にするときには、
-  当然 $1\sigma$ 以上一方向にずれるのは半分の確率 16% である。
+  一方向に $1\sigma$ 以上ずれるのは当然、半分の確率 16% である。
   同様に $2\sigma$ は 2.5% で、$3\sigma$ は 0.15% の程度である。
 </li>
 </ul>
@@ -421,6 +425,136 @@
 </ul>
 
 <h2>6. ジャックナイフ法</h2>
-<p>(todo) これは正直余り理解せずに何となくコードを書いたことがあるだけなので、
-  わかりやすく説明するためには先ず基礎付けを理解しなければならない。
+<p>誤差の伝播では $f(\langle X\rangle, \langle Y\rangle)$ を
+  $f(\bar X, \bar Y)$ で推定する時の標準誤差を求めた。
+  誤差の伝播の問題点は変数が増えた時にどんどん項が増えて計算が煩雑になって行くという事である。
+  確率変数 $X^1, \dots, X^n$ に対して $f(\langle X^1\rangle, \dots, \langle X^n\rangle)$ を推定する
+  $f(\bar X^1, \dots, \bar X^n)$ の標準誤差は、誤差の伝播によって
 </p>
+<p class="aghfly-begin-align">
+  \Delta f &\simeq \sqrt{
+    \sum_{k=1}^n \left.\biggl(\frac{\partial f}{\partial X^k}\biggr)^2\right|_{\langle\bm X\rangle}\cdot (\Delta X^k)^2
+    + 2 \sum_{k \neq l}
+      \left.\frac{\partial f}{\partial X^k}
+      \frac{\partial f}{\partial X^k}\right|_{\langle\bm X\rangle} \cdot \Delta^{kl}}, \\
+  \Delta^{kl} &= \langle(\bar X^k - \langle X^k\rangle)(\bar X^l - \langle X^l\rangle)\rangle.
+</p>
+<p>変数間の相関がないと仮定すれば簡単になって、高々 $n$ 項にはなる。</p>
+<p class="aghfly-begin-align">
+  \Delta f &\simeq \sqrt{
+    \sum_{k=1}^n \left.\biggl(\frac{\partial f}{\partial X^k}\biggr)^2\right|_{\langle\bm X\rangle} \cdot(\Delta X^k)^2}.
+</p>
+<p>しかし、実際には「変数間の相関がない」という事は経験上殆どない。</p>
+
+<p>実は確率変数間の相関を正しく取り込んだ上で
+  より簡単に標準誤差を評価できる方法として<dfn>ジャックナイフ法</dfn> (Jack knife) というものがある。
+  ジャックナイフ法では時系列の標本点の間に相関がある場合にも、
+  それに対する評価を与えることができる。
+</p>
+
+<h3>6.1 ジャックナイフ法</h3>
+<p>ここでは、標本に対する仮定を緩めて置く事にする。</p>
+<p class="mwg-framed">
+  (仮定) 標本点 $(\omega_1, \dots, \omega_N)$ のそれぞれの標本点は、
+  母集団を反映するように抽出されるとする。
+  異なる標本点 $\omega_i$ と $\omega_j$ は独立であるか、
+  或いは番号 $i$ と $j$ が或る程度離れると相関が無視できる程小さくなるとする。
+</p>
+<p class="mwg-footnote">
+  Note: 例えばマルコフ連鎖モンテカルロの場合には、
+  各標本点は母集団を反映する分布になっていると期待するが、
+  隣り合う標本点は相関を持つ。
+  モンテカルロ時間が十分経てば相関は切れる。
+</p>
+<p>標本 $(\omega_1, \dots, \omega_N)$ の $N$ 個の標本点を $b$ 個ずつのビンに分け、
+  $B = N/b$ 個のビンとする [Note: できるだけ $N$ を綺麗に割り切る $b$ を選択するが、
+    仕方なく $N$ が $b$ で割り切れない時は、端数の標本点は捨てる
+    中途半端な標本点数のビンは作らない]。
+  そして、それぞれのビンの中で確率変数のビン平均を取る。$k$ 番目のビン平均を
+</p>
+<p class="aghfly-begin-align">
+  X^k_{[s]} &= \frac1b\sum_{i=1}^{b} X^k_{(s-1)b+i}, \quad(s=1,\dots,B).
+</p>
+<p>とする ($b$ の調節方法は後で述べる。特に標本点同士が独立の場合には $b=1$ で良い。
+  $b=1$ と選べば $X^{k}_{[s]} = X^k_s$ である)。$s$ 番目のビンに含まれる標本点だけ抜いた平均</p>
+<p class="aghfly-begin-align">
+  X^k_{[-s]} &= \frac1{B-1}\sum_{t\neq s} X^k_{[t]}, \quad(s=1,\dots,B)
+</p>
+<p>を定義する。この $B$ 個の平均値について $f$ を計算して、その平均と分散を考える。
+</p>
+<p class="aghfly-begin-align">
+  \hat f &= \frac1B \sum_{s=1}^B f(X^1_{[-s]},\dots,X^n_{[-s]}), \\
+  \hat V &= \frac1B \sum_{s=1}^B [f(X^1_{[-s]},\dots,X^n_{[-s]}) -\hat f]^2.
+</p>
+<p>上記の $\hat f$ を推定量とし、分散 $\hat V$ から推定量の標準誤差を見積もりたい。
+  推定量の標準誤差及び分散の期待値について、
+  $f$ を1次で展開できる程度に各変数のばらつきが小さいとする。
+  $\delta X^a_{[-s]} := X^a_{[-s]} - \langle X^a\rangle$,
+  $\delta X^a_{[s]} := X^a_{[s]} - \langle X^a\rangle$ として、
+  標準誤差は $f$ を $\langle X^a\rangle$ の1次までで展開して、
+</p>
+<p class="aghfly-begin-align">
+  (\Delta \hat f)^2
+    &= \langle[\hat f - f(\langle X^1\rangle, \dots, \langle X^n\rangle)]^2\rangle \\
+    &= \left\langle\left[ \frac1B \sum_{s=1}^B f(X^1_{[-s]},\dots,X^n_{[-s]})
+      - f(\langle X^1\rangle, \dots, \langle X^n\rangle) \right]^2\right\rangle \\
+    &\simeq \left\langle\left[
+      \frac1B\sum_{s=1}^B\sum_{a=1}^n
+      \frac{\partial f_*}{\partial X^a} \delta X^a_{[-s]}
+      \right]^2\right\rangle \\
+    &= \left\langle\left[
+      \frac1{B(B-1)}\sum_{a=1}^n \frac{\partial f_*}{\partial X^a}
+      \sum_{s=1}^B \left( \sum_{t=1}^B \delta X^a_{[t]} - X^a_{[s]} \right)
+      \right]^2\right\rangle \\
+    &= \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b}
+      \left( \frac1B V^{ab} + \frac1{B^2} \sum_{s\neq t} \langle \delta X_{[s]}^a \delta X_{[t]}^b\rangle \right).
+</p>
+<p>但し、各ビン内での相関は同じで、</p>
+<p class="aghfly-begin-align">
+  V^{ab} &:=
+  \langle \delta X_{[1]}^a \delta X_{[1]}^b\rangle
+  = \dots
+  = \langle \delta X_{[B]}^a \delta X_{[B]}^b\rangle
+</p>
+<p>である。$\langle \delta X_{[s]}^a \delta X_{[t]}^b \rangle$ ($s\neq t$) は異なるビンの間の標本点の相関である。
+  次に、分散 $\hat V$ の期待値を同様に計算すると、
+</p>
+<p class="aghfly-begin-align">
+  \langle \hat V \rangle
+  &= \left\langle\frac1B \sum_{s=1}^B [f(X^1_{[-s]},\dots,X^n_{[-s]}) -\hat f]^2 \right\rangle \\
+  &= \frac1B \sum_{s=1}^B \left\langle\left[f(X^1_{[-s]},\dots,X^n_{[-s]}) - \frac1B \sum_{t=1}^B f(X_{[-t]}^1,\dots,X_{[-t]}^n)\right]^2 \right\rangle \\
+  &\simeq \frac1B \sum_{s=1}^B \left\langle\left[
+    \sum_{a=1}^n \frac{\partial f_*}{\partial X^a}
+      \left( \delta X^a_{[-s]} - \frac1B \sum_{t=1}^B \delta X_{[-t]}^a \right)
+        \right]^2 \right\rangle \\
+  &= \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b}
+    \left( \frac1B \sum_{s=1}^B \langle \delta X_{[-s]}^a \delta X_{[-s]}^b\rangle
+      + \frac1{B^2} \sum_{s\neq t} \langle \delta X_{[-s]}^a \delta X_{[-t]}^b\rangle \right) \\
+  &= \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b}
+    \left( \frac1{B(B-1)} V^{ab} + \frac1{B^2(B-1)^2} \sum_{s\neq t} \langle \delta X_{[s]}^a \delta X_{[t]}^b\rangle \right).
+</p>
+<p>ここで異なるビンの間の相関について考える。
+  標本点相関項 $\langle \delta X_{[s]}^a \delta X_{[t]}^b \rangle$ ($s\neq t$)
+  は標本点を独立に抽出している場合には0になる。
+  また、或る$T$を以て標本点$\omega_i$と$\omega_j$の相関が$|i-j|>T$で切れると見なせる場合には、
+  ビンサイズ$b$を$b>T$に取って置けば標本点相関項は無視できるほど小さくなると仮定できる。
+  $b$ をその様に十分大きく取っておけば、
+</p>
+<p class="aghfly-begin-align">
+  (\Delta \hat f)^2
+    &\simeq \frac1B                  \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b} V^{ab}, \\
+  \hat V
+    &\simeq \frac1{B(B-1)} \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b} V^{ab}.
+</p>
+<p>従って、</p>
+<p class="aghfly-begin-align">
+  (\Delta \hat f)^2 &\simeq (B-1) \hat V
+</p>
+<p>となる。標本点の間の相関がないと分かっている時には $b=1$ に取って置くのが良い。
+  近い標本点の間に相関があるということが分かっている時、
+  どれだけ$b$を大きく取れば良いか分からないことが多いが、
+  その時は少しずつ$b$を大きくして行きながら $(B-1)\hat V$ を見れば良い。
+  標本サイズが十分大きければ $b$ に依らない値に収束するはずでそれが $(\Delta\hat f)^2$ である。
+  また、収束の具合を見ることによって標本点の間の相関がどの程度で切れるかの「相関時間」を見積もることもできる。
+</p>
+
