@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>標準誤差の評価</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="標準誤差の評価" />
+  <meta property="og:image" content="https://akinomyoga.github.io/agh/res/agh.icon.mwg_128x128.png" />
+  <meta property="og:url" content="https://akinomyoga.github.io/memo/phys/standard-error.html" />
+  <meta property="og:site_name" content="github.akinomyoga.io" />
+
+  <meta name="agh-fly-type" content="tex" />
+  <script src="/agh/agh.fly.js" charset="utf-8"></script>
+  <script type="application/x-tex" id="tex-preamble">
+  \documentclass{revtex}
+  \def\tr{\operatorname{tr}}
+  \begin{document}
+  </script>
+  <style>
+  img.ring1 { height: 1.4em; vertical-align: middle; }
+  img.ring2 { height: 2.8em; vertical-align: middle; }
+  </style>
+</head>
+<body class="mwg-standard-layout aghfly-inline-math">
+<nav>
+  [
+    <a href="../index.html">Top</a> -
+    物理 - <span class="mwg-nav-here">標準誤差の評価</span>
+  ]
+</nav>
+
+<h1>標準誤差の評価</h1>
+<p>つまりエラーバーをどう計算するか。
+  Web 上にまともな説明がない (間違っているか初歩的すぎるか応用的すぎるかしかない) ので、
+  毎回学生に説明しなければならない。なので、ここにまとめておく事にする。
+  今度からはここを参考に取り敢えず勉強してもらってから教えることにする。
+</p>
+
+<h2>1. 統計と推定</h2>
+<p>今、何らかの集団の性質を知りたいとする。
+  この興味の対象の集団を<dfn>母集団</dfn> (population) と呼び、
+  母集団の性質を表す様々な数を<dfn>母数</dfn> (population parameter) と呼ぶ。
+  母数には例えば<dfn>母平均</dfn> (population mean; 母集団の平均)
+  や<dfn>母分散</dfn> (population variance; 母集団の分散) などがある。
+</p>
+<p>母集団の性質を調べるのに確実な方法は<dfn>全数調査</dfn>である。
+  母集団の全体に対して調査を行って母数を求める。
+  しかし、全数調査が現実的にもしくは原理的にに不可能な場合がある。
+  例えば、日本人の平均身長を求めるために日本人全員の身長を一斉に測るのは大変である。
+  もしくは、考えている母集団自体が<dfn>無限母集団</dfn> (要素が無限にある母集団)
+  の場合には全数調査は原理的に不可能である。
+  例えば、或るサイコロを投げる試行は、
+  (サイコロが物理的に壊れるなどのことを考えなければ)
+  幾らでも繰り返すことが可能であり、終わりがない。
+</p>
+<p>全数調査を行う代わりに母集団の一部から全体を<dfn>推定</dfn> (estimate) することがしばしば有効である。
+  推定に使う母集団の部分集団を<dfn>標本</dfn> (sample) と呼び、
+  標本に含まれる各事例を<dfn>標本点</dfn> (data point) と呼ぶ。
+  母集団から標本を取り出す操作を<dfn>標本抽出</dfn> (sampling) と呼ぶ。
+  標本抽出は偏りがないようにできるだけ<dfn>無作為</dfn> (random) に行う。
+  標本を用いて或る母数を推定するための計算式を<dfn>推定量</dfn> (estimator) と呼ぶ。
+  推定量は飽くまで標本から母数を推定するためのものなので、
+  真の母数からはずれがある。これを<dfn>誤差</dfn> (error) という。
+  標本のサイズが小さい (全数を調査していない) ことに起因するずれを<dfn>統計誤差</dfn> (statistical error) という。
+  標本抽出の手法に起因する偏りなどから来るずれを<dfn>系統誤差</dfn> (systematic error) という。
+  統計誤差は標本を大きくすれば小さくなる誤差で、系統誤差は標本を大きくしても残る誤差と思って良い。
+  <dfn>標準誤差</dfn> (standard error) とは誤差の大きさの尺度であり、
+  "標本抽出と推定量の計算" 自体を無限に繰り返した時の誤差のRMS (二乗平均平方根) である。
+  実際に推定を行うときには得られた推定量がどれだけ信用に足るかを判定するために標準誤差を見積もる。
+  見積もられた標準誤差がグラフにプロットする時のエラーバーの長さとして使われる。
+</p>
+
+<h2>2. 平均と分散の推定</h2>
+<h3>2.1 確率空間と確率変数</h3>
+<p>具体的な推定量を考えるために設定を行う。
+  母集団は<dfn>確率空間</dfn>$(\Omega, F, P)$として与える。
+  つまり標本点の集合$\Omega=\{\omega_\alpha\}$と、
+  <dfn>事象</dfn> (event; 確率を考える対象である部分集合 $E\subset\Omega$) の集まり$F=\{E_\beta\}$と、
+  その上の確率測度$P: F \to \mathbb{R}$を以て、母集団が定義される。
+  確率測度は、母集団の中の点が実現する確率 (的な尺度) を与えると思って良い
+  (或いは単に母集団の中の点の重みと思っても良い)。
+  次に、母集団の各点$\omega\in\Omega$に対応して値を持つ
+  <dfn>確率変数</dfn> (random variable) $X = X(\omega) \in \mathbb{R}$を考える。
+  四則演算などの実数に対する操作は確率変数に対しても自然に定義され、
+  確率変数から計算される別の量も確率変数となる。
+  例えば $X$, $Y$ を確率変数として、
+  $2X$ や $\sin X$ や $(X+Y)^2$ などもそれぞれ確率変数である。
+  確率変数$X$に対する期待値を (測度の言葉で)
+</p>
+<p class="aghfly-begin-align">
+  \langle X \rangle = \int_\Omega X(\omega) dP(\omega)
+</p>
+<p>と書くことにする。</p>
+
+<h3>2.2 標本と一致推定量</h3>
+<p>母集団の性質を推定するために
+  有限の標本 $(\omega_1,\dots,\omega_N) \in \Omega^N$ を抽出する。ただし、
+</p>
+<p class="mwg-framed">(仮定) 各標本点$\omega_i$の抽出は無作為 (確率$P$に従って) かつ独立に行われるとする。
+  特に、有限母集団の場合には重複して抽出されることも許すことにする。
+  つまり、$\omega_1, \dots, \omega_N$ のそれぞれは<dfn>独立同分布</dfn> (i.i.d, independent and identical distribution) に従うと考える。
+</p>
+<p class="mwg-footnote">[Note: 実は他の標本抽出の仕方も考えられる。
+  例えば、重複を許さずに $N$ 点を持ってくるという事もできるし、
+  特定の重みをかけて各点が抽出されるという状況を考えることもできる。
+  マルコフ連鎖モンテカルロ法の場合には、近接する標本点の間に相関が入る。
+  この抽出の仕方によって後の議論は大きく変わるが、
+  今回は物理で現れる上記のような場合に絞って考える]
+</p>
+
+<p>今、確率変数$X$を考えて、
+  母平均 $\mu = \langle X\rangle$ と
+  母分散 $\sigma^2 = \langle(X-\langle X\rangle)^2\rangle$ が知りたい量だとする。
+  標本における確率変数の値 $(X_1,\dots,X_n)$ から求めた
+  <dfn>標本平均</dfn> (標本の平均) と<dfn>標本分散</dfn> (標本の分散) を、それぞれの推定量とすることができる。
+</p>
+<p class="aghfly-begin-align">
+  m &= \frac1N\sum_{i=1}^N X_i, \label{eq:sample-mean} \\
+  s^2 &= \frac1N\sum_{i=1}^N (X_i-m)^2. \label{eq:sample-variance}
+</p>
+<p>これらの推定量は標本サイズが大きくなる極限で真の値に "確率的に" 近づく。</p>
+<p class="aghfly-begin-align">
+  m & \to \mu, & (N\to\infty), \\
+  s^2 & \to \sigma^2, & (N\to\infty).
+</p>
+<p>この性質は<dfn>一致性</dfn> (consistency) と呼び、これを満たす推定量を<dfn>一致推定量</dfn> (consistent estimator) と呼ぶ。
+  但し、ここでは説明しないが "確率的に" 近づくというのには数学的には色々あることに注意する。
+</p>
+
+<p>所で、標本から一つの母数を推定する推定量の組み立て方は一つではない。
+  例えば、(不自然な例ではあるが) 以下の様に重みを変えた平均を以て $\mu$ の推定量とすることも可能である。
+  但し、推定量は最低でも一致性を持つように作るのが普通である。
+</p>
+<p class="aghfly-begin-align">
+  m' &= \frac2{N(N+1)} \sum_{i=1}^N i X_i.
+</p>
+
+<h3>2.3 不偏推定量</h3>
+<p>ここで母数 $\theta$ の推定量 $\hat\theta$ 自体の性質について考える。
+  推定量 $\hat\theta$ はもちろん標本の選び方によって値が変わる。
+  つまり推定量自体も確率的に分布すると考えられる。
+  ここで推定量の期待値 $\langle \hat\theta\rangle$ を考える。
+  どういう事かというと「標本を抽出して標本から推定量を計算する」
+  という過程自体を仮に何度も繰り返したとした時の期待値である。
+  先ず1つ目の標本 $(\omega_1^{(1)},\dots,\omega_N^{(1)}) \in \Omega^N$ を抽出して推定量 $\hat\theta^{(1)}$ を計算する。
+  次に2つ目の標本 $(\omega_1^{(2)},\dots,\omega_N^{(2)})$ から推定量 $\hat\theta^{(2)}$ を計算する。
+  というのを繰り返して、$k$番目の標本$(\omega_1^{(k)},\dots,\omega_N^{(k)})$から推定量$\hat\theta^{(k)}$を計算する。
+  これらの推定量の期待値を考えて $\langle \hat\theta\rangle$ とする。
+  この時 $\langle \hat\theta\rangle - \theta$ を推定量 $\hat\theta$ の<dfn>偏り</dfn> (bias) と呼ぶ。
+  偏りがない、つまり $\langle \hat\theta\rangle = \theta$ を満たすことを<dfn>不偏性</dfn> (unbiasedness) と呼ぶ。
+  不偏性を持つ推定量を<dfn>不偏推定量</dfn> (unbiased estimator) と呼ぶ。
+  例えば、標本平均 $m$ は母平均 $\mu$ の不偏推定量になっている。
+</p>
+<p class="aghfly-begin-align">
+  \langle m \rangle
+    &= \frac1N \sum_{i=1}^N \langle X_i\rangle = \frac1N \sum_{i=1}^N \mu = \mu.
+</p>
+<p>上の計算で、標本の抽出の方法から $(X_1, \dots, X_N)$ はそれぞれ $X$ と同じ分布で独立同分布していることに注意する。
+  一方で、標本分散 $s^2$ は母分散 $\sigma^2$ の不偏推定量ではない。
+</p>
+<p class="aghfly-begin-align">
+  \langle s^2 \rangle
+    &= \frac1N \sum_{i=1}^N \langle (X_i - m)^2 \rangle \\
+    &= \langle (X_1 - m)^2 \rangle \label{eq:sample-variance-reduce} \\
+    &= \langle [(X_1 - \mu) - (m - \mu)]^2 \rangle \\
+    &= \langle (X_1 - \mu)\rangle^2  -2 \langle(X_1-\mu)(m-\mu)\rangle + \langle (m - \mu)^2 \rangle
+      \label{eq:sample-variance-decompose} \\
+    &= \langle(X_1-\mu)^2\rangle -\frac2N \sum_{i=1}^N\langle (X_1-\mu)(X_i-\mu)\rangle \nonumber\\ & \quad
+      + \frac1{N^2} \sum_{i=1}^N \sum_{j=1}^N \langle(X_i-\mu)(X_j-\mu)\rangle \\
+    &= \sigma^2 - \frac2N \sum_{i=1}^N \delta_{1i} \sigma^2 + \frac1{N^2}\sum_{i=1}^N\sum_{j=1}^N \delta_{ij} \sigma^2
+      \label{eq:sample-variance-sigma}\\
+    &= \Bigl(1-\frac1N\Bigr) \sigma^2.
+</p>
+<p>式 $\eqref{eq:sample-variance-reduce}$ で $\langle(X_i-m)^2\rangle$ は $i$ によらずに同じ値になることを用いた。
+  また、式 $\eqref{eq:sample-variance-sigma}$ で $\langle(X_i-\mu)(X_j-\mu)\rangle = \delta_{ij} \sigma^2$ を用いた。
+  上の最後の結果を見ると分かるように、標本分散には $\frac1N$ の割合だけ母分散の推定量として偏りがあることが分かる。
+  そもそも母分散は母平均の周りの揺らぎの大きさで、標本分散は標本平均の周りの揺らぎの大きさである。
+  標本平均の方が母平均よりも標本の各点に引きずられて近くなるので、標本分散の方が母分散よりも小さくなるのは道理である。
+  この偏りを前提として新しく不偏推定量を作ることができる。
+</p>
+<p class="aghfly-begin-align">
+  \sigma^2_* &= \frac{N}{N-1} s^2.
+</p>
+<p>この $\sigma_*^2$ を<dfn>不偏標本分散</dfn> (unbiased sample variance)
+  または単に<dfn>不偏分散</dfn> (unbiased variance) と呼ぶ。
+  $\langle\sigma_*^2\rangle = \frac{N}{N-1} (1-\frac1N) \sigma^2 = \sigma^2$ なので
+  実際に不偏推定量になっている (また当然一致推定量でもある)。
+</p>
+
+<h2>3. 標準誤差の評価</h2>
+<p>ここで推定量$\hat\theta$によって評価した値がどの程度信用できるかの指標が欲しい。
+  その為に推定量が真の値$\theta$からどの程度ずれているかを計る目的で
+  <dfn>標準誤差</dfn> (standard error) $\Delta\hat\theta$ を以下の様に定義する。
+</p>
+<p class="aghfly-begin-align">
+  (\Delta\hat\theta)^2 &= \langle (\hat\theta-\theta)^2\rangle.
+</p>
+<p>最も典型的な推定量は式 $\eqref{eq:sample-mean}$ の平均 $m$ の形をしている。</p>
+<p class="mwg-footnote">
+  [Note: 平均される確率変数 $X$ は標本点から計算されるものであれば、どんなに複雑な量でも良い。
+  例えば、実際には考えている対象に応じて $X = \cos n(Y-Z)$ の形をしていたり、
+  $X = e^{inY} + e^{inZ}$ の形をしていたりしても良い。
+  因みに、標本分散 $\eqref{eq:sample-variance}$ も平均の形を持っている様に見えるが、
+  $m$ は標本点から計算される量ではなくて標本全体から計算される量なので以下の議論は適用できない。]
+</p>
+<p>平均の場合の標準誤差は以下のようになる。</p>
+<p class="aghfly-begin-align">
+  (\Delta m)^2 &= \langle (m-\mu)^2\rangle = \frac1N\sigma^2.
+</p>
+<p>但し、これは丁度、式 $\eqref{eq:sample-variance-decompose}$
+  の第3項で計算したものなので計算は省略した。
+  実際には右辺の母分散 $\sigma^2$ は分からないので不偏標本分散で推定する。
+</p>
+<p class="aghfly-begin-align">
+  (\Delta m)^2 &\simeq \frac1N \sigma_*^2.
+</p>
+<p>結果としてエラーバーには</p>
+<p class="aghfly-begin-align">
+  \Delta m &\simeq \sqrt{\frac1N \sigma_*^2}
+</p>
+<p>を用いる。</p>
+
+<h2>4. 誤差の伝播</h2>
+<p>推定量は必ずしも平均の形をしているとは限らない。
+  最も典型的なのは平均を求めた後で、
+  その平均を使って計算される量である。
+  その量の推定誤差を元の平均の推定誤差から計算するのが誤差の伝播である。
+</p>
+
+<h3>4.1 誤差の伝播の計算方法</h3>
+<p>今、複数の確率変数を考える。
+  ここでは2つの確率変数 $X$, $Y$ の場合を考えるが、実際は1つ以上の任意の数で良い。
+  求めたい母数は関数 $f$ を以て $f(\langle X\rangle, \langle Y\rangle)$ と書かれるとする。
+  この時、標本平均
+</p>
+<p class="aghfly-begin-align">
+  \bar X &= m_X = \frac1N \sum_{i=1}^N X_i, \\
+  \bar Y &= m_Y = \frac1N \sum_{i=1}^N Y_i
+</p>
+<p>を使って、$f(\bar X, \bar Y)$ を推定量とする。標準誤差は定義から</p>
+<p class="aghfly-begin-align">
+  (\Delta f)^2
+    &= \langle [f(\bar X, \bar Y) - f(\langle X\rangle, \langle Y\rangle)]^2\rangle.
+</p>
+<p>であるが、これはそのままでは具体的に評価できない。今、</p>
+<p class="mwg-framed">
+  (仮定) $\bar X$, $\bar Y$ 自体の標準誤差が
+  ($|\partial f/\partial X|$, $|\partial f/\partial Y|$ と較べて) 十分小さい
+</p>
+<p>と考えて、$f(\bar X, \bar Y)$ を $(\langle X\rangle, \langle Y\rangle)$ の周りで1次までのテーラー展開をする。</p>
+<p class="aghfly-begin-align">
+  f(\bar X, \bar Y) - f(\langle X\rangle, \langle Y\rangle)
+    &\simeq \frac{\partial f}{\partial X} \cdot (\bar X-\langle X\rangle)
+      + \frac{\partial f_*}{\partial X} \cdot (\bar Y-\langle Y\rangle).
+    \label{eq:taylor-expansion}
+</p>
+<p>但し、導関数は $(\langle X\rangle, \langle Y\rangle)$ の周りで評価する。</p>
+<p class="aghfly-begin-align">
+  \frac{\partial f_*}{\partial X}
+    &= \left.\frac{\partial f}{\partial X}\right|_{(X,Y)=(\langle X\rangle, \langle Y\rangle)}, \\
+  \frac{\partial f_*}{\partial Y}
+    &= \left.\frac{\partial f}{\partial Y}\right|_{(X,Y)=(\langle X\rangle, \langle Y\rangle)}.
+</p>
+<p>これを代入して、</p>
+<p class="aghfly-begin-align">
+  (\Delta f)^2
+    &\simeq \left\langle\left[\frac{\partial f_*}{\partial X} \cdot (\bar X-\langle X\rangle)
+      + \frac{\partial f_*}{\partial X} \cdot (\bar Y-\langle Y\rangle)\right]^2\right\rangle \\
+    &= \biggl(\frac{\partial f_*}{\partial X}\biggr)^2 \langle(\bar X-\langle X\rangle)^2\rangle
+      + \biggl(\frac{\partial f_*}{\partial Y}\biggr)^2 \langle(\bar Y-\langle Y\rangle)^2\rangle
+    \nonumber \\ & \quad
+      + 2\frac{\partial f_*}{\partial X}\frac{\partial f_*}{\partial Y}
+        \langle(\bar X-\langle X\rangle)(\bar Y-\langle Y\rangle)\rangle \\
+    &= \biggl(\frac{\partial f_*}{\partial X}\biggr)^2 (\Delta X)^2
+      + \biggl(\frac{\partial f_*}{\partial Y}\biggr)^2 (\Delta Y)^2
+      + 2\frac{\partial f_*}{\partial X}\frac{\partial f_*}{\partial Y} \Delta_{XY}.
+      \label{eq:error-propagation-three-terms}
+</p>
+<p>但し、</p>
+<p class="aghfly-begin-align">
+  \Delta_{XY} &= \langle(\bar X-\langle X\rangle)(\bar Y-\langle Y\rangle)\rangle.
+</p>
+<div class="mwg-framed"><dfn>誤差の伝播</dfn>
+  <p>結局、標準誤差 (エラーバーの長さ) は、</p>
+  <p class="aghfly-begin-align">
+    \Delta f
+      &\simeq \sqrt{\biggl(\frac{\partial f_*}{\partial X}\biggr)^2 (\Delta X)^2
+        + \biggl(\frac{\partial f_*}{\partial Y}\biggr)^2 (\Delta Y)^2
+        + 2\frac{\partial f_*}{\partial X}\frac{\partial f_*}{\partial Y} \Delta_{XY}}.
+  </p>
+  <p>ここで、導関数は平均値の上で近似的に評価する。</p>
+  <p class="aghfly-begin-align">
+    \frac{\partial f_*}{\partial X}
+      &\simeq \left.\frac{\partial f}{\partial X}\right|_{(X, Y)=(\bar X, \bar Y)}, \\
+    \frac{\partial f_*}{\partial Y}
+      &\simeq \left.\frac{\partial f}{\partial Y}\right|_{(X, Y)=(\bar X, \bar Y)}.
+  </p>
+  <p>また、各変数の誤差 $\Delta X$, $\Delta Y$ 及び相関 $\Delta_{XY}$ は、不偏分散・不偏共分散</p>
+  <p class="aghfly-begin-align">
+    \sigma_{X*}^2 &= \frac1{N-1} \sum_{i=1}^N (X_i - m_X)^2, \\
+    \sigma_{Y*}^2 &= \frac1{N-1} \sum_{i=1}^N (Y_i - m_Y)^2, \\
+    V_{XY*} &= \frac1{N-1} \sum_{i=1}^N (X_i - m_X)(Y_i - m_Y)
+  </p>
+  <p>を使って</p>
+  <p class="aghfly-begin-align">
+    (\Delta X)^2 &= \frac1N \sigma_X^2 \simeq \frac1N \sigma_{X*}^2, \\
+    (\Delta Y)^2 &= \frac1N \sigma_Y^2 \simeq \frac1N \sigma_{Y*}^2, \\
+    \Delta_{XY}  &= \frac1N V_{XY} \simeq \frac1N V_{XY*}
+  </p>
+  <p>と評価する。但し、確率変数 $X$ と $Y$ が独立と仮定して良い場合は、
+    相関 $V_{XY} = \Delta_{XY} = 0$ なので第3項は無視して良い。
+    実のところ、面倒なので確率変数が従属でも取り敢えず第3項を考えずに
+    エラーバーを算出することも多いが、正直なところ危ない。
+  </p>
+</div>
+
+<h3>4.2 具体例</h3>
+<p>以上の計算は多変数の場合にも自然に拡張できる。
+  個々の場合に同様の式変形を行った方が早いのでここではわざわざ式を挙げることは避ける。
+  練習の為に以下で幾つかの典型的な $f$ の場合について結果を載せる。
+</p>
+<p>独立な$n$個の確率変数 $X^1, \dots, X^n$ を考える。この時、</p>
+<p class="aghfly-begin-align">
+  f(X^1,\dots,X^n) &= \sum_{k=1}^n a_k X^k, \\
+  g(X^1,\dots,X^n) &= \prod_{k=1}^n (X^k)^{e_k}
+</p>
+<p>の誤差は、</p>
+<p class="aghfly-begin-align">
+  (\Delta f)^2 &= \sum_{k=1}^n (a_k)^2 (\Delta X^k)^2, \\
+  \frac{(\Delta g)^2}{g^2} &= \sum_{k=1}^n (e_k)^2 \frac{(\Delta X^k)^2}{(X^k)^2}
+</p>
+<p>で与えられる。特に $g$ に関しては対数微分を考えれば簡単に導出することができる。</p>
+
+<h3>4.3 相関が分からない時の上限値</h3>
+<p>式 $\ref{eq:error-propagation-three-terms}$ において
+  コーシー・シュワルツの不等式から 
+</p>
+<p class="aghfly-begin-align">
+  |\Delta_{XY}| &\le \Delta X\Delta Y
+</p>  
+<p>なので、</p>
+<p class="aghfly-begin-align">
+  (\Delta f)^2
+    &\lesssim \biggl(\frac{\partial f_*}{\partial X}\biggr)^2 (\Delta X)^2
+      + \biggl(\frac{\partial f_*}{\partial Y}\biggr)^2 (\Delta Y)^2
+      + 2\left|\frac{\partial f_*}{\partial X}\right|\cdot\left|\frac{\partial f_*}{\partial Y}\right| \Delta X\Delta Y \\
+    &= \left(\left|\frac{\partial f_*}{\partial X}\right|\Delta X
+        + \left|\frac{\partial f_*}{\partial Y}\right| \Delta Y\right)^2.
+</p>
+<p>従って、</p>
+<p class="aghfly-begin-align">
+  \Delta f &\lesssim \left|\frac{\partial f_*}{\partial X}\right|\Delta X
+        + \left|\frac{\partial f_*}{\partial Y}\right| \Delta Y.
+</p>
+<p>誤差の伝播で検索するとよくあるのがこの式だが、
+  これは飽くまで上限を与えるのに過ぎない。
+  エラーバーを過大に評価しているので一見安全の様にも見えるが、
+  合っていない物を合っていると判断してしまうなど問題である。
+  更に、これで求めた標準誤差を検定で用いると誤った結果を導くことになる。
+  できるだけこの "上限値" ではなくて、正しい式を誤差の伝播の式として用いたい。
+</p>
+
+<h2>5. エラーバーの読み方</h2>
+<p>(この章は個人的な感覚を述べているに過ぎないので余り真面目に読まなくて良い)</p>
+
+<p>実際にエラーバーをつけてグラフにプロットしたらそれで終わりではない。
+  例えば、エラーバーの付いた点と理論的な線や理想的な値と比較したり、
+  或いはエラーバーの付いた点同士を比較して、
+  それらが一致していると言えるか有意にずれていると言えるか判定するのが目的である。
+  その時、厳密に判断するためには<dfn>仮説検定</dfn> (hypothesis testing) を適用する。
+  しかし、毎回あらゆる種類の仮説検定を適用するのは大変だし時間がかかるので、
+  グラフを目で見た時にできるだけ正しい "感覚" で大雑把に判定できる様になると良い。
+</p>
+<p>大雑把な判断を正しくできるようになるためには、
+  個々の場合について検定の考え方を簡単に適用してみるのが最も良い。
+  しかし、検定はまた別に勉強しなければならないので深く立ち入らないことにする。
+  ここでは、よくある場合についてどういう事を見たら良いかという事について、
+  つらつらと並べてみる事にする。
+  (実際には、何も考えずに色々なグラフを見て経験を積んだ方が早い気もするけれども)。
+</p>
+<p>ここで一つ仮定を導入する。</p>
+<p class="mwg-framed">
+  (仮定) 推定の誤差が正規分布をしていると仮定する。
+</p>
+<p>これは、標本のサイズが十分大きい時に中心極限定理により期待されることである。
+  また、途中で誤差の伝播を行っている場合には、
+  関数の二階微分に較べて推定の誤差の二乗が十分小さく、
+  真の値の周りで関数を線形に展開できる範囲内でしか推定が揺らがないという仮定も必要になる。
+</p>
+
+<h3>5.1 エラーバー付きの点とエラーバーなしの値の比較</h3>
+<p>先ず、エラーバー付きの点と理想的な値や線を比較する場合について考える。
+  エラーバーの長さは丁度正規分布の $1\sigma$ の範囲を与える。
+</p>
+<ul>
+<li>正規分布の $1\sigma$ の範囲に入る確率は 68% で外れる確率は 32% なので、
+  エラー付きの点と理想的な値を比較した時に、
+  3つに2つぐらいがエラーバーの範囲内に入り、
+  1つが外れているという具合になるはずである。
+  つまり、殆どがエラーバーの外に出ていれば何か考慮に入れていない理由がある (または何かを間違えている) 事を示唆する。
+  逆に、殆ど全てがエラーバーの中に入っている場合にも、エラーバーの評価を間違えているか何らかのバイアスが入ってしまっている事を示唆する。
+</li>
+<li>更に大きく外れている場合には、正規分布で
+  $2\sigma$ の範囲外になる確率は 5% で、$3\sigma$ の範囲外になる確率は約 0.3% というのは覚えておくと良い。
+  但し、正規分布の裾野の方は中心極限定理が余り効かないので、
+  エラーバーがとても小さいというのでなければ大きく外れた時の $2\sigma$, $3\sigma$ などの割合は余り当てにし過ぎないのが良い。
+</li>
+<li>上では両側検定 (理論値とずれているかずれていないか) を気にしていたが、
+  片側検定 (ある値より上であるべきかどうか) を気にするときには、
+  一方向に $1\sigma$ 以上ずれるのは当然、半分の確率 16% である。
+  同様に $2\sigma$ は 2.5% で、$3\sigma$ は 0.15% の程度である。
+</li>
+</ul>
+
+<h3>5.2 エラーバー付きの点同士の比較</h3>
+<p>エラーバーの長さを目で足して $1\sigma$ としてしまいがちだが、
+  2つの独立な変数の差 $X-Y$ のエラーバーは、
+  誤差の伝播により $\sqrt{(\Delta X)^2 + (\Delta Y)^2}$ である。
+  なので目で「足す」代わりに、ユークリッド距離的に合成しなければならない。
+  例えば、2つのエラーバーの長さが同程度の場合には
+  一方のエラーバーを $\sqrt2$ 倍程度にしてずれを見ると良い。
+</p>
+
+<h3>5.3 複数の点を同時に見るとき</h3>
+<p>複数の点を見るときに先ず注意しなければならないのは、
+  それらの点の誤差に相関があるかどうかという事である。
+  例えば、或る2つの点を計算する時に使う標本に相関があると、
+  一方の点が外れれば他方の点も外れやすいなどの傾向がある。
+  逆に、標本に相関がない場合には、
+  それぞれの点の値に相関はないはずである。
+  また、相関によって全体にずれる効果 (系統誤差など) と、
+  それとは独立に各点独立にずれる統計誤差が混ざる場合もある。
+</p>
+<p>特に複数の点の相関のない統計誤差に注目する時には、色々見ることができる。</p>
+<ul>
+<li>エラーバーの長さだけそれぞれの点がずれていないと怪しい。
+  例えばエラーバーが長いのにそれぞれの点が揃っているというのは怪しいし、
+  エラーバーがとても短いのにそれぞれの点が大きく上下にばらついているのも怪しい。
+</li>
+<li>理論的な線と比較を行う時、
+  エラーバーの中に入っている点の数と外にある点の数が、
+  エラーバー評価が正しければ大体 2:1 程度になっている筈である。
+  それでもわざわざ数えていると判定に時間がかかるので、適当に判断する。
+  感覚的には、中にある点と外にある点が同程度にあって、
+  少しだけ中にある点の方が多いかなというぐらいである。
+</li>
+<li>他に、エラーバーとは独立な検定であるが、
+  複数の点と比較対象の大小を比べる時、
+  殆どの点が比較対象よりも上に出ている時には、
+  有意に比較対象よりも大きいと判断して良い。
+  というのも、もしそれらの点が本来比較対象の上に載っていて
+  誤差により上下に同程度に揺らいでいると考えると、
+  殆どの点が一方に偏るという事は統計的に起こりにくいからである。
+  具体的にそのような統計的偏りが起こる確率は、
+  二項分布で考えれれば $p = {}_nC_r (1/2)^n$ である。
+</li>
+</ul>
+
+<h2>6. ジャックナイフ法</h2>
+<p>誤差の伝播では $f(\langle X\rangle, \langle Y\rangle)$ を
+  $f(\bar X, \bar Y)$ で推定する時の標準誤差を求めた。
+  誤差の伝播の問題点は変数が増えた時にどんどん項が増えて計算が煩雑になって行くという事である。
+  確率変数 $X^1, \dots, X^n$ に対して $f(\langle X^1\rangle, \dots, \langle X^n\rangle)$ を推定する
+  $f(\bar X^1, \dots, \bar X^n)$ の標準誤差は、誤差の伝播によって
+</p>
+<p class="aghfly-begin-align">
+  \Delta f &\simeq \sqrt{
+    \sum_{k=1}^n \left.\biggl(\frac{\partial f}{\partial X^k}\biggr)^2\right|_{\langle\bm X\rangle}\cdot (\Delta X^k)^2
+    + 2 \sum_{k \neq l}
+      \left.\frac{\partial f}{\partial X^k}
+      \frac{\partial f}{\partial X^k}\right|_{\langle\bm X\rangle} \cdot \Delta^{kl}}, \\
+  \Delta^{kl} &= \langle(\bar X^k - \langle X^k\rangle)(\bar X^l - \langle X^l\rangle)\rangle.
+</p>
+<p>変数間の相関がないと仮定すれば簡単になって、高々 $n$ 項にはなる。</p>
+<p class="aghfly-begin-align">
+  \Delta f &\simeq \sqrt{
+    \sum_{k=1}^n \left.\biggl(\frac{\partial f}{\partial X^k}\biggr)^2\right|_{\langle\bm X\rangle} \cdot(\Delta X^k)^2}.
+</p>
+<p>しかし、実際には「変数間の相関がない」という事は経験上殆どない。</p>
+
+<p>実は確率変数間の相関を正しく取り込んだ上で
+  より簡単に標準誤差を評価できる方法として<dfn>ジャックナイフ法</dfn> (Jack knife) というものがある。
+  ジャックナイフ法では時系列の標本点の間に相関がある場合にも、
+  それに対する評価を与えることができる。
+</p>
+
+<h3>6.1 ジャックナイフ法</h3>
+<p>ここでは、標本に対する仮定を緩めて置く事にする。</p>
+<p class="mwg-framed">
+  (仮定) 標本点 $(\omega_1, \dots, \omega_N)$ のそれぞれの標本点は、
+  母集団を反映するように抽出されるとする。
+  異なる標本点 $\omega_i$ と $\omega_j$ は独立であるか、
+  或いは番号 $i$ と $j$ が或る程度離れると相関が無視できる程小さくなるとする。
+</p>
+<p class="mwg-footnote">
+  Note: 例えばマルコフ連鎖モンテカルロの場合には、
+  各標本点は母集団を反映する分布になっていると期待するが、
+  隣り合う標本点は相関を持つ。
+  モンテカルロ時間が十分経てば相関は切れる。
+</p>
+<p>標本 $(\omega_1, \dots, \omega_N)$ の $N$ 個の標本点を $b$ 個ずつのビンに分け、
+  $B = N/b$ 個のビンとする [Note: できるだけ $N$ を綺麗に割り切る $b$ を選択するが、
+    仕方なく $N$ が $b$ で割り切れない時は、端数の標本点は捨てる
+    中途半端な標本点数のビンは作らない]。
+  そして、それぞれのビンの中で確率変数のビン平均を取る。$k$ 番目のビン平均を
+</p>
+<p class="aghfly-begin-align">
+  X^k_{[s]} &= \frac1b\sum_{i=1}^{b} X^k_{(s-1)b+i}, \quad(s=1,\dots,B).
+</p>
+<p>とする ($b$ の調節方法は後で述べる。特に標本点同士が独立の場合には $b=1$ で良い。
+  $b=1$ と選べば $X^{k}_{[s]} = X^k_s$ である)。$s$ 番目のビンに含まれる標本点だけ抜いた平均</p>
+<p class="aghfly-begin-align">
+  X^k_{[-s]} &= \frac1{B-1}\sum_{t\neq s} X^k_{[t]}, \quad(s=1,\dots,B)
+</p>
+<p>を定義する。この $B$ 個の平均値について $f$ を計算して、その平均と分散を考える。
+</p>
+<p class="aghfly-begin-align">
+  \hat f &= \frac1B \sum_{s=1}^B f(X^1_{[-s]},\dots,X^n_{[-s]}), \\
+  \hat V &= \frac1B \sum_{s=1}^B [f(X^1_{[-s]},\dots,X^n_{[-s]}) -\hat f]^2.
+</p>
+<p>上記の $\hat f$ を推定量とし、分散 $\hat V$ から推定量の標準誤差を見積もりたい。
+  推定量の標準誤差及び分散の期待値について、
+  $f$ を1次で展開できる程度に各変数のばらつきが小さいとする。
+  $\delta X^a_{[-s]} := X^a_{[-s]} - \langle X^a\rangle$,
+  $\delta X^a_{[s]} := X^a_{[s]} - \langle X^a\rangle$ として、
+  標準誤差は $f$ を $\langle X^a\rangle$ の1次までで展開して、
+</p>
+<p class="aghfly-begin-align">
+  (\Delta \hat f)^2
+    &= \langle[\hat f - f(\langle X^1\rangle, \dots, \langle X^n\rangle)]^2\rangle \\
+    &= \left\langle\left[ \frac1B \sum_{s=1}^B f(X^1_{[-s]},\dots,X^n_{[-s]})
+      - f(\langle X^1\rangle, \dots, \langle X^n\rangle) \right]^2\right\rangle \\
+    &\simeq \left\langle\left[
+      \frac1B\sum_{s=1}^B\sum_{a=1}^n
+      \frac{\partial f_*}{\partial X^a} \delta X^a_{[-s]}
+      \right]^2\right\rangle \\
+    &= \left\langle\left[
+      \frac1{B(B-1)}\sum_{a=1}^n \frac{\partial f_*}{\partial X^a}
+      \sum_{s=1}^B \left( \sum_{t=1}^B \delta X^a_{[t]} - X^a_{[s]} \right)
+      \right]^2\right\rangle \\
+    &= \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b}
+      \left( \frac1B V^{ab} + \frac1{B^2} \sum_{s\neq t} \langle \delta X_{[s]}^a \delta X_{[t]}^b\rangle \right).
+</p>
+<p>但し、各ビン内での相関は同じで、</p>
+<p class="aghfly-begin-align">
+  V^{ab} &:=
+  \langle \delta X_{[1]}^a \delta X_{[1]}^b\rangle
+  = \dots
+  = \langle \delta X_{[B]}^a \delta X_{[B]}^b\rangle
+</p>
+<p>である。$\langle \delta X_{[s]}^a \delta X_{[t]}^b \rangle$ ($s\neq t$) は異なるビンの間の標本点の相関である。
+  次に、分散 $\hat V$ の期待値を同様に計算すると、
+</p>
+<p class="aghfly-begin-align">
+  \langle \hat V \rangle
+  &= \left\langle\frac1B \sum_{s=1}^B [f(X^1_{[-s]},\dots,X^n_{[-s]}) -\hat f]^2 \right\rangle \\
+  &= \frac1B \sum_{s=1}^B \left\langle\left[f(X^1_{[-s]},\dots,X^n_{[-s]}) - \frac1B \sum_{t=1}^B f(X_{[-t]}^1,\dots,X_{[-t]}^n)\right]^2 \right\rangle \\
+  &\simeq \frac1B \sum_{s=1}^B \left\langle\left[
+    \sum_{a=1}^n \frac{\partial f_*}{\partial X^a}
+      \left( \delta X^a_{[-s]} - \frac1B \sum_{t=1}^B \delta X_{[-t]}^a \right)
+        \right]^2 \right\rangle \\
+  &= \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b}
+    \left( \frac1B \sum_{s=1}^B \langle \delta X_{[-s]}^a \delta X_{[-s]}^b\rangle
+      + \frac1{B^2} \sum_{s\neq t} \langle \delta X_{[-s]}^a \delta X_{[-t]}^b\rangle \right) \\
+  &= \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b}
+    \left( \frac1{B(B-1)} V^{ab} + \frac1{B^2(B-1)^2} \sum_{s\neq t} \langle \delta X_{[s]}^a \delta X_{[t]}^b\rangle \right).
+</p>
+<p>ここで異なるビンの間の相関について考える。
+  標本点相関項 $\langle \delta X_{[s]}^a \delta X_{[t]}^b \rangle$ ($s\neq t$)
+  は標本点を独立に抽出している場合には0になる。
+  また、或る$T$を以て標本点$\omega_i$と$\omega_j$の相関が$|i-j|>T$で切れると見なせる場合には、
+  ビンサイズ$b$を$b>T$に取って置けば標本点相関項は無視できるほど小さくなると仮定できる。
+  $b$ をその様に十分大きく取っておけば、
+</p>
+<p class="aghfly-begin-align">
+  (\Delta \hat f)^2
+    &\simeq \frac1B                  \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b} V^{ab}, \\
+  \hat V
+    &\simeq \frac1{B(B-1)} \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b} V^{ab}.
+</p>
+<p>従って、</p>
+<p class="aghfly-begin-align">
+  (\Delta \hat f)^2 &\simeq (B-1) \hat V
+</p>
+<p>となる。標本点の間の相関がないと分かっている時には $b=1$ に取って置くのが良い。
+  近い標本点の間に相関があるということが分かっている時、
+  どれだけ$b$を大きく取れば良いか分からないことが多いが、
+  その時は少しずつ$b$を大きくして行きながら $(B-1)\hat V$ を見れば良い。
+  標本サイズが十分大きければ $b$ に依らない値に収束するはずでそれが $(\Delta\hat f)^2$ である。
+  また、収束の具合を見ることによって標本点の間の相関がどの程度で切れるかの「相関時間」を見積もることもできる。
+</p>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
+  </p>
+</address>
+</body>
+</html>

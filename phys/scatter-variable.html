@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>加速器実験の粒子の運動量</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="加速器実験の粒子の運動量" />
+  <meta property="og:image" content="https://akinomyoga.github.io/agh/res/agh.icon.mwg_128x128.png" />
+  <meta property="og:url" content="https://akinomyoga.github.io/memo/phys/scatter-variable.html" />
+  <meta property="og:site_name" content="github.akinomyoga.io" />
+
+  <meta name="agh-fly-type" content="tex" />
+  <script src="/agh/agh.fly.js" charset="utf-8"></script>
+  <script type="application/x-tex" id="tex-preamble">
+  \documentclass{revtex}
+  \def\tr{\operatorname{tr}}
+  \begin{document}
+  </script>
+  <style>
+  img.ring1 { height: 1.4em; vertical-align: middle; }
+  img.ring2 { height: 2.8em; vertical-align: middle; }
+  </style>
+</head>
+<body class="mwg-standard-layout aghfly-inline-math">
+<nav>
+  [
+    <a href="../index.html">Top</a> -
+    物理 - <span class="mwg-nav-here">加速器実験の粒子の運動量</span>
+  ]
+</nav>
+
+<h1>加速器実験の粒子の運動量</h1>
+<p>ここでは特に動的模型による解析を行う時に意識しなければならない事について述べる。
+  測定効率や検出器の被覆などの実験特有の事情による細かな処理などについては考えない。
+</p>
+
+<h2>1. 様々な変数</h2>
+<p>加速器実験では衝突点で起こることを直接測定することはできない。
+  衝突反応は原子よりも遥かに小さな領域で起こる反応なので、
+  測定装置が原子で構成されている限り測定装置が巨大すぎて何も見えない。
+  結局、衝突反応の残骸である飛び散った粒子の運動量分布
+  (粒子の種類・角度・運動量の大きさ) を検出器で見るしかない。
+</p>
+<p>加速器実験ではビーム軸を $z$ 軸に取る。
+  更に、衝突係数を定義できる場合にはその方向を $x$ 軸に取ることができる。
+  或いは、実験室の配置で $x$ 軸が決まる。
+  後は右手系になるように $y$ 軸が定まる。
+  $z$ 軸の方向を<dfn>縦方向</dfn> (longitudinal direction) と呼び、
+  $x$-$y$ 平面を<dfn>横平面</dfn> (transverse plane) と呼ぶ。
+  $z$ 軸と衝突係数で張られる平面 ($x$-$z$ 平面)を<dfn>反応平面</dfn> (reaction plane) と呼ぶ。
+  更に、検出された各粒子について運動量 $(p_x, p_y, p_z)$ を考えることができる。
+  $z$を軸とした球座標で $(p, \theta, \phi)$ と表すことがよくある。
+  極角 (polar angle) $\theta$ は $z$ 軸の正の方向から計った角度で、
+  <dfn>方位角</dfn> (azimuthal angle) $\phi$ は横平面内の角度である。
+</p>
+<p>特に重イオン衝突では、横平面内での運動量 $(p_x, p_y)$ は極座標で $(p_T, \phi)$ と表す。
+  $p_T = \sqrt{p_x^2 + p_y^2}$ は特に<dfn>横運動量</dfn> (transverse momentum) と呼ぶ。
+  また、$\theta$ の代わりに擬ラピディティ $\eta$ という量が使われる。
+  <dfn>擬ラピディティ</dfn> (pseudorapidity) は $(p, p_z)$ を
+  双極座標 $(p_T, \eta)$ で以下の様に表す時に現れる量で、
+</p>
+<p class="aghfly-begin-align">
+  p   &= p_T \cosh\eta, \\
+  p_z &= p_T \sinh\eta.
+</p>
+<p>擬ラピディティ $\eta$ は極角 $\theta$ と1対1に対応する。</p>
+<p class="aghfly-begin-align">
+  \cos\theta &= \tanh\eta = \frac{p_z}{p}
+</p>
+<p><dfn>横質量</dfn> (transverse mass) $m_T$ と<dfn>ラピディティ</dfn> (rapidity) $y$ は
+  $(E, p_z)$ の双極座標 $(m_T, y)$ として現れる量である。</p>
+<p class="aghfly-begin-align">
+  E   &= m_T \cosh y, \\
+  p_z &= m_T \sinh y.
+</p>
+<p>$y$ は $z$ 方向のブーストのパラメータであり、
+  粒子の $z$ 方向の速度 $\beta_z$ と以下の関係にある。
+</p>
+<p class="aghfly-begin-align">
+  \beta_z &= \tanh y.
+</p>
+
+<h2>2. よく使う変数のセット</h2>
+<p>重イオン衝突では衝突エネルギーが大きい極限で
+  <dfn>中央ラピディティ</dfn> (mid-rapidity; $y \sim 0$ または $\eta \sim 0$ 付近) における
+  現象がブースト不変になると考えられるので、$(p_T, \phi, y)$ で運動量を取り扱うと都合が良い。
+  しかし、ラピディティ $y$ を求めるためには<dfn>粒子識別</dfn> (particle identification, PID) が必要になるので、
+  より簡単に $\theta$ だけから求められる擬ラピディティ $\eta$ を用いて、
+  $(p_T, \phi, \eta)$ で取り扱うことの方が多い。
+</p>
+<p class="aghfly-begin-align">
+  p_x &= p_T \cosh\phi, \\
+  p_y &= p_T \sinh\phi, \\
+  p_z &= \sqrt{m^2 + p_T^2} \sinh y.
+</p>
+<p>ローレンツ不変な運動量体積要素は以下の様に変数変換される。</p>
+<p class="aghfly-begin-align">
+  \frac{d^3p}E
+    &= \left|\frac{\partial(p_x,p_y,p_z)}{\partial(p_T,\phi, \eta)}\right| \frac{dp_T d\phi d\eta}E \\
+    &= p_T dp_T d\phi d\eta.
+</p>
+
+<h2>3. 横運動量分布</h2>
+<p>粒子数は分布関数 $f(\bm{p})$ を以て</p>
+<p class="aghfly-begin-align">
+  dN &\sim f(\bm{p})\frac{d^3p}E
+</p>
+<p>と書かれるので</p>
+<p class="aghfly-begin-align">
+  f(\bm{p}) &\sim E\frac{dN}{d^3p} \\
+    &= \frac{dN}{p_T dp_T d\phi d\eta}
+</p>
+<p>の様な量を考えると物理的な議論に都合が良い。特に $d\phi$ について平均して</p>
+<p class="aghfly-begin-align">
+  \frac1{2\pi}\int d\phi \frac{dN}{p_T dp_T d\phi d\eta}
+    &= \frac1{2\pi p_T}\frac{dN}{dp_T d\eta}
+</p>
+<p>として横運動量分布を実験で見ることも多い。</p>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
+  </p>
+</address>
+</body>
+</html>

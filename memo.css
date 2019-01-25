@@ -93,7 +93,14 @@ address.mwg-address>p {
   text-align: center;
 }
 
-div.mwg-note {
+div.mwg-note,
+div.mwg-framed {
   border: 1px solid black;
   padding: 0.5em;
+}
+p.mwg-framed {
+  border: 1px solid black;
+  padding: 0.5em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
