@@ -55,13 +55,14 @@
   (サイコロが物理的に壊れるなどのことを考えなければ)
   幾らでも繰り返すことが可能であり、終わりがない。
 </p>
-<p>全数調査を行う代わりに母集団の一部から全体を<dfn>推定</dfn> (estimate) することがしばしば有効である。
+<p>全数調査を行う代わりに母集団の一部から全体を<dfn>推定</dfn> (estimation) することがしばしば有効である。
   推定に使う母集団の部分集団を<dfn>標本</dfn> (sample) と呼び、
   標本に含まれる各事例を<dfn>標本点</dfn> (data point) と呼ぶ。
   母集団から標本を取り出す操作を<dfn>標本抽出</dfn> (sampling) と呼ぶ。
   標本抽出は偏りがないようにできるだけ<dfn>無作為</dfn> (random) に行う。
   標本を用いて或る母数を推定するための計算式を<dfn>推定量</dfn> (estimator) と呼ぶ。
-  推定量は飽くまで標本から母数を推定するためのものなので、
+  推定量を使って実際に標本から計算した値を<dfn>推定値</dfn> (estimate) と呼ぶ。
+  推定値は飽くまで標本から母数を推定したものなので、
   真の母数からはずれがある。これを<dfn>誤差</dfn> (error) という。
   標本のサイズが小さい (全数を調査していない) ことに起因するずれを<dfn>統計誤差</dfn> (statistical error) という。
   標本抽出の手法に起因する偏りなどから来るずれを<dfn>系統誤差</dfn> (systematic error) という。
@@ -140,14 +141,14 @@
 <h3>2.3 不偏推定量</h3>
 <p>ここで母数 $\theta$ の推定量 $\hat\theta$ 自体の性質について考える。
   推定量 $\hat\theta$ はもちろん標本の選び方によって値が変わる。
-  つまり推定量自体も確率的に分布すると考えられる。
+  つまり推定値自体も確率的に分布すると考えられる。
   ここで推定量の期待値 $\langle \hat\theta\rangle$ を考える。
-  どういう事かというと「標本を抽出して標本から推定量を計算する」
+  どういう事かというと「標本を抽出して標本から推定値を計算する」
   という過程自体を仮に何度も繰り返したとした時の期待値である。
-  先ず1つ目の標本 $(\omega_1^{(1)},\dots,\omega_N^{(1)}) \in \Omega^N$ を抽出して推定量 $\hat\theta^{(1)}$ を計算する。
-  次に2つ目の標本 $(\omega_1^{(2)},\dots,\omega_N^{(2)})$ から推定量 $\hat\theta^{(2)}$ を計算する。
-  というのを繰り返して、$k$番目の標本$(\omega_1^{(k)},\dots,\omega_N^{(k)})$から推定量$\hat\theta^{(k)}$を計算する。
-  これらの推定量の期待値を考えて $\langle \hat\theta\rangle$ とする。
+  先ず1つ目の標本 $(\omega_1^{(1)},\dots,\omega_N^{(1)}) \in \Omega^N$ を抽出して推定値 $\hat\theta^{(1)}$ を計算する。
+  次に2つ目の標本 $(\omega_1^{(2)},\dots,\omega_N^{(2)})$ から推定値 $\hat\theta^{(2)}$ を計算する。
+  というのを繰り返して、$k$番目の標本$(\omega_1^{(k)},\dots,\omega_N^{(k)})$から推定値$\hat\theta^{(k)}$を計算する。
+  これらの推定値の期待値を考えて $\langle \hat\theta\rangle$ とする。
   この時 $\langle \hat\theta\rangle - \theta$ を推定量 $\hat\theta$ の<dfn>偏り</dfn> (bias) と呼ぶ。
   偏りがない、つまり $\langle \hat\theta\rangle = \theta$ を満たすことを<dfn>不偏性</dfn> (unbiasedness) と呼ぶ。
   不偏性を持つ推定量を<dfn>不偏推定量</dfn> (unbiased estimator) と呼ぶ。
@@ -197,6 +198,7 @@
 <p class="aghfly-begin-align">
   (\Delta\hat\theta)^2 &= \langle (\hat\theta-\theta)^2\rangle.
 </p>
+<h3>3.1 平均・期待値の標準誤差</h3>
 <p>最も典型的な推定量は式 $\eqref{eq:sample-mean}$ の平均 $m$ の形をしている。</p>
 <p class="mwg-footnote">
   [Note: 平均される確率変数 $X$ は標本点から計算されるものであれば、どんなに複雑な量でも良い。
@@ -221,6 +223,10 @@
   \Delta m &\simeq \sqrt{\frac1N \sigma_*^2}
 </p>
 <p>を用いる。</p>
+
+<h3>3.2 ToDo: ポアッソン過程の誤差</h3>
+<h3>3.3 ToDo: 二項分布の誤差</h3>
+<p>ToDo: 重複を許さない標本の場合</p>
 
 <h2>4. 誤差の伝播</h2>
 <p>推定量は必ずしも平均の形をしているとは限らない。
