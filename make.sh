@@ -47,7 +47,7 @@ function generate {
   <meta property="og:site_name" content="github.akinomyoga.io" />
 
   <meta name="agh-fly-type" content="tex" />
-  <script src="/agh/agh.fly.js" charset="utf-8"></script>
+  <script src="https://akinomyoga.github.io/agh/agh.fly.js" charset="utf-8"></script>
   <script type="application/x-tex" id="tex-preamble">
   \documentclass{revtex}
   \def\tr{\operatorname{tr}}
