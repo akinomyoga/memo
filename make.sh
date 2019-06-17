@@ -105,4 +105,6 @@ generate phys/fluid.html 流体力学の基本
 generate phys/standard-error.html 標準誤差の評価
 generate phys/scatter-variable.html 加速器実験の粒子の運動量
 
+generate phys/cumulant.html 'キュムラント (統計)'
+
 generate aghtex/test-bigl.html 'test \bigl, \bigr'
