@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>キュムラント (統計)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="キュムラント (統計)" />
+  <meta property="og:image" content="https://akinomyoga.github.io/agh/res/agh.icon.mwg_128x128.png" />
+  <meta property="og:url" content="https://akinomyoga.github.io/memo/phys/cumulant.html" />
+  <meta property="og:site_name" content="github.akinomyoga.io" />
+
+  <meta name="agh-fly-type" content="tex" />
+  <script src="/agh/agh.fly.js" charset="utf-8"></script>
+  <script type="application/x-tex" id="tex-preamble">
+  \documentclass{revtex}
+  \def\tr{\operatorname{tr}}
+  \begin{document}
+  </script>
+  <style>
+  img.ring1 { height: 1.4em; vertical-align: middle; }
+  img.ring2 { height: 2.8em; vertical-align: middle; }
+  </style>
+</head>
+<body class="mwg-standard-layout aghfly-inline-math">
+<nav>
+  [
+    <a href="../index.html">Top</a> -
+    物理 - <span class="mwg-nav-here">キュムラント (統計)</span>
+  ]
+</nav>
+
+<h1>キュムラント (統計)</h1>
+<p>キュムラント関係で色々と思うところ。</p>
+
+<h2>1 積率と母関数</h2>
+<p>確率変数の組 $\bm{X} = (X_1, \dots, X_n)$ を考える。
+  $\langle X_{i_1} \dots X_{i_p}\rangle$ を
+  $p$ 次の<dfn>積率</dfn> (moment) または<dfn>モーメント</dfn>と呼ぶ。
+  積率を求める為には単純に定義式の積分を実施しても良いが大変である。
+  代わりに以下を満たす<dfn>積率母関数</dfn> (moment generating function; モーメント母関数) $M(\bm{t})$
+  の解析的な表式が求められれば積率を計算するのが楽になる。母関数は生成関数とも言う。
+</p>
+<p class="aghfly-begin-align">
+  \langle X_{i_1} \dots X_{i_p}\rangle &= \left.\frac{\partial}{\partial t_{i_1}} \dots \frac{\partial}{\partial t_{i_p}} M(\bm{t}) \right|_{\bm{t}=0}.
+  \label{eq:generate-moment}
+</p>
+<p>上記の性質より、積率母関数のマクローリン展開を考えると、</p>
+<p class="aghfly-begin-align">
+  M(\bm{t}) &= \sum_{k_1 = 0}^\infty \dots \sum_{k_n = 0}^\infty
+    \langle {\textstyle\prod_{i=1}^n} (X_i)^{k_i} \rangle
+    \prod_{i=1}^n \frac{(t_i)^{k_i}}{k_i!} \nonumber \\
+  &= \left\langle \prod_{i=1}^n \sum_{k_i = 0}^\infty \frac{(t_iX_i)^{k_i}}{k_i!} \right\rangle \nonumber \\
+  &= \langle e^{\bm{t}\cdot\bm{X}}\rangle
+</p>
+<p>となるので、積率母関数は実は以下の式で求めれば良い。</p>
+<p class="aghfly-begin-align">
+  M(\bm{t}) &:= \langle e^{\bm{t}\cdot\bm{X}}\rangle.
+  \label{def:moment-generate-function}
+</p>
+<p>実際に $\eqref{eq:generate-moment}$ が満たされる事はこの表式を使っても簡単に示すことができる。</p>
+<p class="aghfly-begin-align">
+  \left.\frac{\partial}{\partial t_{i_1}} \dots \frac{\partial}{\partial t_{i_p}} M(\bm{t}) \right|_{\bm{t}=0}
+  &= \left\langle \left. \frac{\partial}{\partial t_{i_1}} \dots \frac{\partial}{\partial t_{i_p}} e^{\bm{t}\cdot\bm{X}} \right|_{\bm{t}=0} \right\rangle \nonumber \\
+  &= \langle X_{i_1} \dots X_{i_p}\rangle.
+</p>
+<p>★一方で、分布密度の Fourier 変換 $\psi(\bm{t})$ を<dfn>特性関数</dfn> (characteristic function) と呼ぶが、</p>
+<p class="aghfly-begin-align">
+  \psi(\bm{t})
+    &= \int d^nX \Pr[\bm{X}] e^{i\bm{t}\cdot\bm{X}}
+    = \langle e^{i\bm{t}\cdot\bm{X}}\rangle = M(i\bm{t})
+</p>
+<p>となり、積率母関数と関係がつく。
+  またこの事から積率母関数または特性関数が原点で解析的ならば、
+  これらは元の分布の全情報を持っている。
+  つまり、積率またはキュムラントが全て定まれば、
+  元の確率分布を再現することができる。
+</p>
+<p>★独立な変数の積率母関数は積に分解される。
+  確率変数の組 $\{X_i\}$ と $\{Y_i\}$ が独立である時、
+</p>
+<p class="aghfly-begin-align">
+  M_{X,Y}(\bm{t},\bm{s})
+    &= \langle e^{\bm{t}\cdot\bm{X} + \bm{s}\cdot\bm{Y}}\rangle \nonumber \\
+    &= \langle e^{\bm{t}\cdot\bm{X}}\rangle\cdot\langle e^{\bm{s}\cdot\bm{Y}}\rangle = M_X(\bm{t})M_Y(\bm{s}).
+    \label{eq:moment.independent-variable}
+</p>
+
+<h2>2 キュムラントと母関数</h2>
+<p><dfn>キュムラント</dfn> (cumulant) は直観的には「積率からより低次の積率の積で書ける成分を取り除いた様な物」である。
+  具体的にキュムラントを定義する前に記号を整理する。
+</p>
+
+<h2>2.1 $p$人の人のグループ分け $\{G_k\}_{k=1}^{n_G}$</h2>
+<p>今、$p$人の人 $\{1, \dots, p\}$ を任意の個数 $n_G$ のグループ $G_k$ ($k = 1,\dots,n_G$) に分ける方法を考える。
+  但し、どの人も何処か1つのグループに属し、
+  各グループには少なくとも1人の人が属する。
+  従ってグループの数 $n_G$ は $1\le n_G\le p$ を満たす。
+  グループの名前を入れ替えて内容が一致する分け方は同じ分け方と見做す
+    (例えば $G_1=\{1,2\}, G_2=\{3,4\}$ と $G_1=\{3,4\}, G_2=\{1,2\}$ は同じ分け方)。
+  $p=1$ の場合は自明に以下の様な分け方しかない。
+</p>
+<ul>
+<li>($n_G=1$) $G_1 = \{1\}$</li>
+</ul>
+<p>$p=2$ の場合は以下の様な分け方がある。</p>
+<ul>
+<li>($n_G=1$) $G_1 = \{1, 2\}$</li>
+<li>($n_G=2$) $G_1 = \{1\}, G_2 = \{2\}$</li>
+</ul>
+<p>$p=3$ の場合は以下の通り。</p>
+<ul>
+<li>($n_G=1$) $G_1 = \{1, 2, 3\}$</li>
+<li>($n_G=2$) $G_1 = \{1\}, G_2 = \{2, 3\}$</li>
+<li>($n_G=2$) $G_1 = \{2\}, G_2 = \{1, 3\}$</li>
+<li>($n_G=2$) $G_1 = \{3\}, G_2 = \{1, 2\}$</li>
+<li>($n_G=3$) $G_1 = \{1\}, G_2 = \{2\}, G_3 = \{3\}$</li>
+</ul>
+<p>$p=4$ の場合は以下の様になる。</p>
+<ul>
+<li>($n_G=1$) $G_1 = \{1, 2, 3, 4\}$</li>
+<li>($n_G=2$) $G_1 = \{1\}, G_2 = \{2, 3, 4\}$</li>
+<li>($n_G=2$) $G_1 = \{2\}, G_2 = \{1, 3, 4\}$</li>
+<li>($n_G=2$) $G_1 = \{3\}, G_2 = \{1, 2, 4\}$</li>
+<li>($n_G=2$) $G_1 = \{4\}, G_2 = \{1, 2, 3\}$</li>
+<li>($n_G=2$) $G_1 = \{1, 2\}, G_2 = \{3, 4\}$</li>
+<li>($n_G=2$) $G_1 = \{1, 3\}, G_2 = \{2, 4\}$</li>
+<li>($n_G=2$) $G_1 = \{1, 4\}, G_2 = \{2, 3\}$</li>
+<li>($n_G=3$) $G_1 = \{1, 2\}, G_2 = \{3\}, G_3 = \{4\}$</li>
+<li>($n_G=3$) $G_1 = \{1, 3\}, G_2 = \{2\}, G_3 = \{4\}$</li>
+<li>($n_G=3$) $G_1 = \{1, 4\}, G_2 = \{2\}, G_3 = \{3\}$</li>
+<li>($n_G=3$) $G_1 = \{2, 3\}, G_2 = \{1\}, G_3 = \{4\}$</li>
+<li>($n_G=3$) $G_1 = \{2, 4\}, G_2 = \{1\}, G_3 = \{3\}$</li>
+<li>($n_G=3$) $G_1 = \{3, 4\}, G_2 = \{3\}, G_3 = \{4\}$</li>
+<li>($n_G=4$) $G_1 = \{1\}, G_2 = \{2\}, G_3 = \{3\}, G_4 = \{4\}$</li>
+</ul>
+
+<h2>2.2 キュムラント</h2>
+<p>既にキュムラントは「積率からより低次の積率の積で書ける成分を取り除いた様な物」と述べた。
+  具体的にはキュムラント $\langle X_{i_1} \dots X_{i_p}\rangle_c$ は次の様に、
+  積率とより低次のキュムラントによって定義される。
+</p>
+<p class="aghfly-begin-align">
+  \langle X_{i_1} \dots X_{i_p}\rangle_c
+    &= \langle X_{i_1} \dots X_{i_p}\rangle
+    - \sum_{\{G_k\}_{k=1}^{n_G}, n_G \ge 2} \prod_{k=1}^{n_G} \left\langle \prod_{s \in G_k} X_{i_s}\right\rangle_c.
+  \label{def:cumulant-2}
+</p>
+<p class="mwg-footnote">[ Note: 1次のキュムラントは積率に等しい事に注意する:
+  $\langle X_i\rangle_c = \langle X_i\rangle.$ ]
+</p>
+<p class="mwg-footnote">[ Note: ところでキュムラントの記号 $\langle\circ\rangle_c$ を書く上で、グループ分けの対象が何であるかは意識する必要がある。
+  例えば $\langle X^{2m}\rangle_c$ と書いた場合は $2m$ 個の $X$ をグループ分けすると考えるが、
+  $\langle(X^2)^m\rangle_c$ と書いた時は $m$ 個の $X^2$ をグループ分けすると解釈するか、
+  $2m$ 個の $X$ をグループ分けすると考えるかによって定義が変わってしまう。
+  その時々に応じて何がグループ分けされる因子であるかを明確にしておく必要がある。 ]
+</p>
+<p class="mwg-footnote">[ Note: キュムラントが各因子について線形であることは定義から明らかである
+  (積率は明らかに線形である。その組み合わせで書かれるキュムラントも線形である)。
+  つまり、$\langle (aX+bY)X_{i_2}\dots X_{i_p}\rangle
+  = a\langle XX_{i_2}\dots X_{i_p}\rangle + b\langle YX_{i_2}\dots X_{i_p}\rangle$ である。]
+</p>
+<p>式$\eqref{def:cumulant-2}$のキュムラントの項を左辺に移項して、
+  更に $\langle X_{i_1} \dots X_{i_p}\rangle_c$ が $n_G=1$ の場合に当たる事に注意すれば、
+  逆に積率をキュムラントで書き表す事ができて、
+</p>
+<p class="aghfly-begin-align">
+  \langle X_{i_1} \dots X_{i_p}\rangle
+    &= \sum_{\{G_k\}_{k=1}^{n_G}} \prod_{k=1}^{n_G} \left\langle \prod_{s \in G_k} X_{i_s}\right\rangle_c.
+  \label{eq:moment-by-cumulant}
+</p>
+
+<p>特に、積率に確率変数が1種類しか現れない場合は、
+  各グループに何個の元があるかで右辺の総和を整理し直すことができる。
+  $s$個の元があるグループの数を $q_s$ とすれば、
+  $\{q_s\}$ で指定される様な分け方は $\textstyle p! / \prod_s q_s!s!^{q_s}$ だけある。よって、
+</p>
+<p class="aghfly-begin-align">
+  \frac{\langle X^p \rangle}{p!}
+    &= \frac1{p!}\sum_{\{q_s \in \mathbb{N}_0\}_{s=1}^\infty}^{\textstyle\sum_{s=1}^\infty sq_s = p}
+      \frac{p!}{\textstyle\prod_{s=1}^\infty q_s! s!^{q_s}}
+      \prod_{s=1}^\infty \langle X^s\rangle_c^{q_s} \nonumber \\
+    &= \sum_{\{q_s \in \mathbb{N}_0\}_{s=1}^\infty}^{\textstyle\sum_{s=1}^\infty sq_s = p}
+      \prod_{s=1}^\infty
+      \frac{1}{q_s!}
+      \left(\frac{\langle X^s\rangle_c}{s!}\right)^{q_s}.
+    \label{eq:moment-by-cumulant-qs}
+</p>
+<p>但し、総和記号は $\textstyle\sum_{s=1}^\infty sq_s = p$ を満たす様な数列 $q_s \in \mathbb{N}_0$ についての和である。
+</p>
+
+<p>キュムラントを具体的に書き出すと、例えば、</p>
+<p class="aghfly-begin-align">
+  \langle XY\rangle_c
+    &= \langle XY\rangle - \langle X\rangle_c\langle Y\rangle_c \\
+    &= \langle XY\rangle - \langle X\rangle\langle Y\rangle \\
+    &= \langle \delta X \delta Y\rangle, \quad \text{(where $\delta X = X - \langle X\rangle$, etc.)}, \\
+  \langle XYZ\rangle_c
+    &= \langle XYZ\rangle
+      - \langle X\rangle\langle YZ\rangle_c
+      - \langle Y\rangle\langle XZ\rangle_c
+      - \langle Z\rangle\langle XY\rangle_c
+      - \langle X\rangle\langle Y\rangle\langle Z\rangle \\
+    &= \langle XYZ\rangle
+      - \langle X\rangle\langle YZ\rangle
+      - \langle Y\rangle\langle XZ\rangle
+      - \langle Z\rangle\langle XY\rangle
+      +2 \langle X\rangle\langle Y\rangle\langle Z\rangle \\
+    &= \langle \delta X\delta Y\delta Z\rangle, \\
+  \langle XYZW\rangle_c
+    &= \langle \delta X\delta Y\delta Z\delta W\rangle
+      - \langle\delta X\delta Y\rangle\langle\delta Z\delta W\rangle \nonumber \\ &\quad
+      - \langle\delta X\delta Z\rangle\langle\delta Y\delta W\rangle
+      - \langle\delta X\delta W\rangle\langle\delta Y\delta Z\rangle.
+</p>
+<p>特に同じ確率変数の累乗の場合は、</p>
+<p class="aghfly-begin-align">
+  \langle X^2\rangle_c &= \langle \delta X^2\rangle, \\
+  \langle X^3\rangle_c &= \langle \delta X^3\rangle, \\
+  \langle X^4\rangle_c &= \langle \delta X^4\rangle - 3\langle \delta X^2\rangle^2, \\
+  \langle X^5\rangle_c &= \langle \delta X^5\rangle - 10\langle \delta X^2\rangle\langle \delta X^3\rangle
+</p>
+<p>などの様に書ける。特に $\sigma^2 = \langle X^2\rangle_c$ は<dfn>分散</dfn> (variance)、
+  $\beta_1^{1/2} = \langle X^3\rangle_c/\sigma^3$ は<dfn>歪度</dfn> (skewness)、
+  $\beta_2 = \langle X^4\rangle_c/\sigma^4$ は<dfn>尖度</dfn> (kurtosis) として知られる。
+</p>
+
+<h2>2.3 キュムラント母関数</h2>
+<p>積率母関数と同様にキュムラントを導関数とする関数として
+  <dfn>第1キュムラント母関数</dfn> (cumulant generating function) $K(\bm{t})$ を考える。
+</p>
+<p class="aghfly-begin-align">
+  \langle X_{i_1} \dots X_{i_p}\rangle_c &= \left.\frac{\partial}{\partial t_{i_1}} \dots \frac{\partial}{\partial t_{i_p}} K(\bm{t}) \right|_{\bm{t}=0}.
+</p>
+<p>積率母関数のときと同様にして、</p>
+<p class="aghfly-begin-align">
+  K(\bm{t})
+  &= \langle e^{\bm{t}\cdot\bm{X}}\rangle_c \\
+  &= \sum_{k = 1}^\infty \frac{\langle (\bm{t}\cdot\bm{X})^{k} \rangle_c}{k!}.
+</p>
+<p>但し、$\langle 1\rangle_c = 0$ と定めた。
+  また、キュムラントは $X_i$ について展開した後に $X_i$ のグループ分けに対して考える物とする。
+  以降 $A = \bm{t}\cdot\bm{X}$ とする。式$\eqref{eq:moment-by-cumulant-qs}$を積率母関数の式に代入すると、
+</p>
+<p class="aghfly-begin-align">
+  M(\bm{t})
+  &= \sum_{k = 0}^\infty \frac{\langle A^k \rangle}{k!} \nonumber \\
+  &= \sum_{k = 0}^\infty \sum_{\{q_s \in \mathbb{N}_0\}_{s=1}^\infty}^{\textstyle\sum_{s=1}^\infty sq_s = k}
+    \prod_{s=1}^\infty
+    \frac{1}{q_s!}
+    \left(\frac{\langle A^s\rangle_c}{s!}\right)^{q_s} \nonumber \\
+  &= \sum_{\{q_s \in \mathbb{N}_0\}_{s=1}^\infty}
+    \prod_{s=1}^\infty
+    \frac{1}{q_s!}
+    \left(\frac{\langle A^s\rangle_c}{s!}\right)^{q_s} \nonumber \\
+  &= \prod_{s=1}^\infty
+    \sum_{q_s=0}^\infty
+    \frac{1}{q_s!}
+    \left(\frac{\langle A^s\rangle_c}{s!}\right)^{q_s}
+  = \exp\left(\sum_{s=1}^\infty \frac{\langle A^s\rangle_c}{s!}\right)
+  = \exp K(\bm{t}).
+</p>
+<p>よって、第1キュムラント母関数は以下の式によって計算される。</p>
+<p class="aghfly-begin-align">
+  K(\bm{t}) &= \ln M(\bm{t}) = \ln \langle e^{\bm{t}\cdot\bm{X}}\rangle.
+</p>
+<p>因みに、第2キュムラント母関数 $K(i\bm{t})$ は特性関数を通して定義されるが本質的に同じである。</p>
+<p class="aghfly-begin-align">
+  K(i\bm{t}) &= \ln \psi(\bm{t}) = \ln \langle e^{i\bm{t}\cdot\bm{X}}\rangle.
+</p>
+<p>★式$\eqref{eq:moment.independent-variable}$より、
+  独立な変数のキュムラント母関数は和に分解される。
+</p>
+<p class="aghfly-begin-align">
+  K_{X,Y}(\bm{t},\bm{s}) &= K_X(\bm{t}) + K_Y(\bm{s}).
+</p>
+
+<h2>3 ガウス分布</h2>
+
+<h3>3.1 ガウス分布</h3>
+<p>多次元のガウス分布は以下で与えられる。</p>
+<p class="aghfly-begin-align">
+  \Pr[\bm{X}] = \frac{d^nX}{\sqrt{(2\pi)^n|G|}} \exp\left(-\frac12(\bm{X}-\bm{m})^\mathrm{T} G^{-1} (\bm{X}-\bm{m})\right).
+</p>
+<p>但し、$G$ は共分散行列で、$\bm{m}$ は平均である。また $|G| = \det G$ である。
+  上記の形に書けることは $G$ の対角化基底で考えれば自然である。
+  積率母関数及びキュムラント母関数を計算すると、
+</p>
+<p class="aghfly-begin-align">
+  \langle e^{\bm{t}^\mathrm{T}\bm{X}}\rangle
+    &= \int \frac{d^nX}{\sqrt{(2\pi)^n|G|}} e^{-\frac12(\bm{X}-\bm{m})^\mathrm{T} G^{-1} (\bm{X}-\bm{m}) + \bm{t}^\mathrm{T} \bm{X}} \nonumber \\
+    &= \int \frac{d^nX}{\sqrt{(2\pi)^n|G|}} e^{-\frac12(\bm{X}-\bm{m}-G\bm{t})^\mathrm{T} G^{-1} (\bm{X}-\bm{m}-G\bm{t})
+      + \frac12 \bm{t}^\mathrm{T}G\bm{t} + \bm{t}^\mathrm{T}\bm{m}} \nonumber \\
+    &= \exp\left(\bm{t}^\mathrm{T}\bm{m} + \frac12 \bm{t}^\mathrm{T}G\bm{t}\right), \\
+  \langle e^{\bm{t}^\mathrm{T}\bm{X}}\rangle_c
+    &= \bm{t}^\mathrm{T}\bm{m} + \frac12 \bm{t}^\mathrm{T}G\bm{t}.
+</p>
+<p>従って、1次のキュムラントは $\langle\bm{X}\rangle_c = \bm{m}$ であり、
+  2次のキュムラントは $\langle\bm{X}\bm{X}^\mathrm{T}\rangle_c = G$ である。
+  その他のキュムラントは全て 0 となる。
+  今 $\langle\bm{X}\rangle = \bm{m} = 0$ の場合を考えると、キュムラントは2次しか存在しない。
+  積率をキュムラントで書く式$\eqref{eq:moment-by-cumulant}$は著しく単純化して、
+</p>
+<p class="aghfly-begin-align">
+  \langle X_{i_1} \dots X_{i_p}\rangle
+    &= \sum_{B} \prod_{\{k, l\} \in B} G_{i_k i_l}.
+</p>
+<p>となる。但し、$B$ についての総和は
+  $\{1,\dots,p\}$ を過不足なく2つ組 $B = \{\{B_{11},B_{12}\}, \dots, \{B_{q1},B_{q2}\}\}$
+  に分けるあらゆる方法についての和である。
+  これを<dfn>ウィックの定理</dfn> (Wick's theorem) もしくは
+  <dfn>ブロッホ・ドミニシスの定理</dfn> (Bloch--de Dominicis theorem) と呼ぶ。
+  $p$ が奇数の時にはその様な分け方はないので積率は0になる事に注意する。
+</p>
+
+<h3>3.2 中心極限定理</h3>
+<p>独立同分布の確率変数の列 $\{X_i\}_{i=1}^\infty$ を考える。
+  分布のキュムラント $\kappa_n = \langle X^n\rangle_c$ は有界とする。
+  $n$ 個の平均を $\bar X_n = \frac1n\sum_{i=1}^n X_i$ と定義する。
+  $\bar X_n$ のキュムラント母関数を計算すると、
+</p>
+<p class="aghfly-begin-align">
+  K_{\bar X_n}(t)
+    &= \ln\langle e^{\frac tn\sum_{i=1}^n X_i}\rangle \nonumber \\
+    &= n K_X(t/n) \nonumber \\
+    &= \sum_{k=1}^\infty \frac{\kappa_k}{n^{k-1}} \frac{t^k}{k!} \nonumber \\
+    &= \kappa_1 t + \frac{\kappa_2}{n} \frac{t^2}2 + \frac{\kappa_3}{n^2} \frac{t^3}{3!} + \cdots.
+</p>
+<p>ここで極限$n\to\infty$を考えると $K_{\bar X_n}(t) = \kappa_1 t$ となる。これは</p>
+<p class="aghfly-begin-align">
+  \Pr[\bar X_n] &\to \Pr[\bar X_\infty] = \delta(\bar X_\infty - \kappa_1)
+</p>
+<p>に分布収束する事を示す。
+  つまり $n\to\infty$ で $\bar X_n$ は値 $\kappa_1$ に確率収束する。
+  これを<dfn>大数の法則</dfn>と呼ぶ。
+  更に、標準化変数 $Z_n = \frac{\bar X_n - \kappa_1}{\sqrt{n\kappa_2}}$ を考えると、
+</p>
+<p class="aghfly-begin-align">
+  K_{Z_n}(t)
+    &= n K_X\left(\frac{t}{n\sqrt{n\kappa_2}}\right) - \frac{\kappa_1 t}{\sqrt{n\kappa_2}} \nonumber \\
+    &= \sum_{k=2}^\infty \frac{\kappa_k}{n^{k/2-1}\kappa_2^{k/2}} \frac{t^k}{k!} \nonumber \\
+    &= \frac12 t^2
+    + \frac{\kappa_3}{\kappa_2^{3/2}\sqrt{n}}\frac{t^3}{3!}
+    + \frac{\kappa_4}{\kappa_2^2 n}\frac{t^4}{4!} + \cdots \nonumber \\
+    &\to \frac{t^2}2, \quad(n\to\infty).
+</p>
+<p>従って、$\bar X_n$ の平均の近く ($\sim 1/\sqrt{n}$) のばらつき方 $Z_n$ を観察すると
+  十分大きな $n$ に対して正規分布をする。
+  これを<dfn>中心極限定理</dfn>と呼ぶ。
+  多変数の場合も同様にして示すことができる。
+</p>
+
+<h3>3.2 $\phi^4$ 理論</h3>
+<p>ウィックの定理がダイアグラム計算にどう繋がって行くのかについて俯瞰する。
+  場 $\phi(x)$ について以下の様な相対確率分布を考える。
+</p>
+<p class="aghfly-begin-align">
+  \rho[\phi(x)] &= \mathcal{D}\phi e^{-\int dx \frac12\phi(x)(-\partial_t^2 - \nabla^2 +m^2)\phi(x) -\int dx \frac{\lambda}{4!}\phi^4(x)} \\
+    &= \mathcal{D}\phi e^{ -\frac12\int dp \frac{\phi(-p)\phi(p)}{\omega^2+\bm{p}^2+m^2}}
+      e^{-\frac{\lambda}{4!}\int\left(\prod_{i=1}^4 dk_i \phi(k_i)\right) \delta({\textstyle\sum_{i=1}^4 k_i)}}.
+</p>
+<p>確率変数の期待値は以下で与えられる。</p>
+<p class="aghfly-begin-align">
+  \langle X[\phi]\rangle &= \int \rho[\phi] X[\phi] \Biggm/ \int \rho[\phi]
+</p>
+<p>今、摂動計算のために $\lambda = 0$ の時の期待値 $\langle\circ\rangle_0$ を定義する。
+  $\lambda = 0$ の時、ガウス分布になっているのでこの期待値はウィックの定理で計算できる。
+</p>
+<p class="aghfly-begin-align">
+  \langle X[\phi]\rangle_0 &= \int \rho_0[\phi] X[\phi] \Biggm/ \int \rho_0[\phi]
+</p>
+<p>$n$点相関関数は</p>
+<p class="aghfly-begin-align">
+  &\langle\phi(p_1)\dots\phi(p_n)\rangle
+    = \frac{\left\langle\phi(p_1)\dots\phi(p_n)
+    e^{-\frac{\lambda}{4!}\int\left(\prod_{i=1}^4 dk_i \phi(k_i)\right) \delta({\textstyle\sum_{i=1}^4 k_i)}}
+    \right\rangle_0}{
+      \left\langle
+          e^{-\frac{\lambda}{4!}\int\left(\prod_{i=1}^4 dk_i \phi(k_i)\right) \delta({\textstyle\sum_{i=1}^4 k_i)}}
+          \right\rangle_0} \nonumber \\
+  &\quad
+  = \frac{\sum_{k=0}^\infty \frac{(-\lambda)^k}{k!4!^k}\left\langle
+    \phi(p_1)\dots\phi(p_n)
+    \left[\int\left(\prod_{i=1}^4 dk_i \phi(k_i)\right) \delta({\textstyle\sum_{i=1}^4 k_i)}\right]^k
+    \right\rangle_0}{\sum_{k=0}^\infty \frac{(-\lambda)^k}{k!4!^k}\left\langle
+    \left[\int\left(\prod_{i=1}^4 dk_i \phi(k_i)\right) \delta({\textstyle\sum_{i=1}^4 k_i)}\right]^k
+    \right\rangle_0} \nonumber \\
+  &\quad = \frac{\text{(diagrams with $n$ external legs)}}{\text{(bubbles)}} \nonumber \\
+  &\quad = \frac{\text{(diagrams without bubbles)}\cdot\text{(bubbles)}}{\text{(bubbles)}} \nonumber \\
+  &\quad = \text{(diagrams without bubbles)}.
+</p>
+<p>の様に摂動展開して評価する。
+  ウィックの定理を適用して出てくる各項にファインマン図を割り当てる。
+  ファインマン図の書き方は面倒なので省略。
+  上の表式から、各頂点に $-\lambda$ を割り当て、
+  各辺に $G = \frac1{\omega^2+\bm{k}^2+m^2}$ を割り当て、
+  運動量が保存する様に各辺の端点に運動量を割り当てて積分する。
+</p>
+<p>$n$点のキュムラントは丁度$n$点相関関数に対する connected な寄与になっている。
+  つまり摂動論において connected diagrams から計算される。
+</p>
+<p class="aghfly-begin-align">
+  \langle\phi(p_1)\dots\phi(p_n)\rangle_c
+  & = \text{(connected diagrams)}.
+</p>
+<p>連結成分の生成汎関数は形式上は</p>
+<p class="aghfly-begin-align">
+  W[J] &= \ln \left\langle e^{-\int dx J(x)\phi(x) }\right\rangle \\
+    &= \text{(connected diagrams with external sources)}.
+</p>
+<p>相関関数の生成汎関数は $Z[J] = \exp W[J]$ で計算すれば良い。</p>
+
+<div class="mwg-framed">
+<p>Memo: 結局ルジャンドル変換の動機というか必然性が何だかわからない。</p>
+<ul>
+<li>場の量子論のキュムラント母関数は連結相関の生成汎関数 $W[J]$ である。
+  これをルジャンドル変換すると 1PI有効作用 $\Gamma[\bar\phi]$ になる。
+</li>
+<li>カノニカル集団のキュムラント母関数は $-\beta F$
+  でありこれをルジャンドル変換するとエントロピー $S$ になる。
+  グランド・カノニカル集団のキュムラント母関数は
+  $\beta\Omega = \beta pV$ であり、これもルジャンドル変換すると $S$ になる。
+</li>
+<li><a href="http://ogyahogya.hatenablog.com/entry/2014/11/19/%E5%B9%B3%E5%9D%87%E3%81%8B%E3%82%89%E5%A4%A7%E3%81%8D%E3%81%8F%E9%9B%A2%E3%82%8C%E3%81%9F%E3%81%A8%E3%81%93%E3%82%8D%E3%81%AE%E7%94%9F%E8%B5%B7%E7%A2%BA%E7%8E%87">平均から大きく離れたところの生起確率 - 初級Mathマニアの寝言</a>
+  チェビシェフの不等式・マルコフの不等式による大偏差の確率の上限。
+  マルコフの不等式を用いるとキュムラント母関数のルジャンドル変換が現れる。
+</li>
+<li><a href="http://ogyahogya.hatenablog.com/entry/2015/01/25/%E5%A4%A7%E5%81%8F%E5%B7%AE%E5%8E%9F%E7%90%86">大偏差原理 - 初級Mathマニアの寝言</a>
+  大偏差原理 (クラメールの定理) でキュムラント母関数のルジャンドル変換が現れる。
+  KLダイバージェンス(相互エントロピー)との関係についても述べられている。
+</li>
+<li><a href="https://www.jstage.jst.go.jp/article/jjssj/46/2/46_113/_pdf">[PDF] Levy の反転公式と鞍点近似法の比較 竹内宏行</a>
+  此処では特性関数の逆Fourier変換の鞍点近似においてキュムラント母関数のルジャンドル変換が現れる事が議論されている。
+</li>
+<li><a href="http://hep1.c.u-tokyo.ac.jp/~kazama/QFT/qft6slide.pdf">[PDF] qft6slide.pdf</a>
+  ここに 1PI が 1PI である事の説明が書かれている。
+  これを統計や統計力学に適用して考えると 1PI 性はどのように翻訳されるのだろうかというのは気になる。
+</li>
+<li><a href="https://home.hiroshima-u.ac.jp/iwatakch/probstaC/lecturenote/probstatC2007rev.pdf">[PDF] probstatC2007rev.pdf</a>
+  大偏差原理については 14, 15 に書かれている。
+  外場を入れて平均を強制的にずらして評価した結果を外場を入れなかった時の確率分布に適用している?
+</li>
+</ul>
+</div>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
+  </p>
+</address>
+</body>
+</html>

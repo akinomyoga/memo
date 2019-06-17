@@ -104,3 +104,14 @@ p.mwg-framed {
   margin-left: 1em;
   margin-right: 1em;
 }
+
+
+table.mwg-normal {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+table.mwg-normal td,
+table.mwg-normal th {
+  border: 1px solid black;
+}
+table.mwg-center { margin-left: auto; margin-right: auto; }
