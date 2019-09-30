@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VPN のまとめ</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="memo.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Git のちゃんとした入門" />
+  <meta property="og:image" content="https://akinomyoga.github.io/agh/res/agh.icon.mwg_128x128.png" />
+  <meta property="og:url" content="https://akinomyoga.github.io/memo/git.html" />
+  <meta property="og:site_name" content="github.akinomyoga.io" />
+</head>
+<body class="mwg-standard-layout">
+<nav>
+  [
+    <a href="index.html">Top</a> -
+    <span class="mwg-nav-here">VPN のまとめ</span>
+  ]
+</nav>
+
+<h1>L2/L3仮想化 (VPN) の色々</h1>
+
+<h2>IPIP (IP-IP)</h2>
+<p>RFC 1853 (1995)。
+  IP-IP (IP in IP Tunneling) は IP 上で IP を実装する。
+  IP プロトコル番号 94 及び 4 を用いる。
+</p>
+
+<h2>L2F</h2>
+<p>RFC 2341 (1998)。
+  L2F (Layer 2 Forwarding) は UDP 1701 上で動作する L2 接続のカプセル化。
+  Cisco によって提案された。
+</p>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/L2F">L2F - Wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Layer_2_Forwarding_Protocol">Layer 2 Forwarding Protocol - Wikipedia</a></li>
+<li>後継: L2TP</li>
+</ul>
+
+<h2>PPTP</h2>
+<p>RFC 2637 (1999)。
+  PPTP (Point-to-Point Tunneling Protocol) は
+  TCP 上で PPP 通信をカプセル化・暗号化する。
+  具体的な暗号などの実装は実装者に任されている。
+  Microsoft によって提案され Windows では標準でサポートされる。
+  セキュリティ上の問題があり現在では非推奨。
+</p>
+<ul>
+<li>後継: L2TP, SSTP</li>
+</ul>
+
+<h2>L2TP/IPsec</h2>
+<p>[RFC 2661 (1999) (L2TP), RFC 3193 (2001) (L2TP/IPsec)]
+  L2TP (Layer 2 Tunneling Protocol) は UDP 1701 上で L2 接続をカプセル化する。
+  L2TP 単体では暗号化を提供しない。
+  L2TP/IPsec は IPsec 上で L2TP 接続を実現する。
+  因みに IPsec は UDP 500, 4500 上で動作し L2TP はその上に仮想化されるので、
+  L2TP/IPsec の時には実際の UDP 1701 は使われない。
+</p>
+
+<h2>SSTP (MS-SSTP)</h2>
+<p>SSTP (Secure Socket Tunneling Protocol) は TLS の上で動作する PPTP の後継。
+  Microsoft により開発され Windows は標準で対応する。
+</p>
+
+<h2>EtherIP/IPsec</h2>
+<p>[RFC 3378 (2002)]
+  EtherIP (Tunneling Ethernet Frames in IP Datagrams) も L2TP と似た仕組み。
+</p>
+
+<h2>L2TPv3/IPsec</h2>
+<p>[RFC 3931 (2005) (L2TPv3)]
+  L2TPv3 は L2TP (L2TPv2) の改良。L2フレーム自体の転送にも対応する。
+  L2TPv3/IPsec は IPsec 上で L2TPv3 接続を行う。
+</p>
+
+<h2>IKEv1/IPsec</h2>
+<p>[RFC 2409 (1998) (IKEv1)]</p>
+<h2>Cisco IPsec</h2>
+<p>IKEv1/IPsec の改良らしい。</p>
+<h2>IKEv2/IPsec</h2>
+<p>[RFC 4306 (2005) (IKEv2)]
+  (巷では VPN のプロトコルであるかの様に記されているが、
+  調べてみると IPsec の最初の鍵交換のプロトコルの気もする。
+  結局 IPsec もそうだが何なのか良くわからない。)
+</p>
+<ul>
+<li><a href="https://www.cactusvpn.com/beginners-guide-to-vpn/what-is-ikev2/#definition">What Is IKEv2? (Your Guide to the IKEV2 VPN Protocol) | CactusVPN</a></li>
+</ul>
+
+<h2>OpenVPN</h2>
+<p>OpenVPN (2001, James Yonan) は VPN ソフトウェア及びそのプロトコルの名前である。
+  恐らく最も広く使われている SSL-VPN プロトコルである。
+  既定で TCP/UDP 1194 の上で動く。
+</p>
+
+<h2>SoftEther VPN (PacketiX VPN)</h2>
+<p>SoftEther は元々、登大遊によって2003年に開発されたソフトウェアである。
+  現在では PacketiX VPN 及び SoftEther VPN によってサポートされている。
+  プロトコルはソフトウェアの名称 SoftEther VPN または PacketiX VPN の名で参照される。
+</p>
+
+<h2>AnyConnect (OpenConnect)</h2>
+<p>AnyConnect は Cisco による SSL-VPN であり、
+  OpenConnect (2009) はそのオープンソース実装だそうだ。
+  プロトコル名としては巷では OpenConnect が使われている様だ。
+</p>
+
+<h2>WireGuard</h2>
+<p>WireGuard (2016, Jason A. Donenfeld) は
+  オープンソースソフトウェアによる SSL-VPN 及び、
+  そのプロトコルである。
+</p>
+
+<h2>StealthVPN</h2>
+<p>Astrill によって開発された SSL-VPN のプロトコル。</p>
+
+<h1>L4仮想化 (Proxy) の色々</h1>
+<p>基本的に SOCKS Proxy を提供する。</p>
+
+<h2>ssh DynamicForward</h2>
+<p>openssh のポート転送 -D を用いる。</p>
+<h2>ShadowSocks</h2>
+<h2>ShadowSocksR</h2>
+<h2>V2Ray</h2>
+<h2>Tor</h2>
+
+<h2>OpenWeb</h2>
+<p>Astrill が 2009 年に開発したもの。</p>
+
+
+<h1>他の一覧</h1>
+<ul>
+<li><a href="https://network.yamaha.com/knowledge/vpn/protocol">VPN接続方式 - ヤマハネットワーク製品</a></li>
+<li><a href="https://www.astrill.com/features/vpn-protocols">VPN プロトコル | Astrill VPN</a></li>
+</ul>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2019, @akinomyoga Koichi Murase &lt;myoga.murase at gmail.com&gt;,</p>
+  <p>連絡先
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>,
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>,
+    <a href="https://twitter.com/akinomyoga">Twitter</a>
+  </p>
+</address>
+</body>
+</html>
