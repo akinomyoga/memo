@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>平均、分散、…</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="平均、分散、…" />
+  <meta property="og:image" content="https://akinomyoga.github.io/agh/res/agh.icon.mwg_128x128.png" />
+  <meta property="og:url" content="https://akinomyoga.github.io/memo/math/mean.html" />
+  <meta property="og:site_name" content="github.akinomyoga.io" />
+
+  <meta name="agh-fly-type" content="tex" />
+  <script src="https://akinomyoga.github.io/agh/agh.fly.js" charset="utf-8"></script>
+  <script type="application/x-tex" id="tex-preamble">
+  \documentclass{revtex}
+  \def\tr{\operatorname{tr}}
+  \begin{document}
+  </script>
+  <style>
+  img.ring1 { height: 1.4em; vertical-align: middle; }
+  img.ring2 { height: 2.8em; vertical-align: middle; }
+  </style>
+</head>
+<body class="mwg-standard-layout aghfly-inline-math">
+<nav>
+  [
+    <a href="../index.html">Top</a> -
+    数学 - <span class="mwg-nav-here">平均、分散、…</span>
+  ]
+</nav>
+
+<h1>平均、分散、…</h1>
+
+<p>共分散と分散は以下で定義する。</p>
+<p class="aghfly-begin-align">
+  \gdef\Var{\mathrm{Var}}
+  \gdef\Cov{\mathrm{Cov}}
+  \Cov[X,Y] := E[(X-E[X])(Y-E[Y])] = E[XY] - E[X]E[Y], \\
+  \Var[X] := \Cov[X,X] = E[(X-E[X])^2] = E[X^2] - E[X]^2.
+</p>
+<p>$\Cov[X,Y]=0$ の時、$X$ と $Y$ は<dfn>無相関</dfn>であると言う。
+  $X$ と $Y$ が独立の時、無相関である。
+</p>
+
+<h2>和則</h2>
+<p class="aghfly-begin-align">
+  E[aX+bY] &= a E[X] + b E[Y], \\
+  \Var[aX+bY] &= a^2 \Var[X] + b^2 \Var[Y] + 2ab \Cov[X,Y].
+</p>
+<p>特に $X$ と $Y$ が無相関の場合、</p>
+<p class="aghfly-begin-align">
+  \Var[aX+bY] &= a^2 \Var[X] + b^2 \Var[Y].
+</p>
+
+<h2>積則</h2>
+<p>$X$, $Y$ が無相関の時</p>
+<p class="aghfly-begin-align">
+  E[XY] &= E[X]E[Y].
+</p>
+
+<p>$X$, $Y$ が独立変数の時</p>
+<p class="aghfly-begin-align">
+  \Var[XY]
+    &= E[X^2]E[Y^2] - E[X]^2E[Y]^2 \\
+    &= \Var[X]\Var[Y] + E[X]^2\Var[Y] + \Var[X]E[Y]^2.
+</p>
+<p>特に $E[X]=E[Y]=0$ の時、</p>
+<p class="aghfly-begin-align">
+  \Var[XY] &= \Var[X]\Var[Y].
+</p>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
+  </p>
+</address>
+</body>
+</html>
