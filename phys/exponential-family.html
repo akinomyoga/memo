@@ -166,13 +166,66 @@
 </ul>
 <p>これは条件として微視的エネルギー及びその他の量を固定して ($d\mu = \delta(\hat E -E)\delta(\hat N - N)\frac{dx^3dp^3}{h^3}$)、
   その他には制約を置かない。測度として位相体積 $dx^3dp^3$ を選ぶのは、通常、時間発展が位相体積を保存する (<dfn>Liouville の定理</dfn>) ことと、
-  長時間待って位相空間の点が十分混合されるとこれについて一様になるだろいうという議論の下で正当化される。
+  長時間待って位相空間の点が十分混合されるとこれについて一様になるだろうという議論の下で正当化される。
   他に制約がないのでエントロピー最大化によって最終的には位相空間の上での一様分布を得る。
   これが<dfn>等重率の原理</dfn>である。
 </p>
+<p>この時、最大エントロピー原理により確率測度は一様分布</p>
+<p class="aghfly-begin-align">
+  d\Pr &= \frac1W d\mu
+</p>
+<p>となり、規格化定数 $W(E,N)$ は<dfn>状態数</dfn> である。エントロピーを定義通りに計算すると</p>
+<p class="aghfly-begin-align">
+  S &= \ln W
+</p>
+<p>となる。</p>
+
 <h2>正準集団 (canonical ensemble)</h2>
 <ul>
-<li>制約: $\langle\hat E = E\rangle$, $\hat N = N$</li>
+<li>制約: $\langle\hat E \rangle = E$, $\hat N = N$</li>
 </ul>
-<p>
+<p>エネルギーについての条件を緩めて、エネルギー期待値を制約として与える。
+  基準の測度は $d\mu = \delta(\hat N - N)\frac{dx^3dp^3}{h^3}$ であり、
+  最大エントロピー原理により得られる確率測度は、
+</p>
+<p class="aghfly-begin-align">
+  d\Pr &= \frac1Z e^{-\beta \hat E} d\mu
+</p>
+<p>エネルギー期待値に対するラグランジュ乗数 $\beta = 1/T$ は温度の逆数になっている。
+  規格化定数 $Z(T, N)$ は<dfn>分配関数</dfn>と呼ぶ。
+  エントロピーを定義から計算すると、</p>
+<p class="aghfly-begin-align">
+  S &= \ln Z + \beta E, \\
+  \ln Z &= -\beta (E - TS).
+</p>
+<p>ここで熱力学的関係式 $E - TS = F$ を思い出せば、
+  実は $\ln Z$ がヘルムホルツの自由エネルギーに関係する事が分かる。
+</p>
+<p class="aghfly-begin-align">
+  F = -\frac1\beta \ln Z.
+</p>
+
+<h2>大正準集団 (grand canonical ensemble)</h2>
+<ul>
+<li>制約: $\langle\hat E \rangle = E$, $\langle\hat N\rangle = N$</li>
+</ul>
+<p>エネルギーも粒子数も期待値で与えられる場合を考える。
+  基準の測度は $d\mu = \frac{dx^3dp^3}{h^3}$ であり、
+  最大エントロピー原理により得られる確率測度は、
+</p>
+<p class="aghfly-begin-align">
+  d\Pr &= \frac1\Xi e^{-\beta (\hat E - \mu \hat N)} d\mu.
+</p>
+<p>ラグランジュ乗数 $\beta = 1/T, \alpha = \beta\mu$ は
+  温度 $T$ と化学ポテンシャル $\mu$ に対応する。
+  規格化定数 $\Xi(T, \mu)$ は<dfn>分配関数</dfn>と呼ぶ。
+  エントロピーを定義から計算すると、</p>
+<p class="aghfly-begin-align">
+  S &= \ln\Xi + \beta(E - \mu N), \\
+  \ln\Xi &= -\beta (E - TS - \mu N) = \beta pV = -\beta\Omega
+</p>
+<p>となり、$\ln \Xi$ はグランドポテンシャル $\Omega$ または圧力に対応すると分かる。
+</p>
+<p class="aghfly-begin-align">
+  \Omega(T,\mu) = -p(T,\mu)V = -\frac1\beta \ln \Xi(T,\mu).
 </p>
