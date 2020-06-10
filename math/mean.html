@@ -1,0 +1,38 @@
+
+<p>共分散と分散は以下で定義する。</p>
+<p class="aghfly-begin-align">
+  \gdef\Var{\mathrm{Var}}
+  \gdef\Cov{\mathrm{Cov}}
+  \Cov[X,Y] := E[(X-E[X])(Y-E[Y])] = E[XY] - E[X]E[Y], \\
+  \Var[X] := \Cov[X,X] = E[(X-E[X])^2] = E[X^2] - E[X]^2.
+</p>
+<p>$\Cov[X,Y]=0$ の時、$X$ と $Y$ は<dfn>無相関</dfn>であると言う。
+  $X$ と $Y$ が独立の時、無相関である。
+</p>
+
+<h2>和則</h2>
+<p class="aghfly-begin-align">
+  E[aX+bY] &= a E[X] + b E[Y], \\
+  \Var[aX+bY] &= a^2 \Var[X] + b^2 \Var[Y] + 2ab \Cov[X,Y].
+</p>
+<p>特に $X$ と $Y$ が無相関の場合、</p>
+<p class="aghfly-begin-align">
+  \Var[aX+bY] &= a^2 \Var[X] + b^2 \Var[Y].
+</p>
+
+<h2>積則</h2>
+<p>$X$, $Y$ が無相関の時</p>
+<p class="aghfly-begin-align">
+  E[XY] &= E[X]E[Y].
+</p>
+
+<p>$X$, $Y$ が独立変数の時</p>
+<p class="aghfly-begin-align">
+  \Var[XY]
+    &= E[X^2]E[Y^2] - E[X]^2E[Y]^2 \\
+    &= \Var[X]\Var[Y] + E[X]^2\Var[Y] + \Var[X]E[Y]^2.
+</p>
+<p>特に $E[X]=E[Y]=0$ の時、</p>
+<p class="aghfly-begin-align">
+  \Var[XY] &= \Var[X]\Var[Y].
+</p>

@@ -100,6 +100,8 @@ update math/matrix-invariants-d3.png
 update math/matrix-invariants-d31.png
 update math/matrix-invariants-d4.png
 
+generate math/mean.html '平均、分散、…'
+
 generate phys/glauber.html グラウバー模型
 generate phys/fluid.html 流体力学の基本
 generate phys/standard-error.html 標準誤差の評価
