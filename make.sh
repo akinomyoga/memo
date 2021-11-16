@@ -111,3 +111,5 @@ generate phys/cumulant.html 'キュムラント (統計)'
 generate phys/exponential-family.html '指数型分布族 (統計)'
 
 generate aghtex/test-bigl.html 'test \bigl, \bigr'
+
+generate text/202111-quantum-neq.html '量子と非平衡の物理 (東京大学出版会)'
