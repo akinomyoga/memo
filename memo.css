@@ -94,16 +94,18 @@ address.mwg-address>p {
 }
 
 div.mwg-note,
-div.mwg-framed {
-  border: 1px solid black;
-  padding: 0.5em;
-}
+div.mwg-framed,
 p.mwg-framed {
   border: 1px solid black;
-  padding: 0.5em;
+  border-radius: 0.5em;
+  padding: 1.0em;
+}
+p.mwg-framed {
   margin-left: 1em;
   margin-right: 1em;
 }
+div.mwg-framed>p:first-child {margin-top:0;}
+div.mwg-framed>p:last-child {margin-bottom:0;}
 
 
 table.mwg-normal {

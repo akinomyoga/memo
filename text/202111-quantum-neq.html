@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>量子と非平衡の物理 (東京大学出版会)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="量子と非平衡の物理 (東京大学出版会)" />
+  <meta property="og:image" content="https://akinomyoga.github.io/agh/res/agh.icon.mwg_128x128.png" />
+  <meta property="og:url" content="https://akinomyoga.github.io/memo/text/202111-quantum-neq.html" />
+  <meta property="og:site_name" content="github.akinomyoga.io" />
+
+  <meta name="agh-fly-type" content="tex" />
+  <script src="https://akinomyoga.github.io/agh/agh.fly.js" charset="utf-8"></script>
+  <script type="application/x-tex" id="tex-preamble">
+  \documentclass{revtex}
+  \def\tr{\operatorname{tr}}
+  \begin{document}
+  </script>
+  <style>
+  img.ring1 { height: 1.4em; vertical-align: middle; }
+  img.ring2 { height: 2.8em; vertical-align: middle; }
+  </style>
+</head>
+<body class="mwg-standard-layout aghfly-inline-math">
+<nav>
+  [
+    <a href="../index.html">Top</a> -
+    text -<span class="mwg-nav-here">量子と非平衡の物理 (東京大学出版会)</span>
+  ]
+</nav>
+
+<h1>量子と非平衡の物理 (東京大学出版会)</h1>
+
+<h2>3章 非平衡量子系のダイナミクス</h2>
+
+<p>この章では、物理系を着目する系 $S$ (System) と環境系 $R$ (Reservoir) に分けて環境系の自由度を消去した時に、
+着目系の時間発展がどう見えるかについて、
+TC型(時間畳み込み型)とTCL型(非時間畳み込み型)の二つの形の方程式を出している。
+</p>
+
+<div class="mwg-framed">
+<p>変数 $W$ (ベクトル) の線形時間発展を考える。</p>
+
+<p class="aghfly-begin-align">
+\gdef\Tr{\mathrm{Tr}}
+\gdef\T{\mathrm{T}}
+\gdef\tint{\textstyle\int}
+  \dot W = D(t) W.
+</p>
+
+<p>但し $D(t)$ は一般には時間依存する行列 (線形演算子) である。
+変数 $W$ の「興味のある部分」を取り出す射影演算子 $\mathcal P$ を考える ($\mathcal P$ は時間依存しない)。
+$W$ を $x = \mathcal PW$ (系) とそれ以外の部分 $y = \mathcal Q W$ (但し $\mathcal Q = 1 - \mathcal P$) に分ける: $W = x + y$。
+この時、それぞれについての時間発展は、
+</p>
+
+<p class="aghfly-begin-align">
+  \dot x &= \mathcal P D x + \mathcal P D y, \\
+  \dot y &= \mathcal Q D x + \mathcal Q D y,
+</p>
+
+<p>と書かれる。$y$ を定数変化法で解くと</p>
+
+<p class="aghfly-begin-align">
+  y(t) &=
+    \int_{t_0}^t dt_1 \T e^{\tint_{t'}^{t} dt' \mathcal Q D(t')}\mathcal Q D(t_1) x(t_1)
+    +\T e^{\tint_{t_0}^t dt' \mathcal QD(t')} y(t_0).
+  \label{eq:3.y-const-var}
+</p>
+
+<p>これを $x$ の時間発展方程式に代入して以下の<dfn>TC型方程式</dfn>を得る。</p>
+
+<p class="aghfly-begin-align">
+  \dot x &= \mathcal P D x
+    +\int_{t_0}^t dt_1 [\mathcal P D(t) \T e^{\tint_{t'}^{t} dt' \mathcal Q D(t')}\mathcal Q D(t_1)] x(t_1)
+    +\mathcal P D(t) \T e^{\tint_{t_0}^t dt' \mathcal QD(t')} y(t_0).
+</p>
+
+<p>一方で、式$\eqref{eq:3.y-const-var}$ の過去に対する依存性 $x(t_1)$ を、
+  現在時刻の $W(t) = x(t)+y(t)$ を用いて</p>
+
+<p class="aghfly-begin-align">
+  x(t_1) &= \mathcal P \T e^{\tint_t^{t_1} dt' D(t')} [x(t)+y(t)]
+</p>
+
+<p>と表せば、</p>
+
+<p class="aghfly-begin-align">
+  y(t) &=
+    \underbrace{\int_{t_0}^t dt_1 \T e^{\tint_{t'}^{t} dt' \mathcal Q D(t')}\mathcal Q D(t_1) \mathcal P \T e^{\tint_t^{t_1} dt' D(t')}}_{=: \Sigma(t, t_0)} [x(t)+y(t)]
+    +\T e^{\tint_{t_0}^t dt' \mathcal QD(t')} y(t_0) \\
+  &= \frac{\Sigma(t,t_0)}{1-\Sigma(t,t_0)}x(t)
+    +\frac1{1-\Sigma(t,t_0)} \T e^{\tint_{t_0}^t dt' \mathcal QD(t')} y(t_0)
+</p>
+
+<p>となるので、これを $x$ の発展方程式に代入して以下の<dfn>TCL型方程式</dfn>を得る。</p>
+
+<p class="aghfly-begin-align">
+  \dot x(t)
+  &= \mathcal P D \frac1{1-\Sigma(t,t_0)} x(t)
+    +\mathcal P D \frac1{1-\Sigma(t,t_0)} \T e^{\tint_{t_0}^t dt' \mathcal QD(t')} y(t_0)
+</p>
+</div>
+
+<h3>具体例</h3>
+
+<p>密度行列の時間発展(Liouville--von Neumann方程式)を考えると、
+  $W(t) = \rho(t)$ で $D(t) = -i \mathrm{ad}_H = -iL$ (時間依存なし) に対応する。
+  今、密度行列をベクトルと見立てていて、この意味で $D(t)$ は超演算子になっている事に注意する。
+  この時、射影演算子を部分トレース $\mathcal P \circ = \rho_R \otimes \Tr_R \circ$ で定義する (これも超演算子である)。
+  但し、$\rho_R$ として規格化 $\Tr \rho_R=1$ を満たす環境系の密度行列を一つ選ぶ。
+</p>
+
+<p class="mwg-footnote">
+  [ Note: $y$ はベクトルとしては着目系に対応する部分空間の直交補空間を為すが、
+  $W$ が密度行列の場合にはこれは物理系としての "環境系" の情報とは限らなくて、
+  "着目系と環境系の相関" など $x$ に欠落している情報全てを "環境" として担っているように思われる。 ]
+</p>
+
+<p>或いは $H = H_0 + H_1$ として $H_0$ による時間発展を先に積分して、
+  相互作用表示 $W^I = e^{iH_0t} W e^{-iH_0 t}$ を考える。
+  この時の発展は $D(t) = -i\mathrm{ad}_{H_1^I(t)} = -iL_1^I(t)$
+  (但し $H_1^I(t) = e^{iH_0t} H_1 e^{-iH_0t}$) で与えられる。
+  射影演算子は上と同様に定義する。
+</p>
+
+<p>Heisenberg 描像に於ける演算子の発展も同様に考える事ができる。
+  但し、密度行列の時との対応を見るために転置して考えるのが都合が良い?
+  (また後で見る)
+  興味のある観測量 $A$ を用いて射影演算子を
+  $\mathcal P \circ = (\circ, A^\dag)(A, A^\dag)^{-1} A$ と定義する。
+  但し、内積 $(\circ, \circ)$ は問題に応じて定める内積である。
+</p>
+
+<h3>疑問: $\rho_R$ の選び方は本当に任意なのか</h3>
+
+<p>密度行列に対する射影演算子 $\mathcal P \circ = \rho_R \Tr_R \circ$ の定義に現れる $\rho_R$ について。
+  この章の内容を読む限りは $\rho_R$ は任意に選んで同じように議論を進めることができるように見える。
+  素朴に考えると、$\rho_R$ は実際に $W$ に含まれる環境の分布を何らかの意味で反映するものでないと都合が悪いのではないかと思われる。
+  例えば $W = \rho_{R1} \otimes \rho_S$ と書かれる場合に、
+  全く関係ない $\rho_{R2} (\neq \rho_{R1})$ を選んで来て $\mathcal P$ を定義したらどうなるのか。
+  実際の $W$ に含まれる環境の分布とかけ離れた $\rho_R$ を選んで $\mathcal P$ を定義する時、
+  (不都合が現れるとしたら) どのような形で不都合が現れてくるのだろうか。
+</p>
+
+<p>更にこの章では $\mathcal P$ は時間発展しないとしている。
+  もし $W$ がそれに含まれる環境の分布も含めて大きく時間発展する時、
+  $\mathcal P$ を固定の $\rho_R$ で定義していても問題ないのだろうか。
+</p>
+
+<p>→これはおそらくTC/TCL型方程式を摂動展開した時の係数
+  $\int_0^t\dots\int_0^t dt_1\dots dt_n \Phi(t_1,\dots,t_n)\sim t^n$ が
+  時間と共に増大する(永年項となる)という形で問題になると思われる。
+  $\rho_R$ を「$t\to\infty$ での環境系の密度行列」に一致させれば、
+  $\Phi(t_1,\dots,t_n)$ が有限の範囲でのみ値を持ち係数が有界になると考えられる。
+  具体的な $\rho_R$ としては、全系のエネルギー・保存量から定まる平衡状態を考えれば良いだろう。
+</p>
+
+<h3>疑問: 系と環境を常にこのような形で分けられるのか?</h3>
+
+<p>1.10節では単に $[X,Y]=0$ との要請しか明示していない。
+  しかし (1.10.214) の部分トレースの定義を見ると
+  全系の基底を二つの部分系の基底の直積で表せるという事を仮定している様に見える。
+  つまり $\{|x,y\rangle\} = \{|x\rangle\}\otimes \{|y\rangle\}$。
+  例えば角運動量演算子について $[\bm L^2, L_3]=0$ が成立するが、
+  後者の量子数 $m$ は前者の量子数 $l$ に依存して取る値の範囲が異なる ($m=-l,\dots,l$)。
+  実際に基底は $|l,m\rangle = Y_{lm}(\theta,\phi) \propto P_l^{(m)}(\cos\theta)e^{im\phi}$ であり、
+  $|l\rangle \otimes | m\rangle$ の形には分解できない様に思われる。
+  この様な時に果たして $\mathcal P \circ = \rho_R\otimes\Tr\circ$ という形で射影を定義できるのかは謎である。
+</p>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
+  </p>
+</address>
+</body>
+</html>
