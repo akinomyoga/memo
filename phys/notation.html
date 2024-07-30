@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>記号と用語の定義</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="記号と用語の定義" />
+  <meta property="og:image" content="https://akinomyoga.github.io/agh/res/agh.icon.mwg_128x128.png" />
+  <meta property="og:url" content="https://akinomyoga.github.io/memo/phys/notation.html" />
+  <meta property="og:site_name" content="github.akinomyoga.io" />
+
+  <meta name="agh-fly-type" content="tex" />
+  <script src="https://akinomyoga.github.io/agh/agh.fly.js" charset="utf-8"></script>
+  <script type="application/x-tex" id="tex-preamble">
+  \documentclass{revtex}
+  \def\tr{\operatorname{tr}}
+  \begin{document}
+  </script>
+  <style>
+  img.ring1 { height: 1.4em; vertical-align: middle; }
+  img.ring2 { height: 2.8em; vertical-align: middle; }
+  </style>
+</head>
+<body class="mwg-standard-layout aghfly-inline-math">
+<nav>
+  [
+    <a href="../index.html">Top</a> -
+    物理 - <span class="mwg-nav-here">記号と用語の定義</span>
+  ]
+</nav>
+
+<h1>記号と用語の定義</h1>
+
+
+
+<h2>時間順序指数関数</h2>
+
+<p>時間順序指数関数 (time-ordered exponential) を以下の様に定義する。
+  $A(t)$ は行列 (線形演算子) で一般に $[A(t_1), A(t_2)] = 0$ とは限らない ($t_1 \ne t_2$)。
+  定義に依るが、ここでは特に積分範囲が反転している時には時間について
+  逆順序となるように定める事にする。</p>
+
+<p class="aghfly-begin-align">
+  \mathrm{T}e^{\textstyle\int_{t_i}^{t_f} dt A(t)}
+  &= \begin{cases}
+    \sum_{k=0}^\infty \int\dots\int_{t_f \ge t_1 \ge \dots \ge t_k \ge t_i}
+      dt_1 \dots dt_k A(t_1) \dots A(t_k), & \text{if $t_f\ge t_i$}, \\
+    \sum_{k=0}^\infty \int\dots\int_{t_f \le t_1 \le \dots \le t_k \le t_i}
+      dt_1 \dots dt_k A(t_1) \dots A(t_k), & \text{if $t_f\le t_i$}.
+  \end{cases}
+</p>
+
+<p>特にスペクトル半径 $\rho(A(t))$ について
+  $\int_{t_i}^{t_f} dt \rho(A(t)) < \infty$ の時、この級数は絶対収束である。
+</p>
+
+<p>時間順序指数関数は、一般に以下の形の時間依存する線形方程式の解として現れる。</p>
+<p class="aghfly-begin-align">
+  \gdef\d{\mathrm{d}}
+  \frac{\d}{\d{t}} v = A(t) v.
+</p>
+
+<p>解は以下で与えられる。</p>
+<p class="aghfly-begin-align">
+  v(t) = \mathrm{T}e^{\textstyle\int_{t_0}^{t} dt' A(t')} v(t_0).
+</p>
+
+<h2>交換関係 $\mathrm{ad}_X$</h2>
+
+<p>線形演算子 $X$ に対して他の線形演算子に作用する超演算子 $\mathrm{ad}_X \circ := [X, \circ]$.</p>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
+  </p>
+</address>
+</body>
+</html>

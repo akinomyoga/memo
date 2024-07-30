@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>密度行列</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="密度行列" />
+  <meta property="og:image" content="https://akinomyoga.github.io/agh/res/agh.icon.mwg_128x128.png" />
+  <meta property="og:url" content="https://akinomyoga.github.io/memo/phys/density-matrix.html" />
+  <meta property="og:site_name" content="github.akinomyoga.io" />
+
+  <meta name="agh-fly-type" content="tex" />
+  <script src="https://akinomyoga.github.io/agh/agh.fly.js" charset="utf-8"></script>
+  <script type="application/x-tex" id="tex-preamble">
+  \documentclass{revtex}
+  \def\tr{\operatorname{tr}}
+  \begin{document}
+  </script>
+  <style>
+  img.ring1 { height: 1.4em; vertical-align: middle; }
+  img.ring2 { height: 2.8em; vertical-align: middle; }
+  </style>
+</head>
+<body class="mwg-standard-layout aghfly-inline-math">
+<nav>
+  [
+    <a href="../index.html">Top</a> -
+    物理 - <span class="mwg-nav-here">密度行列</span>
+  ]
+</nav>
+
+<h1>密度行列</h1>
+<p class="mwg-footnote">
+前文: 密度行列もしくは密度演算子について。学生に質問をされたが、
+これも (自分が思うように) 丁寧に書いてある教科書がなかなか無い。
+仕方がないので自分で説明を書くことにする。
+と思ったのだが、書いた後で Wikipedia [1] が比較的まともに書かれていることに気づいた。
+Wikipedia と比べるとこの文書は厳密には怪しい (特に無限次元線形空間がよく分からない)。
+しかし何でも厳密に書こうとすると無駄に長くなるのでこの程度のものでも理解には役立つだろう。
+Ref. [2] もなかなか良いが最後のエンタングル状態の辺りが怪しい
+(一方でこっちはそもそもエンタングル状態まで辿り着かない)。
+</p>
+
+<p>密度行列は一言で言うならば量子力学における確率分布の必要十分な表現を与える。
+古典力学においては $N$体分布関数 $f_N(x_1,p_1,\dots,x_N,p_N)$ が位相空間上の確率分布を与え、
+また、その「確率分布の時間発展」はポアソン括弧で書かれる(古典)Liouville方程式で与えられた。
+量子力学における自然な拡張として密度行列が現れ、
+その時間発展は(古典)Liouville方程式とそっくりの
+von-Neumann Liouville 方程式で与えられることを見る。
+</p>
+
+<h2>密度行列の導入(仮)</h2>
+<p>古典力学における状態は位相空間上の点 $\Gamma=(x_1,p_1,\dots,x_N,p_N)$ であった。
+状態の確率分布は分布関数 $f(\Gamma, t)$ を用いて確率測度 $f(\Gamma, t)d\Gamma$ で与えられた。
+この分布関数の時間発展が古典非平衡統計力学の対象であった。
+一方で量子力学における状態は規格化された波動関数 $|\psi\rangle \in \mathcal{H}$ によって与えられる。
+一般の確率分布としてヒルベルト空間上<sup>※1</sup>の確率測度</p>
+<p class="aghfly-begin-align">
+  \Pr(|\psi\rangle)
+</p>
+<p>を考えるのが先ずは自然だろう。
+つまり、あらゆる可能な状態ベクトル<sup>※2</sup>に対して確率密度が対応すると考える。
+</p>
+
+<div class="mwg-framed mwg-footnote">
+  <p>※1: 但し、重複を避けるために、
+  規格化されていないベクトルや位相が異なるだけのベクトルは何らかの方法で除外して、
+  線形独立なものだけを考えていることにする。</p>
+  <p>※2: 単にヒルベルト空間の基底ベクトルの一つ一つに対して確率が対応するという意味ではないことに注意する。
+  基底ベクトルのあらゆる独立な線形結合に対して確率が対応するということである。</p>
+</div>
+
+<p>一方で、量子力学では波動関数が与えられたとき、
+全ての物理量はエルミート演算子の量子期待値で与えられる。
+今、波動関数が確率的に分布する場合を考えているが、
+この時は各波動関数に対して定まる量子期待値について更に統計的期待値を取ったものが実際の測定における期待値になる。
+</p>
+<p class="aghfly-begin-align">
+  \langle\hat A\rangle
+  := \int d\Pr(|\psi\rangle) \langle\psi|\hat A|\psi\rangle.
+</p>
+<p>右辺は一つの実数となるが、これを敢えて 1x1 行列と捉えて $\tr$ をつけて、中身を回転する。</p>
+<p class="aghfly-begin-align">
+  \langle\hat A\rangle
+  &= \tr\biggl[\int d\Pr(|\psi\rangle) \langle\psi|\hat A|\psi\rangle\biggr] \notag \\
+  &= \tr\biggl[\int d\Pr(|\psi\rangle) |\psi\rangle \langle\psi|\hat A\biggr] \notag \\
+  &= \tr[\hat\rho\hat A].
+  \label{eq:intro.expectation}
+</p>
+<p>但し、</p>
+<p class="aghfly-begin-align">
+  \hat \rho = \int d\Pr(|\psi\rangle) |\psi\rangle \langle\psi|
+  \label{eq:intro.def}
+</p>
+<p>とした。これを<dfn>密度行列</dfn>と名付ける。
+原理的には、確率測度 $\Pr(|\psi\rangle)$ からこの密度行列さえ求めておけば、
+後はこの密度行列を使い回してあらゆる物理量の期待値を式$\eqref{eq:intro.expectation}$で計算することができる。
+</p>
+
+<p>密度行列は状態ベクトルに対する線形演算子なので確率測度 $\Pr(|\psi\rangle)$ よりも自由度としてずっと小さく扱いやすい。
+しかし、逆に言えば確率測度 $\Pr(|\psi\rangle)$ が物理的に過剰・余分な情報を含んでいることを意味する。
+例えば、同じ密度行列を与える複数の異なる確率測度 $\Pr_1$ と $\Pr_2$<sup>※3</sup> があったとしても、
+それらを実験的に区別することはできない。
+その意味で、「量子力学での確率分布」における本質的な自由度は密度行列で十分に与えられる。
+寧ろ波動関数の具体的な確率分布は非物理的な(余分な)情報を含んでいると言える<sup>※4</sup>。
+従って、量子統計では波動関数の確率分布のことは忘れて、専ら密度行列を考えることになる。
+</p>
+
+<p>密度行列においては量子的期待値と統計的期待値という2段階の期待値もブラックボックスとなる。
+この意味で、量子ゆらぎと統計的ゆらぎ(熱ゆらぎを含む)は、一般の場合には物理的に区別できない。
+</p>
+
+<div class="mwg-framed mwg-footnote">
+  <p>※3: その様な例の具体的な構成は簡単にできる。例えば、</p>
+  <ul>
+  <li>$\Pr_1$: $|1\rangle$ と $|2\rangle$ がそれぞれ確率 1/2</li>
+  <li>$\Pr_2$: $(|1\rangle\pm|2\rangle)/\sqrt{2}$ がそれぞれ確率 1/2</li>
+  </ul>
+  <p>という2つの確率分布は同じ密度行列 $\rho = (1/2)(|1\rangle\langle1|
+  + |2\rangle\langle2|)$ を与える。</p>
+
+  <p>※4: 類似のことは波動関数自体にも言える。
+  例えば、複素位相だけが異なる2つの状態ベクトルは同じ状態を表し、
+  波動関数全体にかかる位相は非物理的なのであった (但しさまざまの"相対"位相には勿論意味がある)。
+  因みに、全体の複素位相については密度行列に於いては丁度打ち消して消えることが定義から分かる。</p>
+  <p>更に言うと、そもそも波動関数自体直接観測できないということを思うと、
+  それについての確率分布を考えるのはどういうことなのかというのもすっきりしない。
+  踏み込むと、波動関数自体実在なのかという解釈論の世界になるが、
+  飽くまで解釈なので、素朴には、この領域は実用とは関係ない趣味の問題だろう。
+  </p>
+</div>
+
+<h3>例. 2準位系の一様分布</h3>
+
+<p>今2準位系を考え、その直交基底を $\{|\uparrow\rangle,|\downarrow\rangle\}$ とする。
+この系の任意の状態ベクトルは、規格化&amp;位相の不定性を除いて、Blochベクトルで書ける<sup>※5</sup>:
+</p>
+<p class="aghfly-begin-align">
+  |\theta, \phi\rangle = \cos\frac\theta2 |\uparrow\rangle + e^{i\phi}\sin\frac\theta2|\downarrow\rangle.
+  \label{eq:intro.bloch}
+</p>
+<p>今状態が統計的に完全にランダムと考えて、Bloch 球面$(\theta,\phi)$上で一様分布すると考える。
+つまり $\mathrm{dPr} = \sin\theta\,\mathrm{d}\theta\,\mathrm{d}\phi/4\pi$ とする。
+この時、密度行列は</p>
+<p class="aghfly-begin-align">
+  \hat\rho
+    &= \int \frac{\mathrm{d}\theta\mathrm{d}\phi}{4\pi} |\theta, \phi\rangle \langle\theta, \phi| \notag \\
+    &= \int \frac{\mathrm{d}\theta\mathrm{d}\phi}{4\pi} \Bigl(
+      \cos^2\frac\theta2 |\uparrow\rangle\langle\uparrow| + \sin^2\frac\theta2 |\downarrow\rangle\langle\downarrow|\Bigr) \notag \\
+    &\quad + \int \frac{\mathrm{d}\theta\mathrm{d}\phi}{4\pi} \sin\frac\theta2\cos\frac\theta2
+      (e^{i\phi}|\downarrow\rangle\langle\uparrow| + e^{-i\phi}|\uparrow\rangle\langle\downarrow|) \notag \\
+    &= \frac12 |\uparrow\rangle\langle\uparrow| + \frac12|\downarrow\rangle\langle\downarrow|.
+    \label{eq:intro.uniform-2level}
+</p>
+<p>つまり、密度行列は「確率1/2で$|\uparrow\rangle$または$|\downarrow\rangle$」の場合と同じになる。</p>
+
+<p>改めて注意したいのは、密度行列がこの形になっているからと言って、
+背景にある確率分布が「2つの基底ベクトルの内何れかに等確率で確定しているという状況」とは限らないということである。
+ランダムな状況では、状態が人間が恣意的に選んだ基底ベクトルの何れかに沿っていると考えるのは、寧ろ不自然だろう。
+状態について事前情報がない場合、つまり統計的に完全にランダムな場合は、
+様々な向きの状態ベクトルが重なりあうことにより密度行列の非対角成分が打ち消し合い、
+ようやく $(1/2)(|\uparrow\rangle\langle\uparrow| + |\downarrow\rangle\langle\downarrow|)$ の形になることを理解されたい<sup>※6</sup>。
+</p>
+
+<div class="mwg-framed mwg-footnote">
+  <p>※5: 任意の状態ベクトルは以下の様に書ける。</p>
+  <p class="aghfly-begin-align*">
+    |\psi\rangle = \alpha |\uparrow\rangle + \beta|\downarrow\rangle.
+  </p>
+  <p>規格化条件 $|\alpha|^2 + |\beta|^2 = 1$ より
+  $\theta \in [0, \pi)$ を以て $|\alpha| = \cos(\theta/2), |\beta| = \sin(\theta/2)$ と取ることができる。
+  波動関数全体に位相を掛ける自由度を用いて $\beta = \cos(\theta/2)$ と選ぶことができる。
+  残る $\beta$ の位相を $e^{i\phi}$ と置けば一般に式$\eqref{eq:intro.bloch}$の形に書けることが分かる。
+  </p>
+  <p>スピン $s = 1/2$ の系の場合には、これは丁度極座標で $(\theta,\phi)$ の方向のスピンの状態
+  (つまり $\hat{\bm{S}}\cdot \hat n_{\theta,\phi}$ の固有状態) になっている:</p>
+  <p class="aghfly-begin-align*">
+    \hat{\bm{S}}\cdot \hat n_{\theta,\phi}
+    &= \frac12(\sigma_x\sin\theta\cos\phi + \sigma_y\sin\theta\sin\phi + \sigma_z\cos\theta) \\
+    &= \frac12 \begin{pmatrix}
+      \cos\theta & \sin\theta(\cos\phi -i\sin\phi) \\
+      \sin\theta(\cos\phi +i\sin\phi) & -\cos\theta
+    \end{pmatrix} \\
+    &= \frac12 \begin{pmatrix}
+      \cos\theta & e^{-i\phi}\sin\theta \\
+      e^{i\phi}\sin\theta & -\cos\theta
+    \end{pmatrix}, \\
+    \hat{\bm{S}}\cdot \hat n_{\theta,\phi}|\theta,\phi\rangle
+    &= \frac12 \begin{pmatrix}
+        \cos\theta & e^{-i\phi}\sin\theta \\
+        e^{i\phi}\sin\theta & -\cos\theta
+      \end{pmatrix}
+      \begin{pmatrix} \cos\tfrac\theta2 \\ e^{i\phi}\sin\tfrac{\theta}2\end{pmatrix} \\
+    &= \frac12 \begin{pmatrix} \cos\theta\cos\tfrac\theta2 + \sin\theta\sin\tfrac\theta2 \\
+      e^{i\phi}(\sin\theta\cos\tfrac\theta2 - \cos\theta\sin\tfrac\theta2)\end{pmatrix}
+    = \frac12 \begin{pmatrix} \cos(\theta - \tfrac\theta2) \\
+      e^{i\phi}\sin(\theta-\tfrac\theta2)\end{pmatrix}
+    = \frac12 |\theta,\phi\rangle.
+  </p>
+  <p>※6: 「ランダムだからそれぞれの基底に対して等確率で割り当てれば良い」などの巷の説明は、
+  結果は間違ってはいないが本質を逸している。</p>
+</div>
+
+<h2>密度行列の性質</h2>
+
+<p>前節では密度行列を構成的に与えた。
+しかし、既に述べたように背景に想定した確率測度 $\Pr(\psi)$ のことはできるだけ早く忘れたい。
+従って、代わりにその性質を以て内包的・公理的に密度行列を捉え直したい。
+</p>
+
+<p>先ずはその構成的な定義を使って性質を調べる必要がある。
+定義$\eqref{eq:intro.def}$よりエルミートであることはすぐに分かる。</p>
+<p class="aghfly-begin-align">
+  \hat\rho^\dag = \hat\rho
+  \label{eq:prop1}
+</p>
+<p>つまり、ユニタリ行列を以て対角化可能であり、その固有値は実数である。
+また、確率の規格化 $\int d\Pr(\psi) = 1$ より、</p>
+<p class="aghfly-begin-align">
+  \tr\hat\rho
+  = \int d\Pr(|\psi\rangle) \langle\psi|\psi\rangle
+  = \int d\Pr(|\psi\rangle) = 1
+  \label{eq:prop2}
+</p>
+<p>である。つまり固有値の和が 1 になる。任意のベクトル $|\phi\rangle \; (\ne 0)$ に対して</p>
+<p class="aghfly-begin-align">
+  \langle\phi|\hat\rho|\phi\rangle
+  = \int d\Pr(|\psi\rangle) |\langle\phi|\psi\rangle|^2 \ge 0
+  \label{eq:prop3}
+</p>
+<p>より非負・狭義正定値 (positive-semidefinite) である。つまり固有値はすべて 0 以上である。
+$\tr\hat\rho = 1$ と合わせて固有値は全て $0 \le \lambda \le 1$ を満たす。
+</p>
+
+<p>逆に式$\eqref{eq:prop1}$-$\eqref{eq:prop3}$の3つの性質を満たす演算子があったとすると、
+それを密度行列として実現するような確率分布 $\Pr$ が少なくとも1つ存在することを示す。
+エルミート性からユニタリ行列(正規直交基底)で対角化可能である。その固有値・固有ベクトルで
+</p>
+<p class="aghfly-begin-align">
+  \hat\rho = \sum_i \lambda_i |\psi_i\rangle\langle\psi_i|
+</p>
+<p>と書き表すことができ、
+$0 \le \lambda_i \le 1$ かつ $\sum_i\lambda_i = 1$ が成り立つ。
+従って、状態 $|\psi_i\rangle$ である確率が $\lambda_i$ となるような確率分布を考えると、
+与えられた演算子がその確率分布に対応する密度行列として与えられる。
+つまり、性質$\eqref{eq:prop1}$-$\eqref{eq:prop3}$を満たすあらゆる演算子が密度行列として可能である。
+</p>
+
+<p>翻って、密度行列の一般論を展開したければ、
+密度行列は「性質$\eqref{eq:prop1}$-$\eqref{eq:prop3}$を満たす演算子」と公理的に定めることができる。
+この下で演算子の期待値を改めて
+</p>
+<p class="aghfly-begin-align">
+  \langle\hat A\rangle := \tr[\hat \rho \hat A]
+</p>
+<p>と定義する。</p>
+
+<p>実用上は密度行列 $\hat\rho$ を規格化を考えずに定義しておき</p>
+<p class="aghfly-begin-align">
+  \langle\hat A\rangle := \frac{\tr[\hat \rho \hat A]}{\tr \hat \rho}
+</p>
+<p>と定めることも多い。この場合には性質$\eqref{eq:prop2}$はもっとゆるく、</p>
+<p class="aghfly-begin-align">
+  \tr\hat\rho &lt; \infty
+</p>
+<p>であれば良い。</p>
+
+<h2>密度行列の必要性</h2>
+
+<p>既に見たように確率分布 $\Pr(|\psi\rangle)$ は量子統計を考える上で過剰であり、
+物理量を考える上では密度行列で "十分" であるということが分かった。
+次に気になるのは、密度行列であることが "必要" なのかということである。
+つまり量子統計を考える上で確率分布の表現をこれ以上小さくできないことを確認する。
+</p>
+
+<h3>量子力学との違い</h3>
+
+<p>前座として、考えている系の単一の状態 $|\psi\rangle$ では密度行列の統計性を再現できないことを見る。
+量子統計を考えなくても、量子力学にはもともと確率が現れ、或る程度の統計性があった。
+従って、「密度行列を考えることによって真に新しい統計的記述になっているか」・
+「密度行列による統計性は量子力学に既に内在していないのか」というのは自然な疑問だろう。
+</p>
+
+<p>もし『任意の密度行列 $\hat\rho$ に対して状態 $|\psi_\rho\rangle$ が存在して、
+任意のエルミート演算子 $\hat A$ に対して
+</p>
+<p class="aghfly-begin-align">
+  \tr[\hat\rho\hat A] = \langle\psi_\rho|\hat A|\psi_\rho\rangle
+  \label{eq:nece.pure.1}
+</p>
+<p>が成立する』ならば、
+別に密度行列を持ち出さなくても代わりに $|\psi_\rho\rangle$ で全て記述すれば良い。
+つまり『量子力学で十分』ということになる。
+逆に反例があれば『量子力学では不十分』ということになる。
+実は既に見た例$\eqref{eq:intro.uniform-2level}$が反例になっている<sup>※6</sup>。
+</p>
+
+<p>つまり、密度行列は単に波動関数を考えるだけでは扱えない場合も含み、
+密度行列を用いた記述は量子力学(単一の波動関数による記述)とは等価ではない。</p>
+
+<div class="mwg-framed mwg-footnote">
+  <p>※6: 式$\eqref{eq:intro.uniform-2level}$の密度行列は $\{|\uparrow\rangle,|\downarrow\rangle\}$ を基底に取れば</p>
+  <p class="aghfly-begin-align">
+    \hat\rho &= \frac12\begin{pmatrix}
+      1 & 0 \\
+      0 & 1
+    \end{pmatrix},
+  </p>
+  <p>と書ける。例えば $\hat A = \mathbb{1}, \hat{\bm{S}}$
+  (但し、$\hat{\bm{S}} = \bm\sigma/2$, $\bm{\sigma}$ はパウリ行列) の全てについて
+  式$\eqref{eq:nece.pure.1}$を満たすような</p>
+  <p class="aghfly-begin-align">
+    |\psi_\rho\rangle &= \begin{pmatrix} \alpha \\ \beta \end{pmatrix}
+  </p>
+  <p>は存在しないと具体的に示せる。
+  先ず $\hat A = 1$ を考えると $\langle\psi_\rho|\psi_\rho\rangle = \tr\hat\rho = 1$ なので、
+  Blockベクトルの形$\eqref{eq:intro.bloch}$ $|\psi_\rho\rangle = |\theta,\phi\rangle$ になる。
+  ここで、$\hat A = \hat{\bm{S}}\cdot n_{\theta,\phi}$ を考えると、
+  右辺は $\langle\psi_\rho|\hat A|\psi_\rho\rangle = \langle\psi_\rho|\frac12|\psi_\rho\rangle = \frac12$ だが、
+  左辺は $\tr[\hat\rho\hat A] = \frac12\tr[\bm{\sigma}]\cdot n_{\theta,\phi} = \frac12 \bm{0}\cdot n_{\theta,\phi} = 0$ になり一致しない。
+  </p>
+</div>
+
+<h3>密度行列が必要十分であること</h3>
+<p>エルミート演算子 $\hat\rho_1$ および $\hat\rho_2$ について、
+(1) 『任意のエルミート演算子 $\hat A$ について
+</p>
+<p class="aghfly-begin-align">
+  \tr[\hat\rho_1\hat A] = \tr[\hat\rho_2\hat A]
+</p>
+<p>が成立すること』と (2) $\hat\rho_1 = \hat\rho_2$ は同値である。</p>
+<div class="mwg-framed">
+  <p>∵ (2)→(1) は明らかである。(1)→(2) について詳しく見る。
+  右辺と左辺の差を完全系 $\mathbb{1} = \sum_i |i\rangle\langle i| = \sum_j |j\rangle\langle j|$ で展開する。</p>
+  <p class="aghfly-begin-align*">
+    0 &= \tr[\hat\rho_1\hat A] - \tr[\hat\rho_2\hat A] \\
+      &= \sum_i A_{ii} ([\rho_1]_{ii} - [\rho_2]_{ii}) \\
+      &\quad + 2\sum_{i < j} \Re A_{ji} \Re ([\rho_1]_{ij} - [\rho_2]_{ij})
+        - 2\sum_{i < j} \Im A_{ji} \Im ([\rho_1]_{ij} - [\rho_2]_{ij}).
+  </p>
+  <p>但し $\circ_{ij} = \langle i|\hat \circ | j\rangle$.
+  ここで、$A_{ii}$ 及び $\Re A_{ij}$, $\Im A_{ij}$ ($i&lt;j$) は任意に独立に選ぶことができるので、</p>
+  <p class="aghfly-begin-align">
+    [\rho_1]_{ii} &= [\rho_2]_{ii}, \\\relax
+    [\rho_1]_{ij} &= [\rho_2]_{ij}, \quad (i < j),
+  </p>
+  <p>が成立する。任意の行列要素が一致することから $\hat\rho_1 = \hat\rho_2$ ■ である。</p>
+</div>
+<p>従って、全ての物理量の期待値を再現しようと思ったら、密度行列を変更する余地はない。
+言い方を変えれば、密度行列全体が、物理量に影響を与える必要な情報であり、密度行列には削減できる無駄な自由度はない。
+この意味で、密度行列は量子論における統計を考える上で必要十分な情報を持つ。
+</p>
+
+<h3>純粋状態と混合状態</h3>
+
+<p>任意の $\hat\rho$ を波動関数 $|\psi_\rho\rangle$ に置き換えることはできないと示したが、
+特別な $\hat\rho$ の場合にはそれが可能になる。
+波動関数が統計的に1つに確定している場合である。
+例えば「$\Pr(|\psi\rangle = |\psi_1\rangle) = 1$ で他の波動関数である確率が 0」とする。
+この時、密度行列は
+</p>
+<p class="aghfly-begin-align">
+  \hat\rho = |\psi_1\rangle\langle\psi_1|
+  \label{eq:nece.pure}
+</p>
+<p>と書かれ、物理量の期待値は量子状態 $|\psi_1\rangle$ の下での通常の量子力学と同じである:</p>
+<p class="aghfly-begin-align">
+  \tr[\hat\rho\hat A] = \langle\psi_1|\hat A|\psi_1\rangle.
+</p>
+<p>更に、密度行列が式$\eqref{eq:nece.pure}$の形になる時、
+それに対応する確率分布は上記のものに一意に定まる<sup>※7</sup>。
+この様に一つの量子状態に確定した状況を<dfn>純粋状態</dfn>と呼ぶ。
+それ以外の状況を<dfn>混合状態</dfn><sup>※8</sup>と呼ぶ。</p>
+
+<div class="mwg-framed mwg-footnote">
+  <p>※7: 式$\eqref{eq:nece.pure}$の形から $\operatorname{rank}\hat\rho=1$ である。
+  一方で、仮に線形独立な2つ以上の状態 $\{|\psi_i\rangle\}$ を用いて</p>
+  <p class="aghfly-begin-align">
+    \hat\rho = \sum_i a_i |\psi_i\rangle\langle\psi_i|, \quad (a_i \ne 0)
+  </p>
+  <p>と書くこともできるとすると $\operatorname{rank}\hat\rho > 1$ になって相容れない。
+  従って $\hat\rho$ は一つの波動関数 $|\psi'_1\rangle$ で</p>
+  <p class="aghfly-begin-align">
+    \hat\rho = |\psi'_1\rangle\langle\psi'_1|
+  </p>
+  <p>と書くしかない。式$\eqref{eq:nece.pure}$と比べると、
+  $|\psi'_1\rangle$ は全体の位相を除いて  $|\psi_1\rangle$ に一致しなければならない。
+  つまり、背景にある確率分布は、量子状態 $|\psi_1\rangle$ に確定した状況に一意に定まる。
+  </p>
+
+  <p>※8: 混合「状態」とは呼んでいるが、
+  これは飽くまで密度行列によって指定される統計であり、
+  量子力学で言う「状態」とは異なる。
+  このように、量子統計に於いては密度行列を (量子統計の) 状態として扱うが、混同しないように注意する。
+  因みに J.J.サクライ[3]は、"状態" と呼ぶのを避けて、
+  それぞれ<dfn>純粋アンサンブル</dfn>・<dfn>混合アンサンブル</dfn>と呼んでいる。
+  </p>
+</div>
+
+<p>密度行列$\hat\rho$について、以下は同値である:</p>
+<ol>
+<li>純粋状態であること: $\exists|\psi\rangle(\hat\rho = |\psi\rangle\langle\psi|)$,</li>
+<li>$\operatorname{rank}\hat\rho = 1$,</li>
+<li>$\hat\rho^2 = \hat\rho$.</li>
+</ol>
+<div class="mwg-framed">
+  <p>∵ 1→2, 1→3 は表式を用いて計算すれば明らかである。
+  2→1 も rank の定義から自明である。
+  3→1 について詳しく見る。$\hat\rho$ はエルミートなので対角化可能である。
+  $\hat\rho(\hat\rho-1)=0$ より $\hat\rho$ の固有値は 0 または 1 になる。
+  $\tr\hat\rho=1$ より、ただ一つの固有値が$\lambda_1=1$で他の固有値は0でなければならない。
+  その固有値に対応する固有ベクトル $|\psi_1\rangle$ を用いて、
+  密度行列を $\hat\rho = |\psi_1\rangle\langle\psi_1|$ と書き表せる■。
+  </p>
+</div>
+
+<h2>密度行列の時間発展</h2>
+<p>Schrodinger描像では波動関数 $|\psi(t)\rangle$ は時間発展する。</p>
+<p class="aghfly-begin-align">
+  i\frac{\partial}{\partial t} |\psi\rangle = \hat H|\psi\rangle
+</p>
+<p>従って式$\eqref{eq:intro.def}$で定義される密度行列も時間発展する。</p>
+<p class="aghfly-begin-align">
+  i\frac{\partial}{\partial t} \hat\rho
+  &= \int \operatorname{dPr}(|\psi\rangle) \Bigl(
+    \frac{\partial|\psi\rangle}{\partial t} \langle\psi|
+    + |\psi\rangle \frac{\partial\langle\psi|}{\partial t}\Bigr) \notag \\
+  &= \int \operatorname{dPr}(|\psi\rangle)(
+    \hat H|\psi\rangle\langle\psi|
+    - |\psi\rangle \langle\psi|\hat H) \notag \\
+  &= \hat H \hat\rho - \hat\rho \hat H \notag \\
+  &= [\hat H, \hat\rho].
+  \label{eq:evolution.eom}
+</p>
+
+<p>これは<dfn>古典Liouville方程式</dfn></p>
+<p class="aghfly-begin-align">
+  \frac{\partial}{\partial t} f(\Gamma, t) &= \{H, f\}
+</p>
+<p>と対照的である。式$\eqref{eq:evolution.eom}$を<dfn>von-Neumann方程式</dfn>
+または<dfn>von-Neumann&ndash;Liouville方程式</dfn>
+または<dfn>Liouville&ndash;von-Neumann方程式</dfn>
+または<dfn>量子Liouville方程式</dfn>などと呼ぶ。
+</p>
+
+<p>時間発展は時間発展演算子を用いて以下のように書ける:</p>
+<p class="aghfly-begin-align">
+  \hat\rho(t)
+  &= \int \operatorname{dPr}(|\psi\rangle) |\psi(t)\rangle \langle\psi(t)| \notag \\
+  &= \int \operatorname{dPr}(|\psi\rangle) e^{-i\hat Ht} |\psi(0)\rangle \langle\psi(0)| e^{i\hat Ht} \notag \\
+  &= e^{-i\hat Ht} \hat\rho(0) e^{i\hat Ht}.
+</p>
+
+<p>物理量$\hat A$の期待値の時間発展は</p>
+<p class="aghfly-begin-align">
+  \langle\hat A(t)\rangle
+  &= \tr[\hat\rho(t)\hat A] \notag \\
+  &= \tr[(e^{-i\hat Ht}\hat\rho(0)e^{i\hat Ht})\hat A] \notag \\
+  &= \tr[\hat\rho(0)(e^{i\hat Ht}\hat A e^{-i\hat Ht})] \notag \\
+  &= \tr[\hat\rho(0)\hat A(t)].
+</p>
+<p>のようにHeisenberg描像でも書ける。
+但し $\hat A(t)$ は量子力学で出てくるHeisenberg表示の$\hat A$と同一である。
+</p>
+
+<h2>(stub)</h2>
+
+<p>[ToDo] 以下はカノニカルアンサンブルなどの密度行列を導入する上では必要ない話題なので取り敢えず省略。
+複合系、部分トレース (部分対角和)、量子エンタングル。
+手で別の系と結合して一つの波動関数で書くことができるということ
+(でもこれは小手先の算術であって物理的に解釈はできないと個人的には思うがどうなのだろう)。
+separable states, convex properties, etc.
+</p>
+<p>[疑問] Wikipedia では $\hat\rho$ が有界であることも条件に入っている。
+有界性はこれは $\tr\hat\rho=1$ と非負性から導けて不要な気がするがどうなのだろう?
+</p>
+<p>[疑問] Wikipedia では期待値の一意性を示す時に
+$\langle A\rangle \to \langle A_n\rangle$ ($A\to A_n$ L2弱収束) を要請している。
+厳密な議論をするためには上記の必要十分性のところで同様の考慮を入れる必要があるかもしれない。
+</p>
+<p>[疑問] Ref. [2] でエンタングル状態は
+$\hat\rho = \sum_i w_i \hat\rho_A^i \otimes \hat\rho_B^i$ と書き表せないもののこととしているが、
+「$\hat\rho = \hat\rho_A \otimes \hat\rho_B$ と書き表せないもの」の誤りでは?
+</p>
+
+<ul>
+<li>[1] <a href="https://ja.wikipedia.org/wiki/%E5%AF%86%E5%BA%A6%E8%A1%8C%E5%88%97">密度行列 - Wikipedia</a></li>
+<li>[2] <a href="https://dora.bk.tsukuba.ac.jp/~takeuchi/?%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6%2F%E5%AF%86%E5%BA%A6%E8%A1%8C%E5%88%97">量子力学/密度行列 - 武内＠筑波大</a></li>
+<li>[3] <a href="https://www.amazon.co.jp/%E7%8F%BE%E4%BB%A3%E3%81%AE%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6-%E4%B8%8A-%E7%AC%AC3%E7%89%88-%E7%89%A9%E7%90%86%E5%AD%A6%E5%8F%A2%E6%9B%B8112-J-J-%E3%82%B5%E3%82%AF%E3%83%A9%E3%82%A4/dp/4842703768">J.J.サクライ, ナポリターノ、現代の量子力学(上)第3版 (物理学叢書112)</a></li>
+</ul>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
+  </p>
+</address>
+</body>
+</html>
