@@ -109,6 +109,7 @@ generate phys/scatter-variable.html 加速器実験の粒子の運動量
 generate phys/cumulant.html 'キュムラント (統計)'
 generate phys/exponential-family.html '指数型分布族 (統計)'
 generate phys/density-matrix.html '密度行列'
+generate phys/linear-analysis.html '線形解析'
 
 generate aghtex/test-bigl.html 'test \bigl, \bigr'
 

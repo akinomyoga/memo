@@ -59,7 +59,7 @@ von-Neumann Liouville 方程式で与えられることを見る。
   \hat \rho = \int d\Pr(|\psi\rangle) |\psi\rangle \langle\psi|
   \label{eq:intro.def}
 </p>
-<p>とした。これを<dfn>密度行列</dfn>と名付ける。
+<p>とした。これを<dfn>密度行列</dfn> (density matrix) と名付ける。
 原理的には、確率測度 $\Pr(|\psi\rangle)$ からこの密度行列さえ求めておけば、
 後はこの密度行列を使い回してあらゆる物理量の期待値を式$\eqref{eq:intro.expectation}$で計算することができる。
 </p>
@@ -73,7 +73,9 @@ von-Neumann Liouville 方程式で与えられることを見る。
 従って、量子統計では波動関数の確率分布のことは忘れて、専ら密度行列を考えることになる。
 </p>
 
-<p>密度行列においては量子的期待値と統計的期待値という2段階の期待値もブラックボックスとなる。
+<p>[ToDo] 密度行列 vs 密度演算子 名前について</p>
+
+<p>[ToDo] 密度行列においては量子的期待値と統計的期待値という2段階の期待値もブラックボックスとなる。
 この意味で、量子ゆらぎと統計的ゆらぎ(熱ゆらぎを含む)は、一般の場合には物理的に区別できない。
 </p>
 
@@ -336,8 +338,8 @@ $0 \le \lambda_i \le 1$ かつ $\sum_i\lambda_i = 1$ が成り立つ。
 </p>
 <p>更に、密度行列が式$\eqref{eq:nece.pure}$の形になる時、
 それに対応する確率分布は上記のものに一意に定まる<sup>※7</sup>。
-この様に一つの量子状態に確定した状況を<dfn>純粋状態</dfn>と呼ぶ。
-それ以外の状況を<dfn>混合状態</dfn><sup>※8</sup>と呼ぶ。</p>
+この様に一つの量子状態に確定した状況を<dfn>純粋状態</dfn> (pure state) と呼ぶ。
+それ以外の状況を<dfn>混合状態</dfn> (mixed state) <sup>※8</sup>と呼ぶ。</p>
 
 <div class="mwg-framed mwg-footnote">
   <p>※7: 式$\eqref{eq:nece.pure}$の形から $\operatorname{rank}\hat\rho=1$ である。
