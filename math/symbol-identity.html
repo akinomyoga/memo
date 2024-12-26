@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>単位行列の記号</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" charset="utf-8" href="../memo.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="単位行列の記号" />
+  <meta property="og:image" content="https://akinomyoga.github.io/agh/res/agh.icon.mwg_128x128.png" />
+  <meta property="og:url" content="https://akinomyoga.github.io/memo/math/symbol-identity.html" />
+  <meta property="og:site_name" content="github.akinomyoga.io" />
+
+  <meta name="agh-fly-type" content="tex" />
+  <script src="https://akinomyoga.github.io/agh/agh.fly.js" charset="utf-8"></script>
+  <script type="application/x-tex" id="tex-preamble">
+  \documentclass{revtex}
+  \def\tr{\operatorname{tr}}
+  \begin{document}
+  </script>
+  <style>
+  img.ring1 { height: 1.4em; vertical-align: middle; }
+  img.ring2 { height: 2.8em; vertical-align: middle; }
+  </style>
+</head>
+<body class="mwg-standard-layout aghfly-inline-math">
+<nav>
+  [
+    <a href="../index.html">Top</a> -
+    数学 - <span class="mwg-nav-here">単位行列の記号</span>
+  ]
+</nav>
+
+<h1>単位行列の記号</h1>
+<style>
+table.mwg-normal th,
+table.mwg-normal td { padding: 0.3em; }
+table.mwg-normal tr>th:first-child,
+table.mwg-normal tr>td:first-child { white-space:nowrap; text-align: center; }
+</style>
+
+<p>単位行列をどの様に表現するのかというのはいつも迷うところである。
+  実際に分野や議論の対象によって色々変わってくる。
+  何にするか迷うことがよくあるので取り敢えずどのような候補があるのかマイナーなものも含めてここにまとめる事にする。
+</p>
+
+<table class="mwg-normal">
+<tr><th>記号</th><th>コメント</th></tr>
+<tr><td>$E$</td><td>恐らく一番初めに線形代数を習う時に触れるのは $E$ が多いだろう。</td></tr>
+<tr><td>$E_n$</td><td>次元を明示する時には $E_n$ などの様にする。</td></tr>
+<tr><td>$I$, $I_n$</td><td>次に多いと思われるのは $I$ である。次元を明示する時には $E$ の時と同様に $I_n$ とする。</td></tr>m
+</table>
+
+<p class="mwg-framed mwg-footnote">
+  検索したら丁度「単位行列の記号」というブログ記事 [1] があって、
+  $E$ はドイツ語の Einheit より、$I$ は英語の identity より来ているそうだ。
+</p>
+
+<p>然し、実際には物理・工学などの応用数学の文脈 (或いは数学でもより高度な分野) で使うとなると記号が枯渇する。
+  $E$ だとか $I$ だとかの文字を他の用途に使いたいという場合が多くなる。
+  従ってもっと別の文字を使うことが多くなる。
+  実際、線形代数の教科書以外で $E$ や $I$ をそのまま使うことがあるのかというのは大いに謎である。
+</p>
+
+<table class="mwg-normal">
+<tr><th>記号</th><th>コメント</th></tr>
+<tr><td>$\mathbb{1}$</td><td>例えば場の理論では黒板体の 1 ($\mathbb{1}$) を使うことがある。</td></tr>
+<tr><td>$\mathrm{id}_V$</td><td>或いは行列を線形写像と見れば、単位行列は恒等写像なので $\mathrm{id}_V$ (但し $V$ は現在考えている線形空間) と書ける。</td></tr>
+<tr><td>$1$</td><td>もしくは文脈が曖昧でなければ単純に数字の $1$ を使うことも考えられる。</td></tr>
+<tr><td>$e$</td><td>実際に行列であることを意識している時に使われることがあるのか分からないが、
+  単位元という意味で $e$ が使われることがあってもおかしくはない。
+  少なくとも群の単位元の表現行列 $D(e)$ は単位行列であるのでこの文脈で表現行列を単に $e$ と書くことはあるかもしれない。
+</td></tr>
+</table>
+
+<p>他にそういう用例があるのか分からないが共同研究者が原稿で使った物がある。</p>
+<table class="mwg-normal">
+<tr><th>記号</th><th>コメント</th></tr>
+<tr><td>$\mathcal{I}$</td><td>これはその論文内の他の行列を全て mathcal で書いていたから、それに合わせただけかもしれない。</td></tr>
+</table>
+
+<h2>零行列</h2>
+<p>同様に記号を迷うものに零行列がある。線形代数の教科書的には $O$ と書くことが多いような気もするが、
+$O$ は直交行列 (orthogonal matrix) の記号としても使われるので混乱の元である。
+実際には単に数字の $0$ を使うことが断然多いように思う。
+しかし、偶にその次元を記号にて明示したいことがあってその時に困る。
+</p>
+
+<table class="mwg-normal">
+<tr><th>記号</th><th>コメント</th></tr>
+<tr><td>$O$</td><td>線形代数の教科書などで出てくる記号。</td></tr>
+<tr><td>$O_n$</td><td>次元を明示したい時。</td></tr>
+<tr><td>$0$</td><td>断然多い気がする。特に等式の右辺にある場合には一々スカラー・ベクトルなどと区別するのも面倒である。</td></tr>
+<tr><td>$0_{m,n}$, $0_V$</td><td>英語版の Wikipedia [2] を見ると $0_{m,n}$ や $0_V$ という記号が使われている様だ。</td></tr>
+</table>
+
+<h2>参照</h2>
+<ul>
+<li>[1] <a href="https://plaza.rakuten.co.jp/kronos/diary/200610130000/">単位行列の記号 | メモ帳兼日記帳なブログ - 楽天ブログ</a></li>
+<li>[2] <a href="https://en.wikipedia.org/wiki/Zero_matrix">Zero matrix - Wikipedia</a></li>
+</ul>
+
+<address class="mwg-address">
+  <p>Copyright &copy; 2018, @akinomyoga
+    <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
+    <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
+  </p>
+</address>
+</body>
+</html>
