@@ -114,4 +114,5 @@ generate phys/linear-analysis.html '線形解析'
 generate aghtex/test-bigl.html 'test \bigl, \bigr'
 
 generate text/202111-quantum-neq.html '量子と非平衡の物理 (東京大学出版会)'
+generate text/202604-JJSakurai-modern.html 'J. J. Sakurai, J. Napolitano, Modern Quantum Mechanics, Third Edition'
 generate phys/notation.html '記号と用語の定義'
