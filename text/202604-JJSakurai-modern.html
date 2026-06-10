@@ -3,27 +3,30 @@ li.com::before,
 li.ask::before,
 li.fix::before,
 li.mnl::before,
+li.til::before,
 li.que::before { margin-right: 0.3em; padding: 0.0em 0.3em; font-size: 80%; font-weight: bold; vertical-align: top; }
 li.com::before { background-color: #262; color: #fff; content: 'コメント'; }
 li.ask::before { background-color: #228; color: #fff; content: '問'; }
 li.fix::before { background-color: #822; color: #fff; content: '訂正'; }
 li.mnl::before { background-color: #444; color: #fff; content: '独言'; }
 li.que::before { background-color: #846; color: #fff; content: '謎'; }
+li.til::before { background-color: #975; color: #fff; content: 'TIL'; }
 </style>
 
-<h2>ゼミの予定</h2>
+<h2>ゼミの記録</h2>
 
 <ul>
-<li>2026-04-16 §1.1</li>
+<li>2026-04-16 §1.1 (9 pages)</li>
 <li>2026-04-21 後に南部コロキウムなど入っていたので短時間のゼミとなった。
   §1.1 の最後の Cs の議論の部分について議論を行った。</li>
-<li>2026-04-28 §1.2</li>
-<li>2026-05-07 §1.3～1.7 まで。
+<li>2026-04-28 §1.2 (6 pages)</li>
+<li>2026-05-07 §1.3～1.7 まで。 (38 pages)
   板書説明形式ではなく分からなかった所の確認 &amp; 問答形式で行った。
 </li>
-<li>2026-05-12 §1.6～1.7 について改めて分からない点を確認する予定。
-  進めば §2 についても行う。
-</li>
+<li>2026-05-12 §2.1.1～§2.1.2 (5 pages)</li>
+<li>2026-05-26 練習問題1.5 及び §2.1.3～§2.1.5 (4 pages)</li>
+<li>2026-05-29 §2.1.6..§2.1.7</li>
+<li>2026-06-09 §2.2..§2.5</li>
 </ul>
 
 <h2>1.1 Stern-Gerlach experiemnt</h2>
@@ -184,4 +187,112 @@ li.que::before { background-color: #846; color: #fff; content: '謎'; }
   現代的には (高エネルギーでは?) $\int \tfrac{dp}{2\pi} |p\rangle\langle p|= 1$ の方が普通と思う。
   後者は $\hbar = 1$ にすると都合が良く、自然単位系を選んだ時には後者の気がする。
 </li>
+</ul>
+
+<ul>
+<li>練習問題 1.5: "回転" ということを言わせたい。3DCG のクォータニオンとの関係。</li>
+</ul>
+
+<h2>2.1 Time Evolution and Schrodinger Equation</h2>
+
+<ul>
+<li class="com">Eq. (2.5): 演算子で書けると言った時点で時間発展が線形であることは仮定している</li>
+<li class="com">Eq. (2.11): この書き方だと unitary => prob conservation は言っているが、
+  prob conservation => unitary は示していない。しかし実際には示せる。
+</li>
+<li class="ask">Eq. (2.12) 下: 何故右から左に時間順序になっているか説明できるか?</li>
+<li class="ask">Eq. (2.33) が解になっている事は簡単に証明できる。</li>
+<li class="ask">Eq. (2.32) から (2.31) も簡単に形できる。</li>
+<li class="ask">Eq. (2.32) から (2.33) は少し大変だがよく考えれば変形できる。
+  t の順序毎に項を分解して、更に t を時刻順にラベル付けし直せば良い。</li>
+<li class="com">時間順序積 or Path ordering の記号についても言及する?
+  ホロノミー・ウィルソンライン・ループ量子重力・etc
+</li>
+<li class="com">英: a constant of motion (運動の定数) は integral of motion (運動の積分) と意味は全く同じらしい。
+  日本語 wikipedia では運動の積分で立項しているが英語 wikipedia では constant of motion になっている。
+</li>
+<li class="fix">Eq. (2.41): typo $a \to \alpha$</li>
+<li class="fix">Eq. (2.49) 上 magnetic moment $e\hbar/2m_ec$ と呼んでいるがこれは Bohr 磁子であって磁気モーメントとは係数が違う。</li>
+<li class="com">Fig. 2.1: 詳細が書かれていないが、muon が decay した時にその時の spin (特定の向き S_z) を計測することができる。
+  上向きの spin が計測されたカウントは時間発展しその周期を計測することができる。
+</li>
+<li class="com">Eq. (2.63): 3 flavor の時は 3x3 行列になる。これは (P)MNS (Pontecorvo-Maki-Nakagawa-Sakata) 行列と呼ばれる。
+  因みに quark の似たような行列は CKM (Cabibbo-Kobayashi-Maskawa) 行列でこれは小林益川のノーベル賞に関連する。
+</li>
+<li class="que">"The curve is not a perfect sine wave because the reactors are not all at the same
+  distance from the detector." の意味がよく分からない。</li>
+<li class="com">Fig. 2.2: 横軸は距離ではなくて $E_\nu$ の方を変更して計測しているということに注意する。</li>
+<li class="com">Sec. 2.1.7: この章は論理が滅茶苦茶である。
+  式と式が正しく繋がっていない。Napolitano が何処かの参考文献の論理を
+  全く理解せずに転記したのではないかと疑われる。
+  <ul>
+  <li>先ず有限個の自由度では完全な decorrelation は発生しない
+    (長時間経ったらまた増幅して大きくなる可能性があるということ)
+    ということが連続自由度を考える本来の理由だが、
+    その事を述べていない。
+  </li>
+  <li>TIL: 因みに有限個の自由度では decorrelation しないというのは<dfn>ディリクレの近似定理</dfn>で、
+    連続自由度を考えたら decorrelate するというのは<dfn>リーマン・ルベーグの補題</dfn>というそうだ。
+  </li>
+  <li>Eq. (2.69): $|_{E\simeq E_{a'}}$ という謎記号があるが、
+    これは $E_{a'}$ 付近で何らかの意味でなめらかという事を
+    言いたいのではないかと想像されるが、
+    未定義の記法を用いても意味不明である。
+  </li>
+  <li>最終的に雰囲気で $t\simeq \hbar/\Delta E$ を出しているが、
+    実際にはちゃんと導出する方法は色々ある。
+    鞍点近似で Gaussian にするのが最もよくある方法である。
+    或いは特定の小さな区間だけ切り取って矩形の分布にして $sin x/x$ の形にする。
+    というか Eq. (2.71) (normalization condition) は全く使われていないが、
+    本来これは鞍点近似で使うために言及されるものなのでは…。
+  </li>
+  <li>"we see that as $t$ becomes large, the integrand oscillates very
+    rapidly unless the energy interval $|E-E_0|$ is small compared with
+    $\hbar/t$. If the interval for which $|E-E_0| \simeq \hbar/t$ holds
+    is much narrower than $\Delta E$, the width of $|g(E)|^2\rho(E)$, we
+    get essentially no contribution to $C(t)$ because of strong
+    cancellations."
+
+    この説明はぐだぐだであるし言葉が余り正確でない。もっと分かりやすく
+    書くならば、
+
+    "$|E-E_0| > \hbar/t$ の領域でキャンセルが起きる。$|E-E_0| <
+    \hbar/t$ でしか寄与が残らないがこの領域の幅 $\hbar/t$ が $\Delta
+    E$ よりもずっと小さい時は $C(t)$ に対する寄与は実質無視できる。"
+
+    ということ。
+  </li>
+  </ul>
+</li>
+</ul>
+
+<h2>2.2 Heisenberg picture</h2>
+
+<ul>
+<li class="com">Eq. (2.77) で変換の下で operator は不変と言っているが、
+  基底変換としては op も変化しなければならないのでは。
+  状態に対する物理的な変換に対しては op は不変というべきの気がする。
+</li>
+<li class="ask">Eq. (2.82) を示せ</li>
+<li class="til">これがエーレンフェストの定理。よくどれがエーレンフェストの定理か分からなくなる…。
+  自分が混乱するのはペロン・フロベニウスの定理である。何故混乱するのかは謎。
+</li>
+</ul>
+
+<h2>2.3 Harmonic Oscillator</h2>
+
+<ul>
+<li class="mnl">Eq. (2.134): $n-1$ で縮退がないという事は示さないと行けないはず。綺麗に示す方法はあるか?</li>
+<li class="ask">Eq. (2.161): 示せ</li>
+<li class="til">Eq. (2.168) は Baker-Hausdorff lemma という名前。excercise にもなっている。</li>
+<li class="ask">Eq. (2.173): coherent state に関する性質を Excercise 2.21 で。
+  Excercise 2.21 a では与えられたケットが coherent state である事を示す問題だが、
+  $\lambda$ を固有値とする coherent state が一意であることの証明は要求していない。
+  しかし、実際には簡単である。単に完全基底 $\sum_n |n\rangle\langle n|=1$ を用いて
+  $|\lambda\rangle = \sum_n f_n |n\rangle$ を用いて条件を出すと
+  $f_n = (\lambda^n/\sqrt{n!}) f_0$ が出せて $f_0$ が規格化から複素位相を除いて一意に定まる。
+</li>
+<li class="til">sinusoidal = 正弦波</li>
+<li class="com">Eq. (2.192): 別に積分しなくても $\bm{j} = \frac1m\Re[\psi^* \hat{\bm{p}} \psi]$ ということが示せるのでは…。</li>
+<li class="com">Eq. (2.199): 因みに phase に対する時間発展を求めると完全流体っぽくなっている。超流動との関係。</li>
 </ul>
