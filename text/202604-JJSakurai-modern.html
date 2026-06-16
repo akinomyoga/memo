@@ -292,7 +292,81 @@ li.til::before { background-color: #975; color: #fff; content: 'TIL'; }
   $|\lambda\rangle = \sum_n f_n |n\rangle$ を用いて条件を出すと
   $f_n = (\lambda^n/\sqrt{n!}) f_0$ が出せて $f_0$ が規格化から複素位相を除いて一意に定まる。
 </li>
+</ul>
+
+<h2>2.4 Schrodinger's Wave Equation</h2>
+
+<ul>
+<li>2.4.1: H = p^2/2m + V の形にして Schrodinger を出している。2.4.2:
+time-independent version もだしている。それからエネルギーが負の状態
+(無限遠でのポテンシャル V = 0 を基準とする) として束縛状態を定義してい
+る。束縛状態は離散になり遠方まで行く状態は連続状態になる。行列力学との
+関係。Scrhodinger は Hamilton-Jacobi の見方を元に 独立に Schrodinger
+eq を作り上げ、後に等価性が証明された。2.4.3: 確率流の満たす方程式。
+</li>
 <li class="til">sinusoidal = 正弦波</li>
 <li class="com">Eq. (2.192): 別に積分しなくても $\bm{j} = \frac1m\Re[\psi^* \hat{\bm{p}} \psi]$ ということが示せるのでは…。</li>
 <li class="com">Eq. (2.199): 因みに phase に対する時間発展を求めると完全流体っぽくなっている。超流動との関係。</li>
+<li class="ask">Hamilton-Jacobi の方程式について説明できるか?</li>
+<li class="mnl">この辺は記憶がないがいつか復習・確認するべきの気がする。
+  Hamilton's characteristic function (Goldstein et al. (2002), pp. 440-444)</li>
+</ul>
+
+<h2>2.5 Elementary solutions to Schrodinger's Wave Equation</h2>
+
+<ul>
+<li>2.5.1: 平面波解と box regularization. DoS (density of state) の計
+算。2.5.2: 調和振動子。空間表示。エルミート多項式を母関数の表式から始
+めて導入している。H の recurrence formula や微分式を出して、それが
+Schrodinger eq for h(x) と一致していることを示している。2.5.3: Linear
+potential の時には Airy eq になる。これの解は Fourier 変換で与えられる。
+2.5.4 WKB 近似について。tunneling についてではなくて変な形の井戸に閉じ
+込められた粒子の話をしている。量子化条件を出してこれからエネルギー準位
+の近似値が出せることを述べている。classical limit との関係。
+Eq. (2.264) で換算 de Broglie 波長と比べて何か言っているがよく分からな
+い。
+</li>
+<li class="com">2.223 の式の書き方はよくないのではないか。
+  単に $H_{2m}$ の性質として導出すればよかっただけでは。
+</li>
+<li class="ask">何故、V が even だと固有状態が odd / even になると言えるのか説明できるか?</li>
+<li class="ask">2.237: これは Fourier 表示で解ける。
+  $u = \int \frac{dk}{2\pi}\tilde u(k) e^{ikx}$
+  を代入すれば $\tilde u$ が定まる。
+</li>
+<li class="ask">更に 2.251 の表式も鞍点法によって求めることができる。</li>
+<li class="com">V(x) が x に対して slowly に変化すると言っている時には、
+  具体的には $\hbar \partial_x \ll W$ みたいな条件を課している (でも W 自体 \hbar の order である)?
+  これはオーダー評価を丁寧にすれば分かるはず。
+</li>
+<li class="til">Eq. (2.254): これは知らなかった。つまり両側が囲まれて
+いる領域の $\int k(x)dx = (n+1/2)\hbar$ になるということ。</li>
+</ul>
+
+<h2>2.6 Propagators and Feynman integrals</h2>
+
+<ul>
+<li class="com">Eq. (2.273) の上で $t > t_0$ の時は、と書いているが、別に $t < t_0$ でも成立するのでは。
+Eq. (2.277) の K は 2.273 の K とは違うのでは。これは $\theta(t-t_0)$ が入っているのでは。
+</li>
+<li class="com">Eq. (2.282): これで $t\to t_0$ もしくは $t-t_0 = 2\pi/\omega$
+  の時に本当にdelta関数に戻るのかというのは式の見た目からは非自明では。
+  どうやって示すのか。
+</li>
+<li class="til">Eq. (2.284) の様な形で trace を取ったら時間発展演算子の trace が出てくる。
+  当たり前といえば当たり前だが余り意識したことのない式である。
+  と思ったが、これはどうも分配関数 Z の虚時間形式に繋げるための議論だった。
+</li>
+<li class="com">Eq. (2.289) spectral function. スペクトル関数。
+  物理数学でクラマース・クロニッヒの関係や、
+  主値積分と $i\epsilon$ 処方などの関係や、
+  Fourier-Laplace transform 等をやっている可能性はある。
+</li>
+<li class="com">Eq. (2.303) 付近。例のごとく位相がものすごく振動するから打ち消す。
+  これをちゃんと数学的に示すにはどうしたら良いのか?
+  一つの方法は $|A| = |\int_{-R}^R dx e^{i [S_0 + S_0^{(1)} x]/\hbar}|
+  < 2\hbar/S_0^{(1)} \to 0$ と述べること。でも2次以降の効果がどのよう
+  に入るかについては本当は慎重に吟味する必要がある。或いはこれもまた鞍
+  点近似の文脈で説明することができる。
+</li>
 </ul>
