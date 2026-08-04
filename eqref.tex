@@ -1,0 +1,287 @@
+\documentclass[amsmath,amssymb,prc,aps]{revtex4-2}
+\usepackage{bm}
+\usepackage[pdftex]{color}
+\newcommand{\Red}[1]{{\color[rgb]{1.0,0.0,0.0}\relax#1}}
+\newcommand{\Blue}[1]{{\color[rgb]{0.0,0.0,1.0}\relax#1}}
+\newcommand{\Green}[1]{{\color[rgb]{0.0,0.7,0.0}\relax#1}}
+\newcommand{\Cyan}[1]{{\color[rgb]{0.0,0.5,0.5}\relax#1}}
+
+% I tried to use "diagbox" to draw the diagonal line in the cell, but this
+% doesn't seem to adjust its size depending on the actual width of the column.
+% To make it work, one needs to manually specify the width of the column.  I
+% gave up drawing the diagonal line.
+%% \usepackage{diagbox}
+%% \let\originalDiagbox\diagbox
+%% \renewcommand{\diagbox}[2]{%
+%%   \relax\ifmmode%
+%%     \hbox{\tabcolsep=\arraycolsep\originalDiagbox{$#1$}{$#2$}}%
+%%   \else%
+%%     \originalDiagbox{#1}{#2}%
+%%   \fi}
+
+\begin{document}
+
+\title{My Reference for Mathematical Formulae}
+\author{Koichi Murase}
+\affiliation{Japan}
+\begin{abstract}
+I decided to maintain formulae and tables that I frequently reference in a
+single PDF.  This is the file.
+\end{abstract}
+\maketitle
+
+%%=============================================================================
+\section{Special functions}
+\subsection{Spherical harmonics}
+
+There are many expressions about the spherical harmonics. The following is the
+expression found in \textit{Napolitano, J. J. Sakurai, Modern Quantum
+Mechanics, 4th Edition}.
+\begin{subequations}
+\begin{align}
+  Y_l^m &= \frac{(-1)^l}{(2l)!!} \sqrt{\frac{2l+1}{4\pi}\frac{(l+m)!}{(l-m)!}} e^{im\phi}
+    (1-z^2)^{-m/2} \partial_z^{l-m} (1-z^2)^l|_{z=\cos\theta},
+    \quad (m \ge 0), \\
+  Y_l^{-m} &= (-1)^m (Y_l^m)^*.
+\end{align}
+\end{subequations}
+
+I might want to summarize the relationship between the variations someday.
+
+The orthogonality is written as
+\begin{align}
+  \int d\Omega\, Y_l^m Y_{l'}^{m'} 
+  &= \int d\phi d\!\cos\theta\, Y_l^m Y_{l'}^{m'} = \delta_{ll'}\delta_{mm'}.
+\end{align}
+
+To write down the explicit forms, let us introduce $x = \cos\phi\sin\theta,
+y=\sin\phi\sin\theta, z=\cos\theta$, and $x_\pm = x\pm iy = e^{\pm
+i\phi}\sin\theta$.  It should be noted that $x^2+y^2+z^2 = x_+ x_- + z^2 = 1$.
+Then, the spherical harmonics may be written as polynomials of $z$ and $x_\pm$.
+
+\begin{subequations}
+\begin{gather}
+  Y_0^0 = \sqrt{\frac1{4\pi}}, \\
+  Y_1^0
+    %= \sqrt{\frac{3}{4\pi}} \cos\theta
+    = \sqrt{\frac{3}{4\pi}} z, \quad
+  Y_1^{\pm}
+    %= \mp\sqrt{\frac{3}{8\pi}} e^{\pm i\phi} \sin\theta
+    = \mp\sqrt{\frac{3}{8\pi}} x_\pm, \\
+  Y_2^0 = \sqrt{\frac{5}{16\pi}} (3z^2-1), \quad
+  Y_2^{\pm1} = \mp\sqrt{\frac{15}{8\pi}} zx_\pm, \quad
+  Y_2^{\pm2} = \sqrt{\frac{15}{32\pi}} x_\pm^2, \\
+  Y_3^0 = \sqrt{\frac{7}{16\pi}} (5z^2-3)z, \quad
+  Y_3^{\pm1} = \mp\sqrt{\frac{21}{64\pi}} (5z^2-1)x_\pm, \quad
+  Y_3^{\pm2} = \sqrt{\frac{105}{32\pi}} zx_\pm^2, \quad
+  Y_3^{\pm3} = \mp\sqrt{\frac{35}{64\pi}} x_\pm^3.
+\end{gather}
+\end{subequations}
+
+\subsection{Clebsch--Gordan (CG) coefficients}
+\def\LadNH#1{\Blue{\stackrel{\times #1}{\leftrightarrow}}}
+\def\LadNV#1{\Blue{\updownarrow\hspace{-0.25em}{\raisebox{0.10em}{\scriptsize$\times #1$}}}}
+
+Here, we consider the angular-momentum addition $j_1\otimes j_2 =
+\bigoplus_{|j_1-j_2|}^{j_1+j_2} J$.  The original angular momentum $j_1$ and
+$j_2$ are fixed in the discussion.  The relationship between the components
+$(m_1, m_2)$ and $(J, M)$ is established.
+
+The Condon--Shortley phase convention sets \Cyan{$\langle J J |m_1 = j_1, m_2 =
+J - j_1\rangle$} to be a real positive number, and the normalization of
+raising/lowering by $j_\pm (= J_\pm, j_{1\pm}, j_{2\pm})$ is assumed to be
+positive as
+\begin{align}
+  j_\pm |j,m\rangle
+    &= \sqrt{j(j+1) - m(m\pm1)} | j, m\pm1\rangle \notag \\
+    &= \sqrt{(j\mp m)(j\pm m + 1)} | j, m\pm1\rangle \notag \\
+    &=: c_{j}^{m,m\pm1} |j, m\pm1\rangle,
+\end{align}
+where $c_j^{m,m'} = \sqrt{j(j+1)-mm'} =
+\sqrt{(j+m_\mathrm{max})(j-m_\mathrm{min})}$, ($|m-m'|=1$,
+$m_\mathrm{max}=\max\{m,m'\}$, $m_\mathrm{min}=\min\{m,m'\}$).  Then, all the
+CG coefficients become real-valued.  The normalization $c_j^{m,m'}$ is
+determined only by the pair of the two adjacent states and does not depend on
+whether it is $j_+$ or $j_-$.  The following table summarizes the sequence of
+$c_j^{m,m'}$ for each $j$, where the square-root is omitted.
+
+\begin{gather}
+  \renewcommand{\arraystretch}{1.8}
+  \setlength{\arraycolsep}{0.5em}
+  \newcommand{\Lad}[1]{\LadNH{#1}}
+  \begin{array}{c|ccccccccccccc}
+  j   & \multicolumn{13}{c}{\text{$\psi_j^m$ and $\LadNH{(c_j^{mm'})^2}$}} \\ \hline\hline
+  1/2 & \psi_{1/2}^{-1/2} & \Lad{1} & \psi_{1/2}^{1/2} \\
+  1   & \psi_1^{-1}       & \Lad{2} & \psi_1^{0}        & \Lad{2}  & \psi_1^{1} \\
+  3/2 & \psi_{3/2}^{-3/2} & \Lad{3} & \psi_{3/2}^{-1/2} & \Lad{4}  & \psi_{3/2}^{1/2}  & \Lad{3}  & \psi_{3/2}^{3/2} \\
+  2   & \psi_2^{-2}       & \Lad{4} & \psi_2^{-1}       & \Lad{6}  & \psi_2^{0}        & \Lad{6}  & \psi_2^{1}       & \Lad{4}  & \psi_2^{2} \\
+  5/2 & \psi_{5/2}^{-5/2} & \Lad{5} & \psi_{5/2}^{-3/2} & \Lad{8}  & \psi_{5/2}^{-1/2} & \Lad{9}  & \psi_{5/2}^{1/2} & \Lad{8}  & \psi_{5/2}^{3/2} & \Lad{5}  & \psi_{5/2}^{5/2} \\
+  3   & \psi_3^{-3}       & \Lad{6} & \psi_3^{-2}       & \Lad{10} & \psi_3^{-1}       & \Lad{12} & \psi_3^{0}       & \Lad{12} & \psi_3^{1}       & \Lad{10} & \psi_3^{2} & \Lad{6} & \psi_3^{3} \\
+  \end{array}
+\end{gather}
+A useful property is that
+\begin{align}
+  \Delta_m^2[(c_j^{m,m+1})^2] = -2, \qquad \text{with $(c_j^{-j-1,-j})^2 = 0$ and $(c_j^{-j,-j+1})^2 = 2j$},
+\end{align}
+where $\Delta_m^2[(c_j^{m,m+1})^2]$ is the second-order finite difference in
+the $m$ direction.  One can easily generate the sequence based on this rule.
+
+The CG coefficients may be constructed by considering the recurrence formula,
+where $J$ is fixed.  When the state $|J, M\rangle$ is written as
+\begin{align}
+  |J, M\rangle = \sum_{m_1+m_2=M} |m_1, m_2\rangle\langle m_1,m_2|J,M\rangle,
+\end{align}
+the lower state $|J, M-1\rangle$ is obtained as
+\begin{align}
+  |J, M-1\rangle
+    &= \frac{J_-}{c_{J}^{M,M-1}}|J,M\rangle \notag \\
+    &= \frac{j_{1-} + j_{2-}}{c_{J}^{M,M-1}} \sum_{m_1+m_2=M} |m_1, m_2\rangle\langle m_1,m_2|J,M\rangle \notag \\
+    &= \sum_{m_1+m_2=M-1} |m_1, m_2\rangle
+      \biggl(\frac{c_{j_1}^{m_1,m_1+1}}{{c_{J}^{M,M-1}}}\langle m_1+1,m_2|J,M\rangle
+      + \frac{c_{j_2}^{m_2,m_2+1}}{{c_{J}^{M,M-1}}}\langle m_1,m_2+1|J,M\rangle\biggr),
+\end{align}
+so the recurrence formula for the CG coefficient is identified as
+\begin{align}
+  \langle m_1,m_2|J,M\rangle =
+  \frac{c_{j_1}^{m_1,m_1+1}}{{c_{J}^{M,M+1}}}\langle m_1+1,m_2|J,M+1\rangle
+      + \frac{c_{j_2}^{m_2,m_2+1}}{{c_{J}^{M,M+1}}}\langle m_1,m_2+1|J,M+1\rangle.
+\end{align}
+The starting point of the recurrence is specified by the highest weight state
+$|J,J\rangle$ of the present $J$.  For the $J=j_1+j_2$, the highest weight
+state is trivially $|J,J\rangle = |m_1=j_1,m_2=j_2\rangle$, so $\langle
+j_1,j_2|J,J\rangle = 1$.  For the other $J$, one needs to determine the
+relative coefficients of $m_1+m_2=J$ and then normalize the coefficients.  It
+is useful to start with $m_1=j_1$, which is specified to be positive by the
+Condon--Shortley convention.  Since the raising operator should annhilate the
+state $|J,J\rangle$,
+\begin{align}
+  c_{j_1}^{m_1,m_1-1} \langle m_1-1, m_2 | J, J\rangle
+  + c_{j_2}^{m_2,m_2-1} \langle m_1, m_2-1 | J, J\rangle = 0.
+\end{align}
+This leads to the following recurrence within the $|J,J\rangle$ coefficients:
+\begin{align}
+  \langle m_1, m_2 | J, J\rangle
+  &= - \frac{c_{j_2}^{m_2,m_2-1}}{c_{j_1}^{m_1+1,m_1}} \langle m_1+1, m_2-1 | J, J\rangle.
+\end{align}
+
+\subsubsection{$(L=2)\otimes(S=1)$}
+
+The following table shows the CG coefficients in the $(m_1,m_2)$ table for each
+$J$; a column and a row specify $m_1$ and $m_2$, respectively.  The square-root
+symbol is omitted for all cells.  For example, ``$-3/10$'' in a cell means the
+corresponding CG coefficient being ``$-\sqrt{3/10}$''.  The \Cyan{cyan number}
+in each table indicates the positive coefficient that determines the entire
+phase under the Condon--Shortley convention.
+
+\begin{align}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{array}{c|ccccccccc}
+  J=3           & Y_2^{-2} & \LadNH{4} & Y_2^{-1} & \LadNH{6} & Y_2^{0} & \LadNH{6} & Y_2^{1} & \LadNH{4} & Y_2^{2} \\ \hline
+  \chi^1        & 1/15 && 1/5 && 6/15 && 2/3 && \Cyan{1} \\
+  \LadNV{2}   \\
+  \chi^0        & 1/3 && 8/15 && 3/5 && 8/15 && 1/3 \\
+  \LadNV{2} \\
+  \chi^{-1}     & 1 && 2/3 && 6/15 && 1/5 && 1/15
+  \\\hline\hline
+  J=2           & Y_2^{-2} & \LadNH{4} & Y_2^{-1} & \LadNH{6} & Y_2^{0} & \LadNH{6} & Y_2^{1} & \LadNH{4} & Y_2^{2} \\ \hline
+  \chi^1        & -2/6 && -1/2 && -3/6 && -1/3 &&  \\
+  \LadNV{2} \\
+  \chi^0        & -2/3 && -1/6 && 0 && 1/6 && \Cyan{2/3} \\
+  \LadNV{2} \\
+  \chi^{-1}     &      && 1/3 && 3/6 && 1/2 && 2/6
+  \\\hline\hline
+  J=1           & Y_2^{-2} & \LadNH{4} & Y_2^{-1} & \LadNH{6} & Y_2^{0} & \LadNH{6} & Y_2^{1} & \LadNH{4} & Y_2^{2} \\ \hline
+  \chi^1        & 6/10 && 3/10 && 1/10  &&       &&  \\
+  \LadNV{2} \\
+  \chi^0        &     && -3/10 && -4/10 && -3/10 &&  \\
+  \LadNV{2} \\
+  \chi^{-1}     &     &&       && 1/10  && 3/10  && \Cyan{6/10}
+  \end{array}
+\end{align}
+
+The $J=1$ eigenfunctions are written as
+\begin{align}
+  \mathcal{Y}^1(^3D_{1}) &= \frac{\sqrt{6} Y_2^2 \chi_1^{-1} - \sqrt{3}Y_2^1 \chi_1^0 + Y_2^0\chi_1^1}{\sqrt{10}}, \\
+  \mathcal{Y}^0(^3D_{1}) &= \frac{\sqrt{3} Y_2^1 \chi_1^{-1} - 2 Y_2^0 \chi_1^0 + \sqrt{3} Y_2^{-1}\chi_1^1}{\sqrt{10}}, \\
+  \mathcal{Y}^{-1}(^3D_{1}) &= \frac{Y_2^0 \chi_1^{-1} - \sqrt{3}Y_2^{-1} \chi_1^0 + \sqrt{6}Y_2^{-2}\chi_1^1}{\sqrt{10}}.
+\end{align}
+
+\subsubsection{$J \otimes (S=1/2)$}
+
+In the case of the second angular momentum being $j_2=1/2$, the table has only
+two rows for $J=j_1\pm1/2$, ($j_1\ge1/2$).  In this case, a simple expression
+for the CG coefficients is obtained.  For $J=j_1+1/2$, the top row can be
+simply calculated by
+\begin{align}
+  \langle m_1, 1/2|J, m_1 + 1/2\rangle
+    &= \frac{c_{j_1}^{m_1,m_1+1}}{c_J^{m_1+1/2,m_1+3/2}} \langle m_1+1, 1/2|J, m_1 + 3/2\rangle \notag \\
+    &= \sqrt{\frac{(j_1+m_1+1)(j_1 - m_1)}{(j_1+m_1+2)(j_1-m_1)}} \langle m_1+1, 1/2|J, m_1 + 3/2\rangle \notag \\
+    &= \sqrt{\frac{j_1+m_1+1}{j_1+m_1+2}} \langle m_1+1, 1/2|J, m_1 + 3/2\rangle \notag \\
+    &= \sqrt{\frac{j_1+m_1+1}{j_1+j_1+1}} \langle j_1, 1/2|J, j_1 + 1/2\rangle \notag \\
+    &= \sqrt{\frac{j_1+m_1+1}{2j_1+1}}.
+\end{align}
+
+The bottom row is obtained by the $(m_1,m_2)\leftrightarrow(-m_1,-m_2)$
+symmetry of the table:
+\begin{align}
+  \langle m_1, -1/2|J, m_1 - 1/2\rangle
+  =\langle -m_1, 1/2|J, -m_1 + 1/2\rangle = \sqrt{\frac{j_1-m_1+1}{2j_1+1}}.
+\end{align}
+
+For the $j=j_1-1/2$, the two coefficients of the highest state have the following relation:
+\begin{align}
+\langle j_1-1,1/2|J,J\rangle
+  &= - \frac{c_{1/2}^{1/2,-1/2}}{c_{j_1}^{j_1-1,j_1}} \langle j_1,-1/2|J,J\rangle \notag \\
+  &= - \sqrt{\frac{1}{2j_1}} \langle j_1,-1/2|J,J\rangle \notag \\
+  &= - \sqrt{\frac{1}{2j_1+1}}, \qquad \text{($\because$ normalization)}.
+\end{align}
+The recurrence in the top row is
+\begin{align}
+  \langle m_1, 1/2|J, m_1 + 1/2\rangle
+    &= \frac{c_{j_1}^{m_1,m_1+1}}{c_J^{m_1+1/2,m_1+3/2}} \langle m_1+1, 1/2|J, m_1 + 3/2\rangle \notag \\
+    &= \sqrt{\frac{(j_1+m_1+1)(j_1 - m_1)}{(j_1+m_1+1)(j_1-m_1-1)}} \langle m_1+1, 1/2|J, m_1 + 3/2\rangle \notag \\
+    &= \sqrt{\frac{j_1 - m_1}{j_1-m_1-1}} \langle m_1+1, 1/2|J, m_1 + 3/2\rangle \notag \\
+    &= \cdots = \sqrt{\frac{j_1 - m_1}{1}} \langle j_1-1, 1/2|J, J\rangle
+      = -\sqrt{\frac{j_1 - m_1}{2j_1+1}}.
+\end{align}
+For the antisymmetry of the table, the bottom row is
+\begin{align}
+  \langle m_1, -1/2|J, m_1 - 1/2\rangle &= \sqrt{\frac{j_1 + m_1}{2j_1+1}}.
+\end{align}
+
+Then, the table has this structure:
+
+\begin{align}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{array}{c|ccccccccccccc}
+  J=j_1+1/2     & \psi^{-j_1} & \leftrightarrow & \psi^{-j_1+1} & \cdots & \psi^{m_1-1} & \leftrightarrow & \psi^{m_1} & \leftrightarrow & \psi^{m_1+1} & \cdots & \psi^{j_1-1} & \leftrightarrow & \psi^{j_1} \\ \hline
+  \chi^{1/2}    & \frac{1}{2j_1+1} && \#   &\cdots& \frac{j_1+m_1}{2j_1+1} && \frac{j_1+m_1+1}{2j_1+1} && \# &\cdots& \frac{2j_1}{2j_1+1} && \Cyan{1} \\
+  \chi^{-1/2}   & 1 && \frac{2j_1}{2j_1+1} &\cdots& \# && \frac{j_1-m_1+1}{2j_1+1} && \frac{j_1-m_1}{2j_1+1} &\cdots& \# && \frac{1}{2j_1+1}
+  \\\hline\hline
+  J=j_1-1/2     & \psi^{-j_1} & \leftrightarrow & \psi^{-j_1+1} & \cdots & \psi^{m_1-1} & \leftrightarrow & \psi^{m_1} & \leftrightarrow & \psi^{m_1+1} & \cdots & \psi^{j_1-1} & \leftrightarrow & \psi^{j_1} \\ \hline
+  \chi^{1/2}    & -\frac{2j_1}{2j_1+1} && \# &\cdots& -\frac{j_1-m_1+1}{2j_1+1} && -\frac{j_1-m_1}{2j_1+1} && \# &\cdots& -\frac{1}{2j_1+1} &&  \\
+  \chi^{-1/2}   &    && \frac{1}{2j_1+1}     &\cdots& \# && \frac{j_1+m_1}{2j_1+1} && \frac{j_1+m_1+1}{2j_1+1}   &\cdots& \# && \Cyan{\frac{2j_1}{2j_1+1}}
+  \end{array}
+\end{align}
+
+The $(J,M)$ eigenstates are
+\begin{subequations}
+\begin{align}
+  \psi_{J=j_1+1/2}^{M=m_1+1/2} &= \sqrt{\frac{j_1-m_1}{2j_1+1}} \psi^{m_1+1}\chi^{-1/2}
+    + \sqrt{\frac{j_1+m_1+1}{2j_1+1}} \psi^{m_1} \chi^{1/2}, \qquad (-j_1-1 \le m_1 \le j_1), \\
+  \psi_{J=j_1-1/2}^{M=m_1+1/2} &= \sqrt{\frac{j_1+m_1+1}{2j_1+1}} \psi^{m_1+1}\chi^{-1/2}
+    - \sqrt{\frac{j_1 - m_1}{2j_1+1}} \psi^{m_1} \chi^{1/2}, \qquad (-j_1 \le m_1 \le j_1-1).
+\end{align}
+\end{subequations}
+
+For example,
+\begin{subequations}
+\begin{gather}
+  \mathcal{Y}^{\pm 1/2}(^2S_{1/2}) = \chi^{\pm1/2}, \\
+  \mathcal{Y}^{\pm 3/2}(^2P_{3/2}) = Y_1^{\pm1} \chi^{\pm1/2}, \quad
+  \mathcal{Y}^{\pm 1/2}(^2P_{3/2}) = \sqrt{\frac13} Y_1^{\pm1} \chi^{\mp1/2} + \sqrt{\frac23} Y_1^0 \chi^{\pm1/2}, \\
+  \mathcal{Y}^{\pm 1/2}(^2P_{1/2}) = \pm\sqrt{\frac23} Y_1^{\pm1} \chi^{\mp1/2} \mp \sqrt{\frac13} Y_1^0 \chi^{\pm1/2}.
+\end{gather}
+\end{subequations}
+
+\end{document}
