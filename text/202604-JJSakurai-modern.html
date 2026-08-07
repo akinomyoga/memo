@@ -37,27 +37,37 @@ li.com::before,
 li.ask::before,
 li.fix::before,
 li.mnl::before,
+li.til::before,
 li.que::before { margin-right: 0.3em; padding: 0.0em 0.3em; font-size: 80%; font-weight: bold; vertical-align: top; }
 li.com::before { background-color: #262; color: #fff; content: 'コメント'; }
 li.ask::before { background-color: #228; color: #fff; content: '問'; }
 li.fix::before { background-color: #822; color: #fff; content: '訂正'; }
 li.mnl::before { background-color: #444; color: #fff; content: '独言'; }
 li.que::before { background-color: #846; color: #fff; content: '謎'; }
+li.til::before { background-color: #975; color: #fff; content: 'TIL'; }
 </style>
 
-<h2>ゼミの予定</h2>
+<h2>ゼミの記録</h2>
 
 <ul>
-<li>2026-04-16 §1.1</li>
+<li>2026-04-16 §1.1 (9 pages)</li>
 <li>2026-04-21 後に南部コロキウムなど入っていたので短時間のゼミとなった。
   §1.1 の最後の Cs の議論の部分について議論を行った。</li>
-<li>2026-04-28 §1.2</li>
-<li>2026-05-07 §1.3～1.7 まで。
+<li>2026-04-28 §1.2 (6 pages)</li>
+<li>2026-05-07 §1.3～1.7 まで。 (38 pages)
   板書説明形式ではなく分からなかった所の確認 &amp; 問答形式で行った。
 </li>
-<li>2026-05-12 §1.6～1.7 について改めて分からない点を確認する予定。
-  進めば §2 についても行う。
-</li>
+<li>2026-05-12 §2.1.1～§2.1.2 (5 pages)</li>
+<li>2026-05-26 練習問題1.5 及び §2.1.3～§2.1.5 (4 pages)</li>
+<li>2026-05-29 §2.1.6..§2.1.7</li>
+<li>2026-06-09 §2.2..§2.5</li>
+<li>2026-06-16 §2.6: Eq. (2.303) まで</li>
+<li>2026-06-23 §2.7</li>
+<li>2026-06-30 §3.1 から §3.3 まで</li>
+<li>2026-07-09 §3.4 から §3.6.1 まで</li>
+<li>2026-07-14 §3.6.2 から §3.7 まで</li>
+<li>2026-07-21 §3.8</li>
+<li>2026-08-04 §3.9 §3.10</li>
 </ul>
 
 <h2>1.1 Stern-Gerlach experiemnt</h2>
@@ -217,6 +227,362 @@ li.que::before { background-color: #846; color: #fff; content: '謎'; }
   この教科書は $\int dp |p\rangle\langle p|= 1$ だが、
   現代的には (高エネルギーでは?) $\int \tfrac{dp}{2\pi} |p\rangle\langle p|= 1$ の方が普通と思う。
   後者は $\hbar = 1$ にすると都合が良く、自然単位系を選んだ時には後者の気がする。
+</li>
+</ul>
+
+<ul>
+<li>練習問題 1.5: "回転" ということを言わせたい。3DCG のクォータニオンとの関係。</li>
+</ul>
+
+<h2>2.1 Time Evolution and Schrodinger Equation</h2>
+
+<ul>
+<li class="com">Eq. (2.5): 演算子で書けると言った時点で時間発展が線形であることは仮定している</li>
+<li class="com">Eq. (2.11): この書き方だと unitary => prob conservation は言っているが、
+  prob conservation => unitary は示していない。しかし実際には示せる。
+</li>
+<li class="ask">Eq. (2.12) 下: 何故右から左に時間順序になっているか説明できるか?</li>
+<li class="ask">Eq. (2.33) が解になっている事は簡単に証明できる。</li>
+<li class="ask">Eq. (2.32) から (2.31) も簡単に形できる。</li>
+<li class="ask">Eq. (2.32) から (2.33) は少し大変だがよく考えれば変形できる。
+  t の順序毎に項を分解して、更に t を時刻順にラベル付けし直せば良い。</li>
+<li class="com">時間順序積 or Path ordering の記号についても言及する?
+  ホロノミー・ウィルソンライン・ループ量子重力・etc
+</li>
+<li class="com">英: a constant of motion (運動の定数) は integral of motion (運動の積分) と意味は全く同じらしい。
+  日本語 wikipedia では運動の積分で立項しているが英語 wikipedia では constant of motion になっている。
+</li>
+<li class="fix">Eq. (2.41): typo $a \to \alpha$</li>
+<li class="fix">Eq. (2.49) 上 magnetic moment $e\hbar/2m_ec$ と呼んでいるがこれは Bohr 磁子であって磁気モーメントとは係数が違う。</li>
+<li class="com">Fig. 2.1: 詳細が書かれていないが、muon が decay した時にその時の spin (特定の向き S_z) を計測することができる。
+  上向きの spin が計測されたカウントは時間発展しその周期を計測することができる。
+</li>
+<li class="com">Eq. (2.63): 3 flavor の時は 3x3 行列になる。これは (P)MNS (Pontecorvo-Maki-Nakagawa-Sakata) 行列と呼ばれる。
+  因みに quark の似たような行列は CKM (Cabibbo-Kobayashi-Maskawa) 行列でこれは小林益川のノーベル賞に関連する。
+</li>
+<li class="que">"The curve is not a perfect sine wave because the reactors are not all at the same
+  distance from the detector." の意味がよく分からない。</li>
+<li class="com">Fig. 2.2: 横軸は距離ではなくて $E_\nu$ の方を変更して計測しているということに注意する。</li>
+<li class="com">Sec. 2.1.7: この章は論理が滅茶苦茶である。
+  式と式が正しく繋がっていない。Napolitano が何処かの参考文献の論理を
+  全く理解せずに転記したのではないかと疑われる。
+  <ul>
+  <li>先ず有限個の自由度では完全な decorrelation は発生しない
+    (長時間経ったらまた増幅して大きくなる可能性があるということ)
+    ということが連続自由度を考える本来の理由だが、
+    その事を述べていない。
+  </li>
+  <li>TIL: 因みに有限個の自由度では decorrelation しないというのは<dfn>ディリクレの近似定理</dfn>で、
+    連続自由度を考えたら decorrelate するというのは<dfn>リーマン・ルベーグの補題</dfn>というそうだ。
+  </li>
+  <li>Eq. (2.69): $|_{E\simeq E_{a'}}$ という謎記号があるが、
+    これは $E_{a'}$ 付近で何らかの意味でなめらかという事を
+    言いたいのではないかと想像されるが、
+    未定義の記法を用いても意味不明である。
+  </li>
+  <li>最終的に雰囲気で $t\simeq \hbar/\Delta E$ を出しているが、
+    実際にはちゃんと導出する方法は色々ある。
+    鞍点近似で Gaussian にするのが最もよくある方法である。
+    或いは特定の小さな区間だけ切り取って矩形の分布にして $sin x/x$ の形にする。
+    というか Eq. (2.71) (normalization condition) は全く使われていないが、
+    本来これは鞍点近似で使うために言及されるものなのでは…。
+  </li>
+  <li>"we see that as $t$ becomes large, the integrand oscillates very
+    rapidly unless the energy interval $|E-E_0|$ is small compared with
+    $\hbar/t$. If the interval for which $|E-E_0| \simeq \hbar/t$ holds
+    is much narrower than $\Delta E$, the width of $|g(E)|^2\rho(E)$, we
+    get essentially no contribution to $C(t)$ because of strong
+    cancellations."
+
+    この説明はぐだぐだであるし言葉が余り正確でない。もっと分かりやすく
+    書くならば、
+
+    "$|E-E_0| > \hbar/t$ の領域でキャンセルが起きる。$|E-E_0| <
+    \hbar/t$ でしか寄与が残らないがこの領域の幅 $\hbar/t$ が $\Delta
+    E$ よりもずっと小さい時は $C(t)$ に対する寄与は実質無視できる。"
+
+    ということ。
+  </li>
+  </ul>
+</li>
+</ul>
+
+<h2>2.2 Heisenberg picture</h2>
+
+<ul>
+<li class="com">Eq. (2.77) で変換の下で operator は不変と言っているが、
+  基底変換としては op も変化しなければならないのでは。
+  状態に対する物理的な変換に対しては op は不変というべきの気がする。
+</li>
+<li class="ask">Eq. (2.82) を示せ</li>
+<li class="til">これがエーレンフェストの定理。よくどれがエーレンフェストの定理か分からなくなる…。
+  自分が混乱するのはペロン・フロベニウスの定理である。何故混乱するのかは謎。
+</li>
+</ul>
+
+<h2>2.3 Harmonic Oscillator</h2>
+
+<ul>
+<li class="mnl">Eq. (2.134): $n-1$ で縮退がないという事は示さないと行けないはず。綺麗に示す方法はあるか?</li>
+<li class="ask">Eq. (2.161): 示せ</li>
+<li class="til">Eq. (2.168) は Baker-Hausdorff lemma という名前。excercise にもなっている。</li>
+<li class="ask">Eq. (2.173): coherent state に関する性質を Excercise 2.21 で。
+  Excercise 2.21 a では与えられたケットが coherent state である事を示す問題だが、
+  $\lambda$ を固有値とする coherent state が一意であることの証明は要求していない。
+  しかし、実際には簡単である。単に完全基底 $\sum_n |n\rangle\langle n|=1$ を用いて
+  $|\lambda\rangle = \sum_n f_n |n\rangle$ を用いて条件を出すと
+  $f_n = (\lambda^n/\sqrt{n!}) f_0$ が出せて $f_0$ が規格化から複素位相を除いて一意に定まる。
+</li>
+</ul>
+
+<h2>2.4 Schrodinger's Wave Equation</h2>
+
+<ul>
+<li>2.4.1: H = p^2/2m + V の形にして Schrodinger を出している。2.4.2:
+time-independent version もだしている。それからエネルギーが負の状態
+(無限遠でのポテンシャル V = 0 を基準とする) として束縛状態を定義してい
+る。束縛状態は離散になり遠方まで行く状態は連続状態になる。行列力学との
+関係。Scrhodinger は Hamilton-Jacobi の見方を元に 独立に Schrodinger
+eq を作り上げ、後に等価性が証明された。2.4.3: 確率流の満たす方程式。
+</li>
+<li class="til">sinusoidal = 正弦波</li>
+<li class="com">Eq. (2.192): 別に積分しなくても $\bm{j} = \frac1m\Re[\psi^* \hat{\bm{p}} \psi]$ ということが示せるのでは…。</li>
+<li class="com">Eq. (2.199): 因みに phase に対する時間発展を求めると完全流体っぽくなっている。超流動との関係。</li>
+<li class="ask">Hamilton-Jacobi の方程式について説明できるか?</li>
+<li class="mnl">この辺は記憶がないがいつか復習・確認するべきの気がする。
+  Hamilton's characteristic function (Goldstein et al. (2002), pp. 440-444)</li>
+</ul>
+
+<h2>2.5 Elementary solutions to Schrodinger's Wave Equation</h2>
+
+<ul>
+<li>2.5.1: 平面波解と box regularization. DoS (density of state) の計
+算。2.5.2: 調和振動子。空間表示。エルミート多項式を母関数の表式から始
+めて導入している。H の recurrence formula や微分式を出して、それが
+Schrodinger eq for h(x) と一致していることを示している。2.5.3: Linear
+potential の時には Airy eq になる。これの解は Fourier 変換で与えられる。
+2.5.4 WKB 近似について。tunneling についてではなくて変な形の井戸に閉じ
+込められた粒子の話をしている。量子化条件を出してこれからエネルギー準位
+の近似値が出せることを述べている。classical limit との関係。
+Eq. (2.264) で換算 de Broglie 波長と比べて何か言っているがよく分からな
+い。
+</li>
+<li class="com">2.223 の式の書き方はよくないのではないか。
+  単に $H_{2m}$ の性質として導出すればよかっただけでは。
+</li>
+<li class="ask">何故、V が even だと固有状態が odd / even になると言えるのか説明できるか?</li>
+<li class="ask">2.237: これは Fourier 表示で解ける。
+  $u = \int \frac{dk}{2\pi}\tilde u(k) e^{ikx}$
+  を代入すれば $\tilde u$ が定まる。
+</li>
+<li class="ask">更に 2.251 の表式も鞍点法によって求めることができる。</li>
+<li class="com">V(x) が x に対して slowly に変化すると言っている時には、
+  具体的には $\hbar \partial_x \ll W$ みたいな条件を課している (でも W 自体 \hbar の order である)?
+  これはオーダー評価を丁寧にすれば分かるはず。
+</li>
+<li class="til">Eq. (2.254): これは知らなかった。つまり両側が囲まれて
+いる領域の $\int k(x)dx = (n+1/2)\hbar$ になるということ。</li>
+</ul>
+
+<h2>2.6 Propagators and Feynman integrals</h2>
+
+<ul>
+<li class="com">Eq. (2.273) の上で $t > t_0$ の時は、と書いているが、別に $t < t_0$ でも成立するのでは。
+Eq. (2.277) の K は 2.273 の K とは違うのでは。これは $\theta(t-t_0)$ が入っているのでは。
+</li>
+<li class="com">Eq. (2.282): これで $t\to t_0$ もしくは $t-t_0 = 2\pi/\omega$
+  の時に本当にdelta関数に戻るのかというのは式の見た目からは非自明では。
+  どうやって示すのか。
+</li>
+<li class="til">Eq. (2.284) の様な形で trace を取ったら時間発展演算子の trace が出てくる。
+  当たり前といえば当たり前だが余り意識したことのない式である。
+  と思ったが、これはどうも分配関数 Z の虚時間形式に繋げるための議論だった。
+</li>
+<li class="com">Eq. (2.289) spectral function. スペクトル関数。
+  物理数学でクラマース・クロニッヒの関係や、
+  主値積分と $i\epsilon$ 処方などの関係や、
+  Fourier-Laplace transform 等をやっている可能性はある。
+</li>
+<li class="com">Eq. (2.303) 付近。例のごとく位相がものすごく振動するから打ち消す。
+  これをちゃんと数学的に示すにはどうしたら良いのか?
+  一つの方法は $|A| = |\int_{-R}^R dx e^{i [S_0 + S_0^{(1)} x]/\hbar}|
+  < 2\hbar/S_0^{(1)} \to 0$ と述べること。でも2次以降の効果がどのよう
+  に入るかについては本当は慎重に吟味する必要がある。或いはこれもまた鞍
+  点近似の文脈で説明することができる。
+</li>
+<li>2.6.4 は何だか泥臭い計算というか試してみたら合ってるでしょみたいな
+  議論の進め方で余り面白いことも何もない。
+</li>
+<li>Eq. (2.309b) これは積分核としての delta function への収束であって、
+  実際には limit を取っても $\xi\neq 0$ で 0 になるわけではない。
+</li>
+</ul>
+
+<h2>2.7 Potentials and Gauge transformations</h2>
+
+<ul>
+<li>2.7.1 エネルギー基準点の変更は基底の位相の変更。2つの経路で異なる
+一様電場をかけると、粒子は力を受けていないのにも拘らず、干渉が発生する。
+2.7.2 重力ポテンシャルによる干渉が中性子のマクロな設定で見えるという話。
+この教科書がよいのは実際に量子力学が見える状況というのが色々例示されて
+いること。2.7.3 canonical momentum は gauge dependent quantity である。
+kinematical momentum が gauge independent. Guage 変換は波動関数の位相
+因子を変えるはたらきを持っている。2.7.4 Aharonov-Bohm effect
+</li>
+<li class="til">kinetic momentum は kinematical momentum とも
+  mechanical momentum とも言う。名前がたくさんある。</li>
+<li class="ask">Eq. (2.338) を示せると教科書は言っている。</li>
+<li class="til">gauge invariance はドイツ語 Eichinvarianz の訳らしい。</li>
+<li class="com">Eq. (2.378) の説明は分かっていれば
+  こういうことを言いたいのだろうと推測されるが、
+  説明として全然駄目の気がする。
+</li>
+<li>Sec. 2.7.2 の最後から二番目の段落で 90 度 \delta を動かすということを書いているが、嘘である。
+  PRL 34, 1472 の論文の図を見ると、実際には -30 度 から 30 度まで 60 度動かして、
+  \sin\delta が -1/2 から 1/2 まで 1 だけ変化する様な設定になっている。
+</li>
+<li>innocuous: (生物・薬学的に) 無害な</li>
+</ul>
+
+<h2>3.4</h2>
+
+<ul>
+<li class="com">§3.4.1 余り確率的な側面を強調していなくて、謎の
+「phase で linear superposition をするわけではない別の種類の混ざり方
+(population w_i)」みたいな説明をしていてよくない気がする。と思ったが
+population というのは用意した原子たちの中の population という意味の様
+である。統計力学的な重ね合わせであるという導入もしくは、partial trace
+による導入の仕方でもいいが、そういう風に導入しないと自然に必要だという
+ことが分からないのではないか。或いは、必然性を示さなくても点から振って
+きたものを受け入れろという立場なのかもしれないが。
+
+<p>量子力学的な確率と統計力学的な確率の混同が混乱を来すと思って、統計
+力学的なものの方を確率と呼ぶのをさけているのかもしれないが、それは寧ろ
+混乱の下の気がする。寧ろ、統計力学的な確率の方が確率として振る舞ってい
+て、量子力学的な確率の方が天から振ってくるような説明しかできないのだか
+ら。
+</p>
+</li>
+<li class="com">後、男と女の重ね合わせはないとか言っているが本当だろう
+か? 量子力学的にはあって良いはずである。ただ干渉の振幅は無視できるぐら
+いに抑えられるが。
+</li>
+<li class="ask">1/2 で + - を足したものが基底(SG apparatus)を回転して
+も特定の向きを持たないものであるということを示す。
+</li>
+<li class="ask">Eq. (3.116) とは別の組み合わせで同じ density operator
+を再現する方法があることを示す。
+</li>
+<li class="com">Eq. (3.122): Poisson 括弧の話はどこかで出ていたか?</li>
+
+<li class="mnl">Eq. (3.125) 下の段落: 現実的なビームの状態は plane
+wave の統計和でも表せるし wave packets の統計和でも表せると書いている。
+本当か? "現実的なビーム" と言ったらそうなっていそうだが、一方で plane
+wave の和と wave packets の和を数学的に変換できるだろうか。基本的に
+Fourier 変換で対角性を保つことができれば良いことになる? うーん。基本的
+に単に "完全系 = 1" を使うだけの気がする。なので OK。というかそもそも
+3.112 および 3.113 の議論もわざわざ具体的に
+
+</li>
+<li class="com">Eq. (3.133) 下: von Neumann entropy という名前は出して
+おくべきの気がする。加法性を満たすということなどから log が出てくるなど、
+情報で習いそうなことも述べても良い。
+</li>
+<li>この教科書は w_i が 0 以上 1 以下であるということを言っていない。
+</li>
+<li>この教科書は純粋アンサンブルなら \rho^2 = \rho は言っているが、そ
+れの逆は言っていない。
+</li>
+<li>純粋状態なら tr(\rho^2) = 1 は言っているが、その逆は言っていない。</li>
+
+<li>3.109 の議論はそもそも分解して書かなくても $|\alpha\rangle$ が成分
+表示で列ベクトルになるし、$\langle \alpha|$ が成分表示で行ベクトルにな
+るということを考えたら自明である。
+</li>
+
+<li>3.123 で A の引数は書いているのに \rho の引数を書いていないのは、
+良くないことの気がする。
+</li>
+
+<li>この教科書は von-Neumann Liouville 方程式について、"Heisenberg 方
+程式の符号が違ったもの" としか言っていない。Heisenberg という名前をだ
+すのだったら、正しい名前を出すべきではないか? 因みに、entropy が
+von-Neumann entropy というのも言っていない。
+</li>
+
+<li>Eq. (3.141) は \beta = 0 にしたら出すことができる。もっと厳密に言
+うと、ミクロカノニカルは $\langle E_i |\rho| E_i\rangle = 0$ ($E_i
+\not\in [U - \epsilon, U + \epsilon]$) みたいな条件があるが、今は \rho
+を決定するために議論しているのであって、範囲外の $E_i$ に対応する固有
+値は、この条件から直ちに決まるので、未知の部分 ($E_i \sim U$ の部分空
+間での固有値) についてだけ考えれば良い。この範囲で考えている限りは追加
+の Lagrange multiplier などは必要ない。
+</li>
+
+<li>因みにこの教科書では「物理量 A が a_i を取る確率」が密度演算子を用
+いて $\langle a_i | \rho | a_i\rangle$ で書かれることも、或いはもっと
+前の方で「物理量 A が a_i を取る確率」 に対応する演算子が射影演算子
+$|a_i\rangle\langle a_i|$ であることも書かれていない。
+</li>
+</ul>
+
+<h2>3.6 Orbital angular momentum</h2>
+
+<ul>
+<li class="ask">$L = x\times p$ で良いのは何故か。エルミートにちゃんとなっているか?
+  (交換しない成分 x_i p_i は消える)
+</li>
+<li class="ask">Eq. (3.258): 何故他の l' の寄与が消えるのか説明できるか。
+  →これは 3.194 から。J では l の外にはみ出ない。</li>
+<li class="til">$|\hat z\rangle$ は m=0 の固有状態だから $|l,0\rangle$ の線形結合で書ける。</li>
+<li class="fix">Eq. (3.262) の $d$ は $\usepackage{mathrsfs}\mathscr{D}$ では。
+  と思ったが既に 3.209 でも出てきているし、\theta 回転しかしない場合は d を使う事にしているのだろう。
+</li>
+<li class="til">球面調和関数は SO(3)の l 表現の回転行列の成分でもある。</li>
+<li class="que">§3.6.3 これだと rotation matrix の $\mathscr{D}^{(l)}_{m0}$ 成分しか分からないのでは。
+  その他の成分はどうなっているのか?</li>
+</ul>
+
+<h2>3.7 Schroedinger's equation for central potentials</h2>
+
+<ul>
+<li class="ask">3.264 だと r が交換可能なのは説明できるか?</li>
+<li class="que">Prob 3.27 で u \sim B/r^l がないとされる理由が干渉項が確率保存を破るからということが示されるそうだ。
+  → と思って 3.27 を見たが、A, B で相対位相がある場合には 0 で flux があると言っている。
+  それだと相対位相がない場合は否定できないのでは…。
+</li>
+<li class="que">3.289 下 "except for any accidental equality between zeros" と言っているが、
+  実際に共有されている zero は存在しているのだろうか?
+</li>
+<li></li>
+</ul>
+
+<h2>3.8 角運動量の合成</h2>
+
+<ul>
+<li>Eq. (3.321) \otimes の意味を説明していなくていきなり出している。</li>
+<li>Eq. (3.324): L と S が交換するのは 3.323 の構造から。</li>
+<li>Eq, (3,384): spin-angular function という名前</li>
+<li>Eq. (3.385): J^2 の固有関数であることを確認するには 3.349 を使うのが便利。</li>
+<li>Eq. (3.390): 間違いとは言い切れないが、
+  $\mathscr{D}(R) := (3.388)$ の様に定義して。
+  右辺第一行の $\mathscr{D}(R)$ はそれぞれ
+  $\mathscr{D}^{j_1}(R)$ $\mathscr{D}^{(j_2)}(R)$ の様に
+  書いた方が分かりやすいのでは。
+</li>
+</ul>
+
+<h2>3.9</h2>
+
+<ul>
+<li class="fix">3.403 の上: we prove (3.402<ins>b</ins>)</li>
+<li>Eq. (3.405): j=N/2 であることを思えば、 $J^2 = \hbar^2 (N/2)(N/2+1)$ と書いた方が対応がつけやすい。</li>
+<li>Eq. (3.426) 式: 既に $d^{(j)}_{00}$ の場合は Eq. (3.262) で $P_j(z)$ になると分かっている。
+  今回求めた式が前回の結果と consistent であることは Eq. (3.426) に $m=m'=0$ を代入すれば、
+  $P_l$ の知られた公式(★)に一致する。
+  一方で、$P_l(z)$ のロドリゲスの公式を Eq. (3.246) から読み取ることができて、
+  $P_z(z) = \frac{(-1)^l}{2^l l!}(d/dz)^l(1-z^2)^l = \frac1{2^ll!}(d/dz)^2[(z+1)^l(z-1)^l]$ となる。
+  これを Leibnitz の公式で分解すると上記の★の式が得られる。
 </li>
 </ul>
 
