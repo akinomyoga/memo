@@ -1,0 +1,200 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{dcancel}[2026-08-11 single and double cancel commands]
+
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage{etoolbox} % for \ifblank
+\usetikzlibrary{calc, shapes.geometric}
+
+\let\dcancel@btext\undefined
+\let\dcancel@ttext\undefined
+
+%------------------------------------------------------------------------------
+% dcancel@subsup
+
+\newcommand{\dcancel@sub}[1]{%
+  \def\dcancel@subsup@command{#1}%
+  \let\dcancel@ttext\undefined%
+  \let\dcancel@btext\undefined%
+  \@ifnextchar_{\dcancel@subsup@grabsub}{\dcancel@subsup@command}}
+\def\dcancel@subsup@grabsub_#1{%
+  \def\dcancel@btext{#1}%
+  \dcancel@subsup@command}
+
+\newcommand{\dcancel@sup}[1]{%
+  \def\dcancel@subsup@command{#1}%
+  \let\dcancel@ttext\undefined%
+  \let\dcancel@btext\undefined%
+  \@ifnextchar^{\dcancel@subsup@grabsup}{\dcancel@subsup@command}}
+\def\dcancel@subsup@grabsup^#1{%
+  \def\dcancel@ttext{#1}%
+  \dcancel@subsup@command}
+
+\newcommand{\dcancel@subsup}[1]{%
+  \def\dcancel@subsup@command{#1}%
+  \let\dcancel@ttext\undefined%
+  \let\dcancel@btext\undefined%
+  \@ifnextchar^{\dcancel@subsup@grabsupsub}{%
+    \@ifnextchar_{\dcancel@subsup@grabsubsup}{%
+      \dcancel@subsup@command}}}
+\def\dcancel@subsup@grabsupsub^#1{%
+  \def\dcancel@ttext{#1}%
+  \@ifnextchar_{\dcancel@subsup@grabsub}{\dcancel@subsup@command}}
+\def\dcancel@subsup@grabsubsup_#1{%
+  \def\dcancel@btext{#1}%
+  \@ifnextchar^{\dcancel@subsup@grabsup}{\dcancel@subsup@command}}
+
+%------------------------------------------------------------------------------
+% dcancel@style
+
+\newcommand{\dcancel@styledefined@}[2]{%
+  \let\dcancel@style#1\relax%
+  \let\dcancel@smaller\scriptscriptstyle%
+  \ifx#1\displaystyle%
+    \let\dcancel@smaller\scriptstyle%
+  \else\ifx#1\textstyle%
+    \let\dcancel@smaller\scriptstyle%
+  \fi\fi%
+  #2}
+\newcommand{\dcancel@styledefined}[1]{\mathpalette{\dcancel@styledefined@}{#1}}
+
+%------------------------------------------------------------------------------
+
+\def\dcancel@cmpmark{circle}
+
+\newif\ifdcancel@bs
+\newif\ifdcancel@xs
+\newif\ifdcancel@double
+\newif\ifdcancel@earrow
+\newif\ifdcancel@warrow
+\newcommand{\dcancel@internal}[2]{%
+  \tikz[baseline=(tocancel.base)]{
+    \node[inner sep=0pt, outer sep=0pt] (tocancel) {$\dcancel@style#2$};
+    \draw[
+      draw = #1,
+      line width = 0.04em,
+      \ifdcancel@earrow
+        \ifdcancel@warrow stealth-stealth \else -stealth \fi
+      \else
+        \ifdcancel@warrow stealth- \fi
+      \fi
+    ]
+      \ifdcancel@double
+        let
+          \p1 = ($(tocancel.north east) - (tocancel.south west)$),
+          \n1 = {veclen(\x1,\y1)},
+          \n2 = {0.1em},
+          \n3 = {0.5*\y1 / \n1 * \n2},
+          \n4 = {0.5*\x1 / \n1 * \n2}
+        in
+        \ifdcancel@bs
+          ([xshift=\n3, yshift=\n4]tocancel.north west)
+          \ifdefined\dcancel@ttext
+            node[text = #1, above left, anchor=south, inner sep=1pt, yshift=0.05em] {$\dcancel@smaller\dcancel@ttext$}
+          \fi
+          -- ([xshift=\n3, yshift=\n4]tocancel.south east)
+          ([xshift=-\n3, yshift=-\n4]tocancel.north west)
+          -- ([xshift=-\n3, yshift=-\n4]tocancel.south east)
+          \ifdefined\dcancel@btext
+            node[text = #1, below right, anchor=north, inner sep=1pt, yshift=-0.1em] {$\dcancel@smaller\dcancel@btext$}
+          \fi
+        \else
+          ([xshift=-\n3, yshift=\n4]tocancel.south west)
+          \ifdefined\dcancel@btext
+            node[text = #1, below left, anchor=north, inner sep=1pt, yshift=-0.1em] {$\dcancel@smaller\dcancel@btext$}
+          \fi
+          -- ([xshift=-\n3, yshift=\n4]tocancel.north east)
+          ([xshift=\n3, yshift=-\n4]tocancel.south west)
+          -- ([xshift=\n3, yshift=-\n4]tocancel.north east)
+          \ifdefined\dcancel@ttext
+            node[text = #1, above right, anchor=south, inner sep=1pt, yshift=0.05em] {$\dcancel@smaller\dcancel@ttext$}
+          \fi
+        \fi
+      \else
+        \ifdcancel@xs
+          (tocancel.north west) -- (tocancel.south east)
+          (tocancel.south west) -- (tocancel.north east)
+          \ifdefined\dcancel@ttext
+            (tocancel.north)
+            node[text = #1, above, anchor=south, inner sep=1pt, yshift=0.05em] {$\dcancel@smaller\dcancel@ttext$}
+          \fi
+          \ifdefined\dcancel@btext
+            (tocancel.south)
+            node[text = #1, below, anchor=north, inner sep=1pt, yshift=-0.1em] {$\dcancel@smaller\dcancel@btext$}
+          \fi
+        \else\ifdcancel@bs
+          (tocancel.north west)
+          \ifdefined\dcancel@ttext
+            node[text = #1, above left, anchor=south, inner sep=1pt, yshift=0.05em] {$\dcancel@smaller\dcancel@ttext$}
+          \fi
+          -- (tocancel.south east)
+          \ifdefined\dcancel@btext
+            node[text = #1, below right, anchor=north, inner sep=1pt, yshift=-0.1em] {$\dcancel@smaller\dcancel@btext$}
+          \fi
+        \else
+          (tocancel.south west)
+          \ifdefined\dcancel@btext
+            node[text = #1, below left, anchor=north, inner sep=1pt, yshift=-0.1em] {$\dcancel@smaller\dcancel@btext$}
+          \fi
+          -- (tocancel.north east)
+          \ifdefined\dcancel@ttext
+            node[text = #1, above right, anchor=south, inner sep=1pt, yshift=0.05em] {$\dcancel@smaller\dcancel@ttext$}
+          \fi
+        \fi\fi
+      \fi
+      \ifdefined\dcancel@mark
+        ($(tocancel.south west)!0.5!(tocancel.north east)$)
+        \ifnum\numexpr\pdfstrcmp{\dcancel@mark}{circle}
+                    * \pdfstrcmp{\dcancel@mark}{1} = 0
+          node[draw=#1, circle, inner sep=0.30em] {}
+        \else\ifnum\numexpr\pdfstrcmp{\dcancel@mark}{box}
+                         * \pdfstrcmp{\dcancel@mark}{2} = 0
+          node[draw=#1, rectangle, inner sep=0.35em] {}
+        \else\ifnum\numexpr\pdfstrcmp{\dcancel@mark}{triangle}
+                         * \pdfstrcmp{\dcancel@mark}{3} = 0
+          node[draw=#1, regular polygon, regular polygon sides=3, inner sep=0.17em] {}
+        \else\ifnum\numexpr\pdfstrcmp{\dcancel@mark}{diamond}
+                         * \pdfstrcmp{\dcancel@mark}{3} = 0
+          node[draw=#1, diamond, inner sep=0.23em] {}
+        \else
+          node[draw=#1, circle, inner sep=0.3em] {}
+        \fi\fi\fi\fi
+      \fi;
+  }%
+}
+
+\newcommand{\dcancel@clear}{
+  \dcancel@bsfalse\dcancel@doublefalse%
+  \dcancel@earrowfalse\dcancel@warrowfalse%
+  \let\dcancel@shape\undefined}
+\newcommand{\slcancel}[2][.]{%
+  \dcancel@clear%
+  \dcancel@subsup{\dcancel@styledefined{\dcancel@internal{#1}{#2}}}}
+\newcommand{\bscancel}[2][.]{%
+  \dcancel@clear\dcancel@bstrue%
+  \dcancel@subsup{\dcancel@styledefined{\dcancel@internal{#1}{#2}}}}
+\newcommand{\slmcancel}[3][.]{%
+  \dcancel@clear%
+  \def\dcancel@mark{#2}%
+  \dcancel@subsup{\dcancel@styledefined{\dcancel@internal{#1}{#3}}}}
+\newcommand{\xscancel}[2][.]{%
+  \dcancel@clear\dcancel@xstrue%
+  \dcancel@subsup{\dcancel@styledefined{\dcancel@internal{#1}{#2}}}}
+\newcommand{\dslcancel}[2][.]{%
+  \dcancel@clear\dcancel@doubletrue%
+  \dcancel@subsup{\dcancel@styledefined{\dcancel@internal{#1}{#2}}}}
+\newcommand{\dbscancel}[2][.]{%
+  \dcancel@clear\dcancel@bstrue\dcancel@doubletrue%
+  \dcancel@subsup{\dcancel@styledefined{\dcancel@internal{#1}{#2}}}}
+\newcommand{\necancel}[2][.]{%
+  \dcancel@clear\dcancel@earrowtrue%
+  \dcancel@subsup{\dcancel@styledefined{\dcancel@internal{#1}{#2}}}}
+\newcommand{\secancel}[2][.]{%
+  \dcancel@clear\dcancel@bstrue\dcancel@earrowtrue%
+  \dcancel@subsup{\dcancel@styledefined{\dcancel@internal{#1}{#2}}}}
+\newcommand{\nwcancel}[2][.]{%
+  \dcancel@clear\dcancel@bstrue\dcancel@warrowtrue%
+  \dcancel@subsup{\dcancel@styledefined{\dcancel@internal{#1}{#2}}}}
+\newcommand{\swcancel}[2][.]{%
+  \dcancel@clear\dcancel@warrowtrue%
+  \dcancel@subsup{\dcancel@styledefined{\dcancel@internal{#1}{#2}}}}
