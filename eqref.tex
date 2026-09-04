@@ -323,8 +323,81 @@ For example,
 \end{gather}
 \end{subequations}
 
+\subsection{Bessel functions}
+
+For an arbitrary $\nu$, the second kind of the Bessel function is defined as
+\begin{align}
+  Y_\nu(x) &= \frac{J_\nu(x)\cos(\nu\pi) - J_{-\nu}(x)}{\sin(\nu\pi)}.
+\end{align}
+This is an indeterminate form in the case of integral $\nu = n$, but the value
+is defined by the l'hospital theorem for $\nu\to n$.  The result involves the
+derivative of $J_\nu$ with respect to $\nu$, and cannot be simply be written by
+the first kind $J_\nu(x)$.  In the case of a half integer $\nu = l + 1/2$, the
+situation becomes much simpler:
+\begin{align}
+  Y_{l+1/2}(x) &= (-1)^{l+1}J_{-(l+1/2)}(x).
+\end{align}
+
+\begin{align}
+  j_l(x) &= \sqrt{\frac{\pi}{2x}} J_{l+1/2}(x), \\
+  y_l(x)
+  &= \sqrt{\frac{\pi}{2x}} Y_{l+1/2}(x)
+  %= (-1)^{l+1} \sqrt{\frac{\pi}{2x}} J_{-(l+1/2)}(x)
+  = (-1)^{l+1} j_{-(l+1)}(x), \\
+  J_{-n}(x) &= (-1)^n J_n(x).
+\end{align}
+\begin{align}
+  \partial_x J_n(x) &= \frac{J_{n-1}(x) - J_{n+1}(x)}2, \\
+  \partial_x J_n(x) &= J_{n-1}(x) - \frac nx J_n(x), \\
+  \partial_x [x^n J_n(x)] &= x^n J_{n-1}(x).
+  \label{eq:bessel.deriv.3}
+\end{align}
+
+
+\subsubsection{Fourier transform of a ball, sphere, and radial function}
+
+The Bessel function appears in the Fourier transform of a ball or a sphere
+appear in different contexts in physics.  For example, interference with the
+double-slit experiment (i.e., the Fourier transform of a one-dimensional
+sphere) produces the pattern with $\cos^2(kR)$, and the finite-width slit
+(i.e., a one-dimensional ball) produces the pattern with $\sin^2(kR)/k^2$,
+which are all actually Bessel functions. The sharp momentum regulator
+$\theta(\Lambda - |\bm{k}|)$ for the cutoff $\Lambda$ in the momentum space
+corresponds to the convolution with the Bessel function in the configuration
+space.
+
+Let $\chi_R(r)$ be the characteristic function of the $n$-dimensional ball of
+radius $R$, i.e., $\chi_R(\bm{x}) = \theta(R - |\bm{x}|)$, its Fourier
+transform is given by
+\begin{align}
+  \hat\chi_R(k)
+  &= \mathcal{F}_k[\chi_R(\bm{x})] = \int d^n\bm{x}\, e^{-ikx} \chi_R(\bm{x}) \notag \\
+  &= \Bigl(\frac{2\pi R}{k}\Bigr)^{n/2} J_{n/2}(kR) \notag \\
+  &= 2R \Bigl(\frac{2\pi R}{k}\Bigr)^{\frac{n-1}2} j_{\frac{n-1}2}(kR).
+\end{align}
+
+The Fourier transform of the $n$-dimensional sphere of radius $R$ can be
+obtained by differentiating the ball case with respect to $R$ because
+$\delta_R(\bm{x}) = \delta(R-|\bm{x}|) = \partial_R \chi_R(\bm{x})$.  The
+derivative of the Fourier transform $\partial_R \hat\chi_R(k)$ is immediately
+given by Eq.~\eqref{eq:bessel.deriv.3}:
+\begin{align}
+  \hat\delta_R(k) &= \mathcal{F}_k[\delta(R - |\bm{x}|)] = \partial_R \hat\chi_R(k) \notag \\
+  &= k \Bigl(\frac{2\pi R}{k}\Bigr)^{n/2} J_{n/2-1}(kR) \notag \\
+  &= 2kR \Bigl(\frac{2\pi R}{k}\Bigr)^{\frac{n-1}2} j_{\frac{n-1}2-1}(kR).
+\end{align}
+
+The Fourier transform of a radial function $f(\bm{x}) = f(r = |\bm{x}|)$ in the
+$n$-dimensional space can be written by the integration with the Bessel
+function:
+\begin{align}
+  \mathcal{F}_k[f(\bm{x})]
+  &= \int dR\, \mathcal{F}[\delta_R(\bm{x})] f(R) \notag \\
+  &= k\int dr\, \Bigl(\frac{2\pi r}{k}\Bigr)^{n/2} J_{n/2-1}(kr) f(r).
+\end{align}
+
 \appendix
-\subsection{Test for \texttt{dcancel}}
+\section{Test for \texttt{dcancel}}
 
 \begin{gather}
   \frac{(n+1)\bscancel[red]{(n+2)}\slcancel[blue]{(n+3)}}{\bscancel[red]{(n+2)}\slcancel[blue]{(n+3)}(n+4)}, \\
