@@ -1,6 +1,13 @@
 \documentclass[amsmath,amssymb,prc,aps]{revtex4-2}
 \usepackage{bm}
 \usepackage[pdftex]{xcolor}
+
+\usepackage[pdftex, pdfencoding=auto, psdextra]{hyperref}
+\newcommand{\hmath}[1]{\texorpdfstring{$#1$}{#1}}
+\hypersetup{colorlinks=true, pdfborder={0 0 1}}
+%\pdfstringdefDisableCommands{\def\otimes{⊗}}
+
+
 \newcommand{\Red}[1]{{\color[rgb]{1.0,0.0,0.0}\relax#1}}
 \newcommand{\Blue}[1]{{\color[rgb]{0.0,0.0,1.0}\relax#1}}
 \newcommand{\Green}[1]{{\color[rgb]{0.0,0.7,0.0}\relax#1}}
@@ -167,7 +174,7 @@ This leads to the following recurrence within the $|J,J\rangle$ coefficients:
   &= - \frac{c_{j_2}^{m_2,m_2-1}}{c_{j_1}^{m_1+1,m_1}} \langle m_1+1, m_2-1 | J, J\rangle.
 \end{align}
 
-\subsubsection{$(L=2)\otimes(S=1)$}
+\subsubsection{\hmath{(L=2)\otimes(S=1)}}
 
 The following table shows the CG coefficients in the $(m_1,m_2)$ table for each
 $J$; a column and a row specify $m_1$ and $m_2$, respectively.  The square-root
@@ -181,7 +188,7 @@ phase under the Condon--Shortley convention.
   \begin{array}{c|ccccccccc}
   J=3           & Y_2^{-2} & \LadNH{4} & Y_2^{-1} & \LadNH{6} & Y_2^{0} & \LadNH{6} & Y_2^{1} & \LadNH{4} & Y_2^{2} \\ \hline
   \chi^1        & 1/15 && 1/5 && 6/15 && 2/3 && \Cyan{1} \\
-  \LadNV{2}   \\
+  \LadNV{2} \\
   \chi^0        & 1/3 && 8/15 && 3/5 && 8/15 && 1/3 \\
   \LadNV{2} \\
   \chi^{-1}     & 1 && 2/3 && 6/15 && 1/5 && 1/15
@@ -209,7 +216,36 @@ The $J=1$ eigenfunctions are written as
   \mathcal{Y}^{-1}(^3D_{1}) &= \frac{Y_2^0 \chi_1^{-1} - \sqrt{3}Y_2^{-1} \chi_1^0 + \sqrt{6}Y_2^{-2}\chi_1^1}{\sqrt{10}}.
 \end{align}
 
-\subsubsection{$J \otimes (S=1/2)$}
+\subsubsection{\hmath{(L=1)\otimes(S=1)}}
+
+\begin{align}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{array}{c|ccccc}
+  J=2           & Y_1^{-1} & \LadNH{2} & Y_1^{0} & \LadNH{2} & Y_1^{1} \\ \hline
+  \chi^1        & 1/6 && 1/2 && \Cyan{1} \\
+  \LadNV{2} \\
+  \chi^0        & 1/2 && 4/6 && 1/2 \\
+  \LadNV{2} \\
+  \chi^{-1}     & 1 && 1/2 && 1/6
+  \\\hline\hline
+  J=1           & Y_1^{-1} & \LadNH{2} & Y_1^{0} & \LadNH{2} & Y_1^{1} \\ \hline
+  \chi^1        & -1/2 && -1/2 && 0 \\
+  \LadNV{2} \\
+  \chi^0        & -1/2 && 0 && \Cyan{1/2} \\
+  \LadNV{2} \\
+  \chi^{-1}     & 0 && 1/2 && 1/2
+  \\\hline\hline
+  J=0           & Y_1^{-1} & \LadNH{2} & Y_1^{0} & \LadNH{2} & Y_1^{1} \\ \hline
+  \chi^1        & 1/3 && 0 && 0 \\
+  \LadNV{2} \\
+  \chi^0        & 0 && -1/3 && 0 \\
+  \LadNV{2} \\
+  \chi^{-1}     & 0 && 0 && \Cyan{1/3}
+  \end{array}
+\end{align}
+
+
+\subsubsection{\hmath{J \otimes (S=1/2)}}
 
 In the case of the second angular momentum being $j_2=1/2$, the table has only
 two rows for $J=j_1\pm1/2$, ($j_1\ge1/2$).  In this case, a simple expression
