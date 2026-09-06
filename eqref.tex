@@ -353,7 +353,6 @@ situation becomes much simpler:
   \label{eq:bessel.deriv.3}
 \end{align}
 
-
 \subsubsection{Fourier transform of a ball, sphere, and radial function}
 
 The Bessel function appears in the Fourier transform of a ball or a sphere
@@ -395,6 +394,144 @@ function:
   &= \int dR\, \mathcal{F}[\delta_R(\bm{x})] f(R) \notag \\
   &= k\int dr\, \Bigl(\frac{2\pi r}{k}\Bigr)^{n/2} J_{n/2-1}(kr) f(r).
 \end{align}
+
+\section{Combinatorics}
+First, we define the factorial, falling factorial, and rising factorial.  The
+factorial is defined as $n! = n(n-1)(n-2)\cdots3\cdot 2\cdot 1 = \Gamma(n+1)$.
+The falling and rising factorials are defined as $x^{\underline{r}} =
+x(x-1)\cdots (x-r+1) = \Gamma(x+1)/\Gamma(x-r+1)$ and $x^{\overline{r}} =
+x(x+1)\cdots (x+r-1) = \Gamma(x+r)/\Gamma(x)$.  In some contexts, they are also
+denoted by $(x)_r$ and $[x]_r$.  The rising factorial may also be denoted by
+$x^{(r)}$.
+
+The number of permutations, $_n\mathrm{P}_r$, represents the number of possible
+patterns of arranging $r$ elements out of $n$ elements in a sequence.  It is
+expressed as
+\begin{align}
+  {}_n\mathrm{P}_r &= \frac{n!}{(n-r)!} = n^{\underline{r}}.
+\end{align}
+
+The number of permutations with repetition, $_n\Pi_r$, represents the number of
+possible patterns of arranging $r$ elements out of $n$ elements allowing
+repetitions in a sequence. It is simply calculated as
+\begin{align}
+  {}_n\Pi_r &= n^r.
+\end{align}
+
+The number of combinations, $_n\mathrm{C}_r$, represents the number of possible
+patterns of choosing $r$ elements out of $n$ elements.  It is expressed as
+\begin{align}
+  {}_n\mathrm{C}_r &= \frac{n!}{r!(n-r)!} = \frac{n^{\underline{r}}}{r!}.
+\end{align}
+The binomial theorem,
+\begin{align}
+  {}_n\mathrm{C}_r &= \binom{n}{r},
+\end{align}
+states that the number
+of combinations is identical to the binomial coefficients $\binom{n}{r}$ as
+defined in the binomial expansion:
+\begin{align}
+  (x+1)^n &= \sum_{r=0}^n \binom{n}{r} x^r.
+\end{align}
+The number of combinations has the following recurrence formula:
+\begin{align}
+  {}_n\mathrm{C}_r &= {}_{n-1}\mathrm{C}_r + {}_{n-1}\mathrm{C}_{r-1}.
+\end{align}
+
+The number of combinations with repetition, $_n\mathrm{H}_r$, represents the
+number of possible patterns of choosing $r$ elements out of $n$ elements
+allowing repetitions.  It is expressed by the number of combinations as
+\begin{align}
+  {}_n\mathrm{H}_r &= {}_{r+n-1}\mathrm{C}_r = {}_{r+n-1}\mathrm{C}_{n-1} = \frac{(r+n-1)!}{r!(n-1)!}.
+\end{align}
+
+The symbols for combinatorics largely depend on the countries and regions.  The
+form $_n\mathrm{C}_r$ used in Japanese education dates back to England's
+education in the 19th century, and found e.g. in G. Chrystal's textbook
+\textit{``Algebra---an elementary text-book for the higher classes of secondary
+schools and for colleges'', Adam and Charles Black, London (1904)}.  In the
+United States and England, the form $\mathrm{C}^n_r$ or $\mathrm{C}(n, r)$
+seems to be used.  In France, Russia, China, and ISO 80000-2, the form
+$\mathrm{C}_n^r$ seems to be used, where the positions of the superscript and
+subscript are reversed.  In Germany, the form $\mathrm{C}(n, r)$ is used.  In
+Italy, the form $\mathrm{C}_{n,k}$ seems to be used.  At the same time, the
+functional notation $\mathrm{C}(n, r)$ is found worldwide, though its
+popularity depends on the country. In Table~\ref{tab:combinatorics.symbol}, the
+letters used for the symbols in different countries are summarized.
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{c|cccccccc}
+  \hline
+                               & Japan        & USA          & France       & Germany             & Italy                       & Russia                  & China        & ISO \\ \hline\hline
+  Permutations                 & $\mathrm{P}$ & $\mathrm{P}$ & $\mathrm{V}$ & $\mathrm{V}$        & $\mathrm{D}$                & $\mathrm{A}$            & $\mathrm{A}$ & $\mathrm{V}$   \\
+  Permutations with repetition & $\Pi$        &              &              & $\mathrm{V_w, V^*}$ & $\mathrm{D}', \mathrm{D^R}$ & $\overline{\mathrm{A}}$ &              & $\mathrm{^RV}$ \\
+  Combinations                 & $\mathrm{C}$ & $\mathrm{C}$ & $\mathrm{C}$ & $\mathrm{C, K}$     & $\mathrm{C}$                & $\mathrm{C}$            & $\mathrm{C}$ & $\mathrm{C}$   \\
+  Combinations with repetition & $\mathrm{H}$ &              &              & $\mathrm{C_w, C^*}$ & $\mathrm{C}', \mathrm{C^R}$ & $\overline{\mathrm{C}}$ &              & $\mathrm{^RC}$ \\
+  \hline
+  \end{tabular}
+  \caption{Symbols for combinatorics by country. In the United States,
+  $\mathrm{P_R}(n,r)$ and $\mathrm{C_R}(n,r)$ may sometimes be used for the
+  permutations with repetition and the combinations with repetition,
+  respectively.  In Japan, $\Pi$ is chosen as the Greek letter corresponding to
+  $P$, and letter $\mathrm{H}$ stands for the number of terms in a $n$-variate
+  homogeneous polynomial of degree $r$.  In France, letter $\mathrm{V}$ stands
+  for the variations, and letters $\bar{\mathrm{V}}$ and $\bar{\mathrm{C}}$
+  seem to have been used for the permutations and combinations with repetition
+  historically.  Also, $\Gamma$ (which is the Greek letter corresponding to
+  $C$) seems to have been used for the combinations with repetition.  In
+  Germany, letters $\mathrm{w}$ and $\mathrm{K}$ stand for Wiederholung and
+  Kombination, respectively.  The symbol $\mathrm{V_W}$ may also be used for
+  the permutations with repetition.  The symbols $\mathrm{C_W, K_w, K_W, K^*}$
+  may also be used for the combinations with repetition.  In Italy, letter
+  $\mathrm{D}$ stands for disposizioni, and some books use $\mathrm{RD}$ and
+  $\mathrm{RC}$ for the permutations and combinations with repetition. In
+  Russia, letter $\mathrm{A}$ stands for arrangement.  In China, $\mathrm{P}$
+  seems to have been used for the permutations in the past, but it was later
+  replaced by $\mathrm{A}$.}
+  \label{tab:combinatorics.symbol}
+\end{table}
+
+\newcommand{\stirbrack}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}}
+\newcommand{\stirbrace}[2]{\genfrac{\{}{\}}{0pt}{}{#1}{#2}}
+
+The unsigned Stirling number of the first kind $c(n, r)$ is the number of
+patterns of making $r$ disjoint cycles, each having at least one element,
+consuming $n$ elements.  It is calculated by the recurrence formula:
+\begin{align}
+  c(n,r) &= (n-1) c(n-1, r) + c(n-1, r-1),
+\end{align}
+with $c(0,0) = 1$, and $c(0, r) = 0$ otherwise.  The unsigned Stirling numbers
+of the first kind match $\stirbrack{n}{r}$, the expansion coefficients of the
+rising factorial defined as
+\begin{align}
+  x^{\overline{n}} &= \sum_{r=0}^n \stirbrack{n}{r} x^r.
+\end{align}
+The (signed) Stirling numbers of the first kind $s(n, r) = (-1)^{n-r} c(n,r)$
+are the expansion coefficients of the falling factorial,
+\begin{align}
+  x^{\underline{n}} &= \sum_{r=0}^n (-1)^{n-r} \stirbrack{n}{r} x^r.
+\end{align}
+
+The Stirling number of the second kind $S(n,r)$ is the number of patterns of
+making $r$ groups, each having at least one element, consuming $n$ elements.
+It is calculated by the recurrence formula:
+\begin{align}
+  S(n,r) &= r S(n-1, r) + S(n-1, r-1),
+\end{align}
+with $S(0,0) = 1$, and $S(0, r) = 0$ otherwise.  The Stirling numbers of the
+second kind match $\stirbrace{n}{r}$, the expansion coefficients of the normal
+power in terms of the falling factorials (or the rising factorials with extra
+signs):
+\begin{align}
+  x^n
+  &= \sum_{r=0}^n \stirbrace{n}{r} x^{\underline{r}} \notag \\
+  &= \sum_{r=0}^n (-1)^{n-r} \stirbrace{n}{r} x^{\overline{r}}.
+\end{align}
+
+The number of strings of length $n$ with $r$ distinct symbols, with each symbol
+appearing at least once, can be written with the Stirling number of the second
+kind as $r! S(n, r)$.
 
 \appendix
 \section{Test for \texttt{dcancel}}
