@@ -50,24 +50,29 @@ li.til::before { background-color: #975; color: #fff; content: 'TIL'; }
 <h2>ゼミの記録</h2>
 
 <ul>
-<li>2026-04-16 §1.1 (9 pages)</li>
-<li>2026-04-21 後に南部コロキウムなど入っていたので短時間のゼミとなった。
-  §1.1 の最後の Cs の議論の部分について議論を行った。</li>
-<li>2026-04-28 §1.2 (6 pages)</li>
-<li>2026-05-07 §1.3～1.7 まで。 (38 pages)
-  板書説明形式ではなく分からなかった所の確認 &amp; 問答形式で行った。
+<li>2006年度: B4ゼミ。§1-§3 を終わらせた。
+  <ul>
+  <li>2026-04-16 §1.1 (9 pages)</li>
+  <li>2026-04-21 後に南部コロキウムなど入っていたので短時間のゼミとなった。
+    §1.1 の最後の Cs の議論の部分について議論を行った。</li>
+  <li>2026-04-28 §1.2 (6 pages)</li>
+  <li>2026-05-07 §1.3～1.7 まで。 (38 pages)
+    板書説明形式ではなく分からなかった所の確認 &amp; 問答形式で行った。
+  </li>
+  <li>2026-05-12 §2.1.1～§2.1.2 (5 pages)</li>
+  <li>2026-05-26 練習問題1.5 及び §2.1.3～§2.1.5 (4 pages)</li>
+  <li>2026-05-29 §2.1.6..§2.1.7</li>
+  <li>2026-06-09 §2.2..§2.5</li>
+  <li>2026-06-16 §2.6: Eq. (2.303) まで</li>
+  <li>2026-06-23 §2.7</li>
+  <li>2026-06-30 §3.1 から §3.3 まで</li>
+  <li>2026-07-09 §3.4 から §3.6.1 まで</li>
+  <li>2026-07-14 §3.6.2 から §3.7 まで</li>
+  <li>2026-07-21 §3.8</li>
+  <li>2026-08-04 §3.9 §3.10</li>
+  <li>2026-10-14 §3.11: §3 で最後まで残っていた章を終わらせた。</li>
+  </ul>
 </li>
-<li>2026-05-12 §2.1.1～§2.1.2 (5 pages)</li>
-<li>2026-05-26 練習問題1.5 及び §2.1.3～§2.1.5 (4 pages)</li>
-<li>2026-05-29 §2.1.6..§2.1.7</li>
-<li>2026-06-09 §2.2..§2.5</li>
-<li>2026-06-16 §2.6: Eq. (2.303) まで</li>
-<li>2026-06-23 §2.7</li>
-<li>2026-06-30 §3.1 から §3.3 まで</li>
-<li>2026-07-09 §3.4 から §3.6.1 まで</li>
-<li>2026-07-14 §3.6.2 から §3.7 まで</li>
-<li>2026-07-21 §3.8</li>
-<li>2026-08-04 §3.9 §3.10</li>
 </ul>
 
 <h2>1.1 Stern-Gerlach experiemnt</h2>
@@ -297,7 +302,7 @@ li.til::before { background-color: #975; color: #fff; content: 'TIL'; }
     この説明はぐだぐだであるし言葉が余り正確でない。もっと分かりやすく
     書くならば、
 
-    "$|E-E_0| > \hbar/t$ の領域でキャンセルが起きる。$|E-E_0| <
+    "$|E-E_0| > \hbar/t$ の領域でキャンセルが起きる。$|E-E_0| &lt;
     \hbar/t$ でしか寄与が残らないがこの領域の幅 $\hbar/t$ が $\Delta
     E$ よりもずっと小さい時は $C(t)$ に対する寄与は実質無視できる。"
 
@@ -441,10 +446,10 @@ kinematical momentum が gauge independent. Guage 変換は波動関数の位相
   PRL 34, 1472 の論文の図を見ると、実際には -30 度 から 30 度まで 60 度動かして、
   \sin\delta が -1/2 から 1/2 まで 1 だけ変化する様な設定になっている。
 </li>
-<li>innocuous: (生物・薬学的に) 無害な</li>
+<li class="til">innocuous: (生物・薬学的に) 無害な</li>
 </ul>
 
-<h2>3.4</h2>
+<h2>3.4 Density operators</h2>
 
 <ul>
 <li class="com">§3.4.1 余り確率的な側面を強調していなくて、謎の
@@ -572,7 +577,7 @@ $|a_i\rangle\langle a_i|$ であることも書かれていない。
 </li>
 </ul>
 
-<h2>3.9</h2>
+<h2>3.9 Schwinger's Oscillator Model</h2>
 
 <ul>
 <li class="fix">3.403 の上: we prove (3.402<ins>b</ins>)</li>
@@ -584,6 +589,166 @@ $|a_i\rangle\langle a_i|$ であることも書かれていない。
   $P_z(z) = \frac{(-1)^l}{2^l l!}(d/dz)^l(1-z^2)^l = \frac1{2^ll!}(d/dz)^2[(z+1)^l(z-1)^l]$ となる。
   これを Leibnitz の公式で分解すると上記の★の式が得られる。
 </li>
+</ul>
+
+<h2>3.11 Tensor operators</h2>
+
+<ul>
+<li>Sec. 3.11.1: Vector operators については、単に $\bm{V}, \bm{J},
+\bm{x}, \bm{p}$ が回転によって受ける変換性について述べている。
+
+<p>幾何学的な考察から Eq. (3.449) であるということを書き下して、それを用い
+て Eq. (3.451) を出している。似たようなことを教科書の前の方で既にしていない
+か?
+</p>
+</li>
+
+<li>Sec. 3.11.2: $T_{ij} = U_i V_j$ の形のテンソルについて既約分解とテ
+ンソル演算子を議論している。
+
+<p>Eq. (3.456) で複数の成分に分解することができると言っているが、これ
+はどのように説明したら良い? 少なくとも traceless 対称成分は更に複数の
+等質空間に分解することができる。AI に聞いたら、等質空間は固有値一定の
+曲面になっていてベクトル空間になっていないとのこと。確かにそれはそうだ。
+</p>
+
+<p>spherical tensors の例は以下のようにして得られる: $T_q^{(k)} :=
+Y_k^q(\bm{V})$。但し、$Y_k^q(\bm{V})$ とは $Y_k^q(\hat{\bm{n}})$ に現
+れる $\hat{\bm{n}} = \bm{r}/r$ を $\bm{V}$ で置き換えたものである。但
+し、全ての spherical tensor operator がこの形に書けるという意味ではな
+く単なる例である。
+</p>
+
+<p>order $k$ の spherical tensor operator とは厳密には、以下のように球
+面調和関数と同様に変換を受ける演算子の列 $\{T_q^{(k)}\}_{q=-k}^k$ と定
+めることができる。
+</p>
+<p class="aghfly-begin-align">
+  \mathcal{D}^\dag(R) T_q^{(k)} \mathcal{D}(R)
+  = \sum_{q'=-k}^k \mathcal{D}_{qq'}^{(k)*}(R) T_{q'}^{(k)}
+</p>
+<p>もしくは、微小変換に対して</p>
+<p class="aghfly-begin-align">
+  [J_z, T_q^{(k)}] &amp;= \hbar q T_q^{(k)}, \\\relax
+  [J_\pm, T_q^{(k)}] &amp;= \hbar\sqrt{(k\mp q)(k\pm q+1)} T_{q\pm1}^{(k)}
+</p>
+<p>という変換性を持つものとも言える。</p>
+</li>
+<li>Sec. 3.11.3 では先ず rank 2 tensor の spherical tensor による表示
+を示して、その後に Theorem 5 を示している。Theorem 5 は球面調和関数の
+角運動量合成を書き直しただけに見える。</li>
+<li>Sec. 3.11.4 Matrix Elements of Tensor Operators は角運動量固有状態
+による行列要素の性質について述べている。
+
+<p>原子や原子核と EM field の相互作用の時に、tensor operators の角運動量
+固有状態による matrix elements を計算することがよくある (Chap 5)。
+</p>
+
+<p>先ず、tensor operators の m による選択則を述べている。これの証明は2
+つ示されているがどちらもいかにもなものであり特筆すべきことはない。次に
+Eq. (3.474) は具体的な matrix elements の m,m',q 依存性を与える
+(Wigner-Eckart theorem):
+</p>
+
+<p class="aghfly-begin-align">
+  \langle\alpha'j'm'|T_q^{(k)} |\alpha jm\rangle
+  &amp;= \langle jk mq|jk;j'm'\rangle\frac{\langle \alpha'j' \| T^{(k)} \| \alpha j\rangle}{\sqrt{2j'+1}}
+</p>
+
+<p>ただし、 $\langle \alpha'j' \| T^{(k)} \| \alpha j\rangle$ は
+$(m,m',q)$ に依らない共通因子であり、どれか一つの $(m,m',q)$ において
+matrix element を計算することで得られる。証明は球面調和関数の時と同じ
+recurrence formula によって両方とも例えば highest weight が生成される
+から、最初の係数の比以外は全部一致するという感じだろうか。
+</p>
+
+<p>もっと何か言っているが $a_{ij}, x_j$ がそれぞれ何なのかは非自明だ。
+勿論 $a_{ij}$ が $\hbar\sqrt{(j+m)(j-m+1)}$ などの係数で、$x_j$ が現在
+考えている行列要素 $\langle\alpha'jm'|T_q^{(k)|\alpha jm\rangle}$ で、
+恐らく $j$ はここでは $(m,m',q)$ についての和に使う変数 [例えば
+$(m_1,m_2,q_1)$ とおく] に対応するのだろう。特に $m'=m+q$ の寄与しかな
+いと思えば、$j=(m_1,q_1)$ と思って良い。一方で $i$ は $(m,q)$ に対応す
+るだろう。しかし、十分な数の方程式が本当に立っているのだろうか? 自由度
+の勘定もちゃんとして、斉次方程式として解が一次元線形空間を為すというこ
+とを示す必要がある。
+</p>
+
+<p>共通因子の normalization は文献によって色々である。今回の $\langle
+\alpha'j' \| T^{(k)} \| \alpha j\rangle$ は Gottfried and Yan 2003 と
+一貫している。 Edmonds 1974 は異なる convention と更に他の convention
+との比較を行っている。
+</p>
+
+<p>次に projection theorem を述べている。</p>
+<p class="aghfly-begin-align">
+  \langle \alpha'jm'|V_q|\alpha jm\rangle
+  &amp;= \frac{\langle \alpha'jm|\bm{J}\cdot\bm{V}|\alpha jm\rangle}{\hbar^2 j(j+1)} \langle jm' | J_q |jm\rangle.
+</p>
+<p>
+これは Wigner-Eckart の定理を使えば示せる。 まず $\langle
+\alpha'jm|\bm{J}\cdot\bm{V}|\alpha jm\rangle$が $\langle
+\alpha'jm'|V_q|\alpha jm\rangle$ の線形結合で書かれて、結局共通因子
+$\langle\alpha'j\|\bm{V}\|\alpha j\rangle$ に $\bm{V}$, $\alpha'$,
+$\alpha$ に依存しない特定の係数 $c_{jm}$ を掛けたものになると分かる。
+故に、$\bm{V}=\bm{J}$ と置いた場合との比を取って、
+</p>
+<p class="aghfly-begin-align">
+  \frac{\langle\alpha'jm|\bm{J}\cdot\bm{V}|\alpha jm\rangle}{\langle\alpha jm|\bm{J}^2|\alpha jm\rangle}
+  &amp;= \frac{\langle\alpha'j\|\bm{V}\|\alpha j\rangle}{\langle\alpha j\|\bm{J}\|\alpha j\rangle}
+  = \frac{\langle\alpha'jm'|V_q|jm\rangle}{\langle\alpha jm'|J_q|jm\rangle}.
+</p>
+</li>
+
+<li class="til">dyadic: 二項積。 $u\otimes v$ の事を言うらしい</li>
+<li class="til">formidable: 恐ろしい</li>
+<li class="fix">Eq. (3.460) の下の $Y_l^{(m)}$ の括弧は typo の気がする。
+$T_q^{(k)}$ に合わせるにしてもそもそも添字の上下が交換されている。</li>
+<li class="com">Eqs. (3.459) and (3.460) は x,y,z よりも n_x = x/r,
+etc. で書いた方が分かりやすい気がする。</li>
+<li class="com">Eq. (3.456) ここでやっていることは正に Eq. (3.196) で
+説明している「特定の j とは限らない回転を表す行列を特定の j の既約表現
+の回転行列のブロック対角の形にできる」という話である。つまり、
+$R\otimes R$ → 1x1 + 3x3 + 5x5 の形にしている。
+</li>
+<li class="com">球面調和関数の回転行列は Eqs. (3.194), (3.258),
+(3.423), (3.426)を参照。</li>
+<li class="com">定理5の直前の説明で $Y_2^0$ は $\bm{U} = \bm{V} =
+\bm{r} / r = \hat{n}_x$ とすることで得られると書く方がいいと思う。</li>
+<li class="ask">定理5 の証明を交換関係による定義 Eq. (3.468) を使って
+できるか?  Eq. (3.468a) は $q_1+q_2 = q$ の時だけ CG 係数が非零になる
+ことを使えば簡単。Eq. (3.468b) は CG係数の漸化式を使わないといけないの
+で面倒である。
+</li>
+<li class="fix">Eq. (3.473) の下に "which is orthogonal to
+$|\alpha'j'm'\rangle$" と書かれているが、
+
+<p>$\phi$ 依存性を見て直交しているかどうかということを言いたいのであれ
+ば、 「$\mathcal{D} |\alpha'j'm'\rangle =
+e^{-im'\phi}|\alpha'j'm'\rangle$ と直交している」と言わなければならな
+い。しかし、実際のところ $\phi$ はこちらが手で指定した回転量であって、
+波動関数の角度依存性ではないので内積を取る時の積分変数ではない。従って、
+$\phi$ 依存性を見て直交しているかどうかというのは議論できない。
+</p>
+
+<p>正しくは、Eq. (3.473) に左から $\langle\alpha'j'm'|$ を掛けて、任意
+の $\phi$ について、
+</p>
+<p class="aghfly-begin-align">
+  [e^{-im'\phi} - e^{-i(m+q)\phi}]\langle\alpha'j'm'|T_q^{(k)}|\alpha jm\rangle = 0
+</p>
+<p>より、$m'\ne m+q$ の時、必ず $e^{-im'\phi} - e^{-i(m+q)\phi}\ne0$
+となる $\phi$ が存在して、$\langle\alpha'j'm'|T_q^{(k)}|\alpha
+jm\rangle=0$ と書くべきである。教科書の記述がこれを imply しているとは
+思えない。不理解を疑う。</p>
+</li>
+<li class="fix">Eq. (3.479) は $\dim\ker A = 1$ の時にしか言えないので
+はないか?  recurrence で比の形で全て計算できるということを思ったら、わ
+ざわざ斉次方程式であるということを述べる必要もない。実際には例えば
+highest weight からの recurrence で求まるということ、最初の非ゼロの項
+を何に置くかで全て決まって、その項に全体が比例するということが効いてい
+る。
+</li>
+
 </ul>
 
 <address class="mwg-address">

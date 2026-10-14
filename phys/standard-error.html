@@ -32,7 +32,7 @@
 </nav>
 
 <h1>標準誤差の評価</h1>
-<p>エラーバーをどう計算するかについて。
+<p>エラーバーの長さをどう計算するかについて。
   Web 上に良さそうなページがない
   (初歩的すぎるか応用的すぎるかの両極端しかない) ので
   ここにまとめておく事にする。
@@ -76,38 +76,48 @@
 <h2>2. 平均と分散の推定</h2>
 <h3>2.1 確率空間と確率変数</h3>
 <p>具体的な推定量を考えるために設定を行う。
-  母集団は<dfn>確率空間</dfn>$(\Omega, F, P)$として与える。
+  母集団は<dfn>確率空間</dfn> (probability space) $(\Omega, \mathcal{F}, P)$として与える。
   つまり標本点の集合$\Omega=\{\omega_\alpha\}$と、
-  <dfn>事象</dfn> (event; 確率を考える対象である部分集合 $E\subset\Omega$) の集まり$F=\{E_\beta\}$と、
-  その上の確率測度$P: F \to \mathbb{R}$を以て、母集団が定義される。
-  確率測度は、母集団の中の点が実現する確率 (的な尺度) を与えると思って良い
-  (或いは単に母集団の中の点の重みと思っても良い)。
+  <dfn>事象</dfn> (event; 確率を考える対象である部分集合 $E\subset\Omega$) の族$\mathcal{F}=\{E_\beta\}$と、
+  その上の確率測度$P: \mathcal{F} \to \mathbb{R}$を以て、母集団が定義される。
+  確率測度は、母集団の中の点が実現する確率的な尺度 (もしくは重みのようなもの) を、事象の確率 $P(E)$ を通して与える。
   次に、母集団の各点$\omega\in\Omega$に対応して値を持つ
-  <dfn>確率変数</dfn> (random variable) $X = X(\omega) \in \mathbb{R}$を考える。
-  四則演算などの実数に対する操作は確率変数に対しても自然に定義され、
-  確率変数から計算される別の量も確率変数となる。
-  例えば $X$, $Y$ を確率変数として、
-  $2X$ や $\sin X$ や $(X+Y)^2$ などもそれぞれ確率変数である。
-  確率変数$X$に対する期待値を (測度の言葉で)
+  <dfn>確率変数</dfn> (random variable) $X = X(\omega) \in \mathbb{R}$ を考え、
+  その<dfn>期待値</dfn> (expected value) を測度の言葉で
 </p>
 <p class="aghfly-begin-align">
-  \langle X \rangle = \int_\Omega X(\omega) dP(\omega)
+  \mathbb{E}[X] = \langle X \rangle = \int_\Omega X(\omega) dP(\omega)
+  \label{def:E}
 </p>
-<p>と書くことにする。</p>
+<p>と書く。
+  実数に対する操作 (四則演算など) は実数関数である確率変数に対しても自然に定義され、
+  確率変数から「普通の」操作で計算される別の量も確率変数となる。
+  例えば $X$, $Y$ を確率変数として、
+  $2X$ や $\sin X$ や $(X+Y)^2$ などもそれぞれ確率変数である。
+</p>
+<p class="mwg-footnote">
+  [Note: Eq. $\eqref{def:E}$ の積分値が定義できるために、確率変数は
+  « <dfn>$\mathcal{F}$-可測</dfn> ($\mathcal{F}$-measurable) な実数関数 » と定義される。
+  $X(\omega)$ が $\mathcal{F}$-可測であるとは、« $\forall a \in \mathbb R, \{\omega \,|\, X(\omega) &lt; a\} \in \mathcal{F}$ »。
+  つまり、« 任意の実数 $a$ に対し「$X &lt; a$」という事象の確率が定義される » ということ。
+  $\mathcal{F}$ が<dfn>シグマ体</dfn> ($\sigma$-field; <dfn>シグマ加法族</dfn>, $\sigma$-algebra) であることが、
+  $2X$ や $\sin X$ がまた確率変数になることを担保する]
+</p>
 
 <h3>2.2 標本と一致推定量</h3>
 <p>母集団の性質を推定するために
   有限の標本 $(\omega_1,\dots,\omega_N) \in \Omega^N$ を抽出する。ただし、
+  この文書では以下のような場合に限って考える。
 </p>
 <p class="mwg-framed">(仮定) 各標本点$\omega_i$の抽出は無作為 (確率$P$に従って) かつ独立に行われるとする。
-  特に、有限母集団の場合には重複して抽出されることも許すことにする。
-  つまり、$\omega_1, \dots, \omega_N$ のそれぞれは<dfn>独立同分布</dfn> (i.i.d, independent and identical distribution) に従うと考える。
+  特に、有限母集団の場合には重複して抽出されることも許すことにする (<dfn>非復元抽出</dfn>, sampling with replacement)。
+  つまり、$\omega_1, \dots, \omega_N$ のそれぞれは<dfn>独立同分布</dfn> (i.i.d., independent and identical distribution) に従うと考える。
 </p>
 <p class="mwg-footnote">[Note: 実は他の標本抽出の仕方も考えられる。
-  例えば、重複を許さずに $N$ 点を持ってくるという事もできるし、
+  例えば、重複を許さずに $N$ 点を持ってくる (<dfn>復元抽出</dfn>, sampling without replacement) という事もできるし、
   特定の重みをかけて各点が抽出されるという状況を考えることもできる。
   マルコフ連鎖モンテカルロ法の場合には、近接する標本点の間に相関が入る。
-  この抽出の仕方によって後の議論は大きく変わるが、
+  抽出の仕方によって後の議論は大きく変わるが、
   今回は物理で現れる上記のような場合に絞って考える]
 </p>
 
@@ -163,15 +173,15 @@
 </p>
 <p class="aghfly-begin-align">
   \langle s^2 \rangle
-    &= \frac1N \sum_{i=1}^N \langle (X_i - m)^2 \rangle \\
-    &= \langle (X_1 - m)^2 \rangle \label{eq:sample-variance-reduce} \\
-    &= \langle [(X_1 - \mu) - (m - \mu)]^2 \rangle \\
+    &= \frac1N \sum_{i=1}^N \langle (X_i - m)^2 \rangle \notag \\
+    &= \langle (X_1 - m)^2 \rangle \label{eq:sample-variance-reduce} \notag \\
+    &= \langle [(X_1 - \mu) - (m - \mu)]^2 \rangle \notag \\
     &= \langle (X_1 - \mu)\rangle^2  -2 \langle(X_1-\mu)(m-\mu)\rangle + \langle (m - \mu)^2 \rangle
-      \label{eq:sample-variance-decompose} \\
-    &= \langle(X_1-\mu)^2\rangle -\frac2N \sum_{i=1}^N\langle (X_1-\mu)(X_i-\mu)\rangle \nonumber\\ & \quad
-      + \frac1{N^2} \sum_{i=1}^N \sum_{j=1}^N \langle(X_i-\mu)(X_j-\mu)\rangle \\
+      \label{eq:sample-variance-decompose} \notag \\
+    &= \langle(X_1-\mu)^2\rangle -\frac2N \sum_{i=1}^N\langle (X_1-\mu)(X_i-\mu)\rangle \notag \\ & \quad
+      + \frac1{N^2} \sum_{i=1}^N \sum_{j=1}^N \langle(X_i-\mu)(X_j-\mu)\rangle \notag \\
     &= \sigma^2 - \frac2N \sum_{i=1}^N \delta_{1i} \sigma^2 + \frac1{N^2}\sum_{i=1}^N\sum_{j=1}^N \delta_{ij} \sigma^2
-      \label{eq:sample-variance-sigma}\\
+      \label{eq:sample-variance-sigma} \notag \\
     &= \Bigl(1-\frac1N\Bigr) \sigma^2.
 </p>
 <p>式 $\eqref{eq:sample-variance-reduce}$ で $\langle(X_i-m)^2\rangle$ は $i$ によらずに同じ値になることを用いた。
@@ -273,12 +283,12 @@
 <p class="aghfly-begin-align">
   (\Delta f)^2
     &\simeq \left\langle\left[\frac{\partial f_*}{\partial X} \cdot (\bar X-\langle X\rangle)
-      + \frac{\partial f_*}{\partial X} \cdot (\bar Y-\langle Y\rangle)\right]^2\right\rangle \\
+      + \frac{\partial f_*}{\partial X} \cdot (\bar Y-\langle Y\rangle)\right]^2\right\rangle \notag \\
     &= \biggl(\frac{\partial f_*}{\partial X}\biggr)^2 \langle(\bar X-\langle X\rangle)^2\rangle
       + \biggl(\frac{\partial f_*}{\partial Y}\biggr)^2 \langle(\bar Y-\langle Y\rangle)^2\rangle
-    \nonumber \\ & \quad
+    \notag \\ & \quad
       + 2\frac{\partial f_*}{\partial X}\frac{\partial f_*}{\partial Y}
-        \langle(\bar X-\langle X\rangle)(\bar Y-\langle Y\rangle)\rangle \\
+        \langle(\bar X-\langle X\rangle)(\bar Y-\langle Y\rangle)\rangle \notag \\
     &= \biggl(\frac{\partial f_*}{\partial X}\biggr)^2 (\Delta X)^2
       + \biggl(\frac{\partial f_*}{\partial Y}\biggr)^2 (\Delta Y)^2
       + 2\frac{\partial f_*}{\partial X}\frac{\partial f_*}{\partial Y} \Delta_{XY}.
@@ -351,7 +361,7 @@
   (\Delta f)^2
     &\lesssim \biggl(\frac{\partial f_*}{\partial X}\biggr)^2 (\Delta X)^2
       + \biggl(\frac{\partial f_*}{\partial Y}\biggr)^2 (\Delta Y)^2
-      + 2\left|\frac{\partial f_*}{\partial X}\right|\cdot\left|\frac{\partial f_*}{\partial Y}\right| \Delta X\Delta Y \\
+      + 2\left|\frac{\partial f_*}{\partial X}\right|\cdot\left|\frac{\partial f_*}{\partial Y}\right| \Delta X\Delta Y \notag \\
     &= \left(\left|\frac{\partial f_*}{\partial X}\right|\Delta X
         + \left|\frac{\partial f_*}{\partial Y}\right| \Delta Y\right)^2.
 </p>
@@ -487,7 +497,7 @@
 <p>しかし、実際には「変数間の相関がない」という事は経験上殆どない。</p>
 
 <p>実は確率変数間の相関を正しく取り込んだ上で
-  より簡単に標準誤差を評価できる方法として<dfn>ジャックナイフ法</dfn> (Jack knife) というものがある。
+  より簡単に標準誤差を評価できる方法として<dfn>ジャックナイフ法</dfn> (Jackknife) というものがある。
   ジャックナイフ法では時系列の標本点の間に相関がある場合にも、
   それに対する評価を与えることができる。
 </p>
@@ -529,25 +539,35 @@
 <p>上記の $\hat f$ を推定量とし、分散 $\hat V$ から推定量の標準誤差を見積もりたい。
   推定量の標準誤差及び分散の期待値について、
   $f$ を1次で展開できる程度に各変数のばらつきが小さいとする。
+  結論から書くと、以下の式で見積もれば良い。
+</p>
+<p class="aghfly-begin-align">
+  (\Delta \hat f)^2 &\simeq (B-1) \hat V.
+  \label{eq:jk.jkerror}
+</p>
+
+<div class="mwg-framed">
+<p>(∵) 両者が1次までで一致することを示す。
   $\delta X^a_{[-s]} := X^a_{[-s]} - \langle X^a\rangle$,
   $\delta X^a_{[s]} := X^a_{[s]} - \langle X^a\rangle$ として、
   標準誤差は $f$ を $\langle X^a\rangle$ の1次までで展開して、
 </p>
 <p class="aghfly-begin-align">
   (\Delta \hat f)^2
-    &= \langle[\hat f - f(\langle X^1\rangle, \dots, \langle X^n\rangle)]^2\rangle \\
+    &= \langle[\hat f - f(\langle X^1\rangle, \dots, \langle X^n\rangle)]^2\rangle \notag \\
     &= \left\langle\left[ \frac1B \sum_{s=1}^B f(X^1_{[-s]},\dots,X^n_{[-s]})
-      - f(\langle X^1\rangle, \dots, \langle X^n\rangle) \right]^2\right\rangle \\
+      - f(\langle X^1\rangle, \dots, \langle X^n\rangle) \right]^2\right\rangle \notag \\
     &\simeq \left\langle\left[
       \frac1B\sum_{s=1}^B\sum_{a=1}^n
       \frac{\partial f_*}{\partial X^a} \delta X^a_{[-s]}
-      \right]^2\right\rangle \\
+      \right]^2\right\rangle \notag \\
     &= \left\langle\left[
       \frac1{B(B-1)}\sum_{a=1}^n \frac{\partial f_*}{\partial X^a}
       \sum_{s=1}^B \left( \sum_{t=1}^B \delta X^a_{[t]} - X^a_{[s]} \right)
-      \right]^2\right\rangle \\
+      \right]^2\right\rangle \notag \\
     &= \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b}
       \left( \frac1B V^{ab} + \frac1{B^2} \sum_{s\neq t} \langle \delta X_{[s]}^a \delta X_{[t]}^b\rangle \right).
+    \label{eq:jk.f.linear}
 </p>
 <p>但し、各ビン内での相関は同じで、</p>
 <p class="aghfly-begin-align">
@@ -561,15 +581,15 @@
 </p>
 <p class="aghfly-begin-align">
   \langle \hat V \rangle
-  &= \left\langle\frac1B \sum_{s=1}^B [f(X^1_{[-s]},\dots,X^n_{[-s]}) -\hat f]^2 \right\rangle \\
-  &= \frac1B \sum_{s=1}^B \left\langle\left[f(X^1_{[-s]},\dots,X^n_{[-s]}) - \frac1B \sum_{t=1}^B f(X_{[-t]}^1,\dots,X_{[-t]}^n)\right]^2 \right\rangle \\
+  &= \left\langle\frac1B \sum_{s=1}^B [f(X^1_{[-s]},\dots,X^n_{[-s]}) -\hat f]^2 \right\rangle \notag \\
+  &= \frac1B \sum_{s=1}^B \left\langle\left[f(X^1_{[-s]},\dots,X^n_{[-s]}) - \frac1B \sum_{t=1}^B f(X_{[-t]}^1,\dots,X_{[-t]}^n)\right]^2 \right\rangle \notag \\
   &\simeq \frac1B \sum_{s=1}^B \left\langle\left[
     \sum_{a=1}^n \frac{\partial f_*}{\partial X^a}
       \left( \delta X^a_{[-s]} - \frac1B \sum_{t=1}^B \delta X_{[-t]}^a \right)
-        \right]^2 \right\rangle \\
+        \right]^2 \right\rangle \notag \\
   &= \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b}
     \left( \frac1B \sum_{s=1}^B \langle \delta X_{[-s]}^a \delta X_{[-s]}^b\rangle
-      + \frac1{B^2} \sum_{s\neq t} \langle \delta X_{[-s]}^a \delta X_{[-t]}^b\rangle \right) \\
+      + \frac1{B^2} \sum_{s\neq t} \langle \delta X_{[-s]}^a \delta X_{[-t]}^b\rangle \right) \notag \\
   &= \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b}
     \left( \frac1{B(B-1)} V^{ab} + \frac1{B^2(B-1)^2} \sum_{s\neq t} \langle \delta X_{[s]}^a \delta X_{[t]}^b\rangle \right).
 </p>
@@ -585,12 +605,12 @@
     &\simeq \frac1B                  \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b} V^{ab}, \\
   \hat V
     &\simeq \frac1{B(B-1)} \sum_{a=1}^n \sum_{b=1}^n \frac{\partial f_*}{\partial X^a} \frac{\partial f_*}{\partial X^b} V^{ab}.
+    \label{eq:jk.hatV.linear}
 </p>
-<p>従って、</p>
-<p class="aghfly-begin-align">
-  (\Delta \hat f)^2 &\simeq (B-1) \hat V
-</p>
-<p>となる。標本点の間の相関がないと分かっている時には $b=1$ に取って置くのが良い。
+<p>式 $\eqref{eq:jk.f.linear}$ と $\eqref{eq:jk.hatV.linear}$ を見比べれば、式 $\eqref{eq:jk.jkerror}$ を得る。</p>
+</div>
+
+<p>標本点の間の相関がないと分かっている時には $b=1$ に取って置くのが良い。
   近い標本点の間に相関があるということが分かっている時、
   どれだけ$b$を大きく取れば良いか分からないことが多いが、
   その時は少しずつ$b$を大きくして行きながら $(B-1)\hat V$ を見れば良い。
