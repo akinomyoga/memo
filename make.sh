@@ -14,6 +14,7 @@ function update {
 function generate {
   local PAGE_PATH=$1
   local TITLE=$2
+  local YEAR=${3-2018}
 
   [[ out/$PAGE_PATH -nt $PAGE_PATH ]] && return
   # && [[ out/$PAGE_PATH -nt make.sh ]] && return
@@ -70,7 +71,7 @@ function generate {
 $CONTENT
 
 <address class="mwg-address">
-  <p>Copyright &copy; 2018, @akinomyoga
+  <p>Copyright &copy; $YEAR, Koichi Murase
     <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
     <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
   </p>
@@ -102,17 +103,19 @@ update math/matrix-invariants-d4.png
 
 generate math/mean.html '平均、分散、…'
 
-generate phys/glauber.html グラウバー模型
-generate phys/fluid.html 流体力学の基本
-generate phys/standard-error.html 標準誤差の評価
-generate phys/scatter-variable.html 加速器実験の粒子の運動量
-generate phys/cumulant.html 'キュムラント (統計)'
-generate phys/exponential-family.html '指数型分布族 (統計)'
-generate phys/density-matrix.html '密度行列'
-generate phys/linear-analysis.html '線形解析'
+generate phys/glauber.html グラウバー模型 2018
+generate phys/fluid.html 流体力学の基本 2018
+generate phys/standard-error.html 標準誤差の評価 2019
+generate phys/scatter-variable.html 加速器実験の粒子の運動量 2019
+generate phys/cumulant.html 'キュムラント (統計)' 2019
+generate phys/exponential-family.html '指数型分布族 (統計)' 2019
+generate phys/density-matrix.html '密度行列' 2024
+generate phys/linear-analysis.html '線形解析' 2024
 
 generate aghtex/test-bigl.html 'test \bigl, \bigr'
 
-generate text/202111-quantum-neq.html '量子と非平衡の物理 (東京大学出版会)'
-generate text/202604-JJSakurai-modern.html 'J. J. Sakurai, J. Napolitano, Modern Quantum Mechanics, Third Edition'
-generate phys/notation.html '記号と用語の定義'
+generate text/202111-quantum-neq.html '量子と非平衡の物理 (東京大学出版会)' 2021
+generate text/202604-JJSakurai-modern.html 'J. J. Sakurai, J. Napolitano, Modern Quantum Mechanics, Third Edition' 2026
+generate phys/notation.html '記号と用語の定義' 2021
+
+generate blog/202611-ai.html 'AI観察記録' 2026
