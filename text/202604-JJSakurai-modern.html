@@ -33,24 +33,24 @@
 
 <h1>J. J. Sakurai, J. Napolitano, Modern Quantum Mechanics, Third Edition</h1>
 <style type="text/css">
-li.com::before,
-li.ask::before,
-li.fix::before,
-li.mnl::before,
-li.til::before,
-li.que::before { margin-right: 0.3em; padding: 0.0em 0.3em; font-size: 80%; font-weight: bold; vertical-align: top; }
-li.com::before { background-color: #262; color: #fff; content: 'コメント'; }
-li.ask::before { background-color: #228; color: #fff; content: '問'; }
-li.fix::before { background-color: #822; color: #fff; content: '訂正'; }
-li.mnl::before { background-color: #444; color: #fff; content: '独言'; }
-li.que::before { background-color: #846; color: #fff; content: '謎'; }
-li.til::before { background-color: #975; color: #fff; content: 'TIL'; }
+li.com::before, p.com::before,
+li.ask::before, p.ask::before,
+li.fix::before, p.fix::before,
+li.mnl::before, p.mnl::before,
+li.til::before, p.til::before,
+li.que::before, p.que::before { margin-right: 0.3em; padding: 0.0em 0.3em; font-size: 80%; font-weight: bold; vertical-align: top; }
+li.com::before, p.com::before { background-color: #262; color: #fff; content: 'コメント'; }
+li.ask::before, p.ask::before { background-color: #228; color: #fff; content: '問'; }
+li.fix::before, p.fix::before { background-color: #822; color: #fff; content: '訂正'; }
+li.mnl::before, p.mnl::before { background-color: #444; color: #fff; content: '独言'; }
+li.que::before, p.que::before { background-color: #846; color: #fff; content: '謎'; }
+li.til::before, p.til::before { background-color: #975; color: #fff; content: 'TIL'; }
 </style>
 
 <h2>ゼミの記録</h2>
 
 <ul>
-<li>2006年度: B4ゼミ。§1-§3 を終わらせた。
+<li>2026年度: B4ゼミ。§1-§3 を終わらせた。
   <ul>
   <li>2026-04-16 §1.1 (9 pages)</li>
   <li>2026-04-21 後に南部コロキウムなど入っていたので短時間のゼミとなった。
@@ -71,8 +71,14 @@ li.til::before { background-color: #975; color: #fff; content: 'TIL'; }
   <li>2026-07-21 §3.8</li>
   <li>2026-08-04 §3.9 §3.10</li>
   <li>2026-10-14 §3.11: §3 で最後まで残っていた章を終わらせた。</li>
+  </ul>
+</li>
+<li>2026年度: 卒研ゼミ。§6
+  <ul>
   <li>2026-10-30 §6.1 から 6.3</li>
   <li>2026-11-04 §6.4 から 6.5</li>
+  <li>2026-11-10 §6.6 から 6.7</li>
+  <li>2026-11-11 §6.8 から 6.9</li>
   </ul>
 </li>
 </ul>
@@ -626,8 +632,8 @@ Y_k^q(\bm{V})$。但し、$Y_k^q(\bm{V})$ とは $Y_k^q(\hat{\bm{n}})$ に現
 めることができる。
 </p>
 <p class="aghfly-begin-align">
-  \mathcal{D}^\dag(R) T_q^{(k)} \mathcal{D}(R)
-  = \sum_{q'=-k}^k \mathcal{D}_{qq'}^{(k)*}(R) T_{q'}^{(k)}
+  \mathscr{D}^\dag(R) T_q^{(k)} \mathscr{D}(R)
+  = \sum_{q'=-k}^k \mathscr{D}_{qq'}^{(k)*}(R) T_{q'}^{(k)}
 </p>
 <p>もしくは、微小変換に対して</p>
 <p class="aghfly-begin-align">
@@ -725,7 +731,7 @@ $R\otimes R$ → 1x1 + 3x3 + 5x5 の形にしている。
 $|\alpha'j'm'\rangle$" と書かれているが、
 
 <p>$\phi$ 依存性を見て直交しているかどうかということを言いたいのであれ
-ば、 「$\mathcal{D} |\alpha'j'm'\rangle =
+ば、 「$\mathscr{D} |\alpha'j'm'\rangle =
 e^{-im'\phi}|\alpha'j'm'\rangle$ と直交している」と言わなければならな
 い。しかし、実際のところ $\phi$ はこちらが手で指定した回転量であって、
 波動関数の角度依存性ではないので内積を取る時の積分変数ではない。従って、
@@ -750,8 +756,9 @@ highest weight からの recurrence で求まるということ、最初の非�
 を何に置くかで全て決まって、その項に全体が比例するということが効いてい
 る。
 </li>
+</ul>
 
-<h2>6.1</h2>
+<h2>6.1 T行列</h2>
 
 <p>
 Eq. (6.10) の導入の仕方が分かりにくいが、要するに (一次までの Born 近
@@ -764,27 +771,27 @@ Eq. (6.10) の導入の仕方が分かりにくいが、要するに (一次ま�
 
 <p>
 この教科書にはこのように収束因子を入れる理由について具体的に説明がない
-が、動機としては入射波を漸近的自由な波 |i\rangle にしたいという境界条
-件を入れたいから、過去の V を 0 にしたいということである。つまり、収束
-因子が過去で 0 になり、現在時刻 t で 1 になるという具合の状態で極限を
+が、動機としては入射波を漸近的自由な波 $|i\rangle$ にしたいという境界条
+件を入れたいから、過去の $V$ を 0 にしたいということである。つまり、収束
+因子が過去で 0 になり、現在時刻 $t$ で 1 になるという具合の状態で極限を
 取りたい。故に、このような極限の順序になる。
 </p>
 
 <p>
 そのままだと Eq. (6.24) のままだと "第2項" に収束因子がなくて計算でき
 ない。そもそも過去に平面波を用意するという観点から言うと、時間依存の摂
-動ポテンシャル V の中に $e^{\epsilon t}$ があると考えるのが自然だと思
+動ポテンシャル $V$ の中に $e^{\epsilon t}$ があると考えるのが自然だと思
 うと、6.24 の時点でその因子が含まれていると考えるべきである。しかし、
-そうすると今度は第 3 項の中に 2\epsilon 等が出てきてうまく消し合わなく
+そうすると今度は第 3 項の中に $2\epsilon$ 等が出てきてうまく消し合わなく
 なってしまう。実際には 6.26 の最後の項に余分な因子
 $(i\omega_{ni}+\epsilon)/(i\omega_{ni}+2\epsilon)$ が付くことになるが、
-\epsilon は小さいと思って無視するという近似 (但し、6.26 の分母の
-\epsilon はちゃんと境界条件を選択する為に残している) と考えるのが良い
+$\epsilon$ は小さいと思って無視するという近似 (但し、6.26 の分母の
+$\epsilon$ はちゃんと境界条件を選択する為に残している) と考えるのが良い
 だろう。
 </p>
 
 <p>
-Eq. (6.27) でおもむろに T_ni を \langle V \Psi^+ \rangle の形に定義し
+Eq. (6.27) でおもむろに $T_{ni}$ を $\langle V \Psi^+ \rangle$ の形に定義し
 てから $|\psi^{(+)}\rangle$ の具体的形を抜き出しているが、それだとそも
 そも 6.27 の形にできるのかというのが気持ちが悪く感じられる。別に始めか
 ら 6.26 を計算して変形していけば $\langle V| \cdots$ の形に変形できる
@@ -792,15 +799,21 @@ Eq. (6.27) でおもむろに T_ni を \langle V \Psi^+ \rangle の形に定義�
 いのではないか。
 </p>
 
+<h2>6.2 散乱振幅</h2>
+
 <p class="aghfly-begin-align">
   G_{\pm}
   = \frac{\hbar^2}{2m} \frac{1}{E - H_0 \pm i\epsilon}
-  = -\frac{1}{4\pi} \frac{e^{\pm ik|\bm{x}-\bm{x}'|}}{|\bm{x}-\bm{x}'|}
+  \sim -\frac{1}{4\pi} \frac{e^{\pm ik|\bm{x}-\bm{x}'|}}{|\bm{x}-\bm{x}'|}
   = \int\frac{d^3\bm{k}'}{(2\pi)^3} \frac{e^{i\bm{k}'\cdot(\bm{x}-\bm{x}')}}{k^2 - \bm{k}'^2 \pm i\epsilon}.
 </p>
 
+<h2>6.3 ボルン近似</h2>
+
 <p>
-Eq. (6.85) をどのように出すかはよく分からない。
+Eq. (6.85) をどのように出すかはよく分からない。砂川では具体的に球の時
+のポテンシャルから求めた関数形で議論していて、log ではない形になってい
+る。
 </p>
 
 <h2>6.4 部分波展開</h2>
@@ -819,9 +832,16 @@ Eq. (6.101) の下。平面波はあらゆる $b$ の寄与を含んでいると
 </p>
 
 <p>
-Eq. (6.103) と Eq. (6.104) の間の公式は $Y_l(r)^\dag Y_l(k) =
-Y_l(\theta)^\dag \mathcal{D}^\dag\mathcal{D} Y_l(z) = Y_l(\theta)^\dag
-Y_l(z) = Y_l^0(\theta)^* Y_l^0(z) = ((2l+1)/4\pi) P_l(\cos\theta)$ として示される。
+Eq. (6.103) と Eq. (6.104) の間の公式は
+</p>
+<p class="aghfly-begin-align">
+Y_l(r)^\dag Y_l(k)
+&amp;= Y_l(\theta)^\dag \mathscr{D}^\dag\mathscr{D} Y_l(z) \notag \\
+&amp;= Y_l(\theta)^\dag Y_l(z) \notag \\
+&amp;= Y_l^0(\theta)^* Y_l^0(z) = \frac{2l+1}{4\pi} P_l(\cos\theta)
+</p>
+<p class="resume">
+として示される。
 ところで、Eq. (6.112) と Eq. (6.113) の議論は正に同じ事を話していて、
 こっちでそれを説明するのであれば、 Eq. (6.103) と Eq. (6.104) の間で同
 じ議論をしてちゃんと説明すればよかったのでは。そして Eq. (6.103) と
@@ -842,17 +862,17 @@ Eq. (6.109) は $\sum_m [Y^m(k)]^* Y^m(k) = \mathrm{const}$ を使ってい
 <h2>6.5 アイコナール近似</h2>
 
 <p>
-semiclassical path 近似の条件として dV/dx が十分小さいなど言葉で述べて
+semiclassical path 近似の条件として $dV/dx$ が十分小さいなど言葉で述べて
 いるが、実はもっと具体的な式が WKB 近似の時に Eq. (2.264) で既に書かれ
 ている。
 </p>
 
 <p>
-この教科書では Eikonal 近似の時点で V が球対称であるという仮定の下で計
+この教科書では Eikonal 近似の時点で $V$ が球対称であるという仮定の下で計
 算しているが、Eikonal 近似自体はポテンシャルが球対称であるということは
-必要ない。6.5.1 の手前までは基本的に任意の (原点付近の) V について議論
-できる。但し、 6.165 の積分はできないので d\phi_b の積分は残したままに
-なる。一方で、6.166 は先に積分することができる。
+必要ない。Eq. (6.5.1) の手前までは基本的に任意の (原点付近の) $V$ につ
+いて議論できる。但し、 Eq. (6.165) の積分はできないので $d\phi_b$ の積
+分は残したままになる。一方で、Eq. (6.166) は先に積分することができる。
 </p>
 
 <p>
@@ -861,24 +881,85 @@ Eq. (6.159) で $kz - \int dz k$ を導入してからテーラー展開して�
 </p>
 
 <p>
-Eq. (6.179) と (6.180) のように具体的に \theta 依存性を求めなくても、
-6.178 と同じ議論によって、部分波毎に足し合わせればよくなって、結局
-6.178 と全く同じ形の式になる気がする。ここでわざわざ 6.179 の様にした
+Eq. (6.179) と (6.180) のように具体的に $\theta$ 依存性を求めなくても、
+Eq. (6.178) と同じ議論によって、部分波毎に足し合わせればよくなって、結
+局 Eq. (6.178) と全く同じ形の式になる気がする。ここでわざわざ
+Eq. (6.179) の様にした
 のは Fraunhofer diffraction の式を再現してみせたかったからだろう。これ
 は、丸い穴の Fourier 変換に他ならない。
 </p>
 
-<p>暗記して欲しい式: 6.104, 6.122--6.125, 6.127, 6.134。教科書は l \ne
-0 の時の r\to 0 の漸近形を書いていない。$A_l \sim \sin(kr - l\pi/2 +
-\delta_l) / kr$ (因みに 6.174 はこれを使った方が速い気がする)。また、
-$|f_l|^2 = (1/k)\Im f_l$ の式や、$\sigma_\mathrm{tot} = 4\pi \sum_l
-(2l+1) |f_l|^2$ も意識したい。
+<p>暗記して欲しい式: Eqs. (6.104), (6.122)--(6.125), (6.127), (6.134)。
+教科書は $l \ne 0$ の時の $r\to 0$ の漸近形を書いていない。$A_l \sim
+\sin(kr - l\pi/2 + \delta_l) / kr$ (因みに 6.174 はこれを使った方が速
+い気がする)。また、$|f_l|^2 = (1/k)\Im f_l$ の式や、
+$\sigma_\mathrm{tot} = 4\pi \sum_l (2l+1) |f_l|^2$ も意識したい。
 </p>
 
-</ul>
+<h2>6.6 低エネルギー散乱と束縛状態</h2>
+
+<p class="com">Eq. (6.187) の上、$j_l \sim k^l$ という振る舞いは
+Eq. (B.41) に書かれている。ただ、そうしなくても Schrodinger 方程式の k
+\sim 0 の時を変数分離形にして解くことができる。</p>
+
+<p class="fix">Eq. (6.187) の上 typo "the phase shift $k$" と言ってい
+るが the phase shift なら $\delta_l$ のはず。或いは、"the phase shift
+and $k$"?</p>
+
+<p class="fix">図 6.11 は変な気がする。曲率が R ではなくて縦の点線のと
+ころで変わったりしている。手書きのはいいが定性的にも変になっている気が
+する。sinh も sinh の形をしていないし。あと、ここで矢印をつけるのは黒
+線の方なのでは…。図 6.12 も変である。 (b) で実践が途中で終わっている
+が、R の位置まで伸ばすべきである。</p>
+
+<p class="com">Eq. (6.197) 下で散乱長を述べている。ただし、散乱長の符
+号の定義には流派がある。伝統的な原子核では符号が逆だったりする事に注意
+する。
+</p>
+
+<p class="til">Positive $a$ は何となく $R$ と関係あるが、negative $a$
+は関係ない。例えば $k\to0$ で total cross section は $\sigma_{tot}
+\simeq 4\pi a^2$ になる。Shallow bound state の時の negative $a$ は
+exponential decay rate に関係していて、zero-range limit で binding
+energy は $\hbar^2/2ma^2$ に関係している。</p>
+
+<p class="com">Eq. (6.204) は実験的には 6.198 を用いて測定する。</p>
+
+<p class="ask">Eq. (6.206) の時の binding energy の予測はどうなるか。</p>
+
+<p class="com">実験的に $f_l$ を決定する時には、適当な cutoff lmax を
+定めて $f_l(\theta) = \sum_{l=0}^{l_\max} (2l+1) f_l P_l$ と
+parametrize して、 $l+1$ 個の未知変数を決定する問題にする。
+$|f(\theta)|^2 = d\sigma/d\Omega$ などから未知変数に制限をかける。離散
+個の不定性が残るが、それは $f_l(k)$ の連続性や $\sigma_{tot} =
+(4\pi/k)\Im f(0)$ や $f_l(k) = 1/(k\cot \delta_0 -ik)$ の形に書けるこ
+とや、偏極実験や、追加の物理的な考察による仮定などから制限して行く必要
+がある。
+</p>
+
+<p class="com">この教科書では Eq. (6.211) でそれっぽい仮定を要求して出
+しているが、実際には Eq. (6.213) もしくは Eq. (6.214) の関係式を出して
+置いてからその低エネルギー展開として解釈した方が分かりやすいだろう。
+</p>
+
+<h2>6.7 共鳴散乱</h2>
+
+<p class="ask">Eq. (6.216) は振る舞いの話をしているだけだが、具体的に計算す
+ることができるはず。自分で scattering amplitude など計算してグラフを描
+いたら理解が深まるはず。</p>
+
+<p class="fix">p414 の Eq. (6.220) の上の段落の4行目の $\delta_l$ は
+$\cot\delta_l$ の間違いである。</p>
+
+<p class="til">半値全幅ははんちぜんはばと読むらしい。ぜんぷくだと思っ
+ていた。</p>
+
+<h2>6.8 散乱における対称性</h2>
+
+<h2>6.9 非弾性電子原子散乱</h2>
 
 <address class="mwg-address">
-  <p>Copyright &copy; 2018, @akinomyoga
+  <p>Copyright &copy; 2026, Koichi Murase
     <a href="https://github.com/akinomyoga/memo/issues">Issue</a>
     <a href="https://github.com/akinomyoga/memo/pulls">PR</a>
   </p>
