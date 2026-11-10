@@ -1,16 +1,16 @@
 <style type="text/css">
-li.com::before,
-li.ask::before,
-li.fix::before,
-li.mnl::before,
-li.til::before,
-li.que::before { margin-right: 0.3em; padding: 0.0em 0.3em; font-size: 80%; font-weight: bold; vertical-align: top; }
-li.com::before { background-color: #262; color: #fff; content: 'コメント'; }
-li.ask::before { background-color: #228; color: #fff; content: '問'; }
-li.fix::before { background-color: #822; color: #fff; content: '訂正'; }
-li.mnl::before { background-color: #444; color: #fff; content: '独言'; }
-li.que::before { background-color: #846; color: #fff; content: '謎'; }
-li.til::before { background-color: #975; color: #fff; content: 'TIL'; }
+li.com::before, p.com::before,
+li.ask::before, p.ask::before,
+li.fix::before, p.fix::before,
+li.mnl::before, p.mnl::before,
+li.til::before, p.til::before,
+li.que::before, p.que::before { margin-right: 0.3em; padding: 0.0em 0.3em; font-size: 80%; font-weight: bold; vertical-align: top; }
+li.com::before, p.com::before { background-color: #262; color: #fff; content: 'コメント'; }
+li.ask::before, p.ask::before { background-color: #228; color: #fff; content: '問'; }
+li.fix::before, p.fix::before { background-color: #822; color: #fff; content: '訂正'; }
+li.mnl::before, p.mnl::before { background-color: #444; color: #fff; content: '独言'; }
+li.que::before, p.que::before { background-color: #846; color: #fff; content: '謎'; }
+li.til::before, p.til::before { background-color: #975; color: #fff; content: 'TIL'; }
 </style>
 
 <h2>ゼミの記録</h2>
@@ -43,6 +43,8 @@ li.til::before { background-color: #975; color: #fff; content: 'TIL'; }
   <ul>
   <li>2026-10-30 §6.1 から 6.3</li>
   <li>2026-11-04 §6.4 から 6.5</li>
+  <li>2026-11-10 §6.6 から 6.7</li>
+  <li>2026-11-11 §6.8 から 6.9</li>
   </ul>
 </li>
 </ul>
@@ -859,3 +861,65 @@ Eq. (6.179) の様にした
 い気がする)。また、$|f_l|^2 = (1/k)\Im f_l$ の式や、
 $\sigma_\mathrm{tot} = 4\pi \sum_l (2l+1) |f_l|^2$ も意識したい。
 </p>
+
+<h2>6.6 低エネルギー散乱と束縛状態</h2>
+
+<p class="com">Eq. (6.187) の上、$j_l \sim k^l$ という振る舞いは
+Eq. (B.41) に書かれている。ただ、そうしなくても Schrodinger 方程式の k
+\sim 0 の時を変数分離形にして解くことができる。</p>
+
+<p class="fix">Eq. (6.187) の上 typo "the phase shift $k$" と言ってい
+るが the phase shift なら $\delta_l$ のはず。或いは、"the phase shift
+and $k$"?</p>
+
+<p class="fix">図 6.11 は変な気がする。曲率が R ではなくて縦の点線のと
+ころで変わったりしている。手書きのはいいが定性的にも変になっている気が
+する。sinh も sinh の形をしていないし。あと、ここで矢印をつけるのは黒
+線の方なのでは…。図 6.12 も変である。 (b) で実践が途中で終わっている
+が、R の位置まで伸ばすべきである。</p>
+
+<p class="com">Eq. (6.197) 下で散乱長を述べている。ただし、散乱長の符
+号の定義には流派がある。伝統的な原子核では符号が逆だったりする事に注意
+する。
+</p>
+
+<p class="til">Positive $a$ は何となく $R$ と関係あるが、negative $a$
+は関係ない。例えば $k\to0$ で total cross section は $\sigma_{tot}
+\simeq 4\pi a^2$ になる。Shallow bound state の時の negative $a$ は
+exponential decay rate に関係していて、zero-range limit で binding
+energy は $\hbar^2/2ma^2$ に関係している。</p>
+
+<p class="com">Eq. (6.204) は実験的には 6.198 を用いて測定する。</p>
+
+<p class="ask">Eq. (6.206) の時の binding energy の予測はどうなるか。</p>
+
+<p class="com">実験的に $f_l$ を決定する時には、適当な cutoff lmax を
+定めて $f_l(\theta) = \sum_{l=0}^{l_\max} (2l+1) f_l P_l$ と
+parametrize して、 $l+1$ 個の未知変数を決定する問題にする。
+$|f(\theta)|^2 = d\sigma/d\Omega$ などから未知変数に制限をかける。離散
+個の不定性が残るが、それは $f_l(k)$ の連続性や $\sigma_{tot} =
+(4\pi/k)\Im f(0)$ や $f_l(k) = 1/(k\cot \delta_0 -ik)$ の形に書けるこ
+とや、偏極実験や、追加の物理的な考察による仮定などから制限して行く必要
+がある。
+</p>
+
+<p class="com">この教科書では Eq. (6.211) でそれっぽい仮定を要求して出
+しているが、実際には Eq. (6.213) もしくは Eq. (6.214) の関係式を出して
+置いてからその低エネルギー展開として解釈した方が分かりやすいだろう。
+</p>
+
+<h2>6.7 共鳴散乱</h2>
+
+<p class="ask">Eq. (6.216) は振る舞いの話をしているだけだが、具体的に計算す
+ることができるはず。自分で scattering amplitude など計算してグラフを描
+いたら理解が深まるはず。</p>
+
+<p class="fix">p414 の Eq. (6.220) の上の段落の4行目の $\delta_l$ は
+$\cot\delta_l$ の間違いである。</p>
+
+<p class="til">半値全幅ははんちぜんはばと読むらしい。ぜんぷくだと思っ
+ていた。</p>
+
+<h2>6.8 散乱における対称性</h2>
+
+<h2>6.9 非弾性電子原子散乱</h2>
